@@ -9,7 +9,7 @@ coordination of mentors needed to execute projects, ranging from recruitment to 
 ## Techonologies 
 
 * Frontend - 
-* Backend -
+* Backend - 
 * Database -
 * Deployment env -
 
@@ -45,7 +45,7 @@ To get it up and running on your local machine, follow the steps below:
 
 # Creating issue 
 
-- Raise any identified issue with your mentor.
+- Raise any identified issue with your TTL
 
 #### Other commands available
 
