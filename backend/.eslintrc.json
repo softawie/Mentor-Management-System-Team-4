@@ -15,6 +15,6 @@
     "consistent-return": "off",
     "jest/expect-expect": "off",
     "security/detect-object-injection": "off",
-    "no-lone-blocks": "off"
+    "no-useless-catch" : "off"
   }
 }
