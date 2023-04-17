@@ -37,10 +37,10 @@ export default function AppHeader() {
     setAnchorEl(null);
   };
 
-  const [showClearIcon, setShowClearIcon] = useState("none");
+  // const [showClearIcon, setShowClearIcon] = useState("none");
 
   const handleChange = (event) => {
-    setShowClearIcon(event.target.value === "" ? "none" : "flex");
+    // setShowClearIcon(event.target.value === "" ? "none" : "flex");
   };
 
   return (
