@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 import catchAsync from '../utils/catchAsync';
-import { tokenService, emailService, authService } from '../services';
+import { authService } from '../services';
 
 const register = catchAsync(async (req, res) => {
   const user = await authService.registerUser(req);
@@ -14,9 +14,15 @@ const login = catchAsync(async (req, res) => {
 });
 
 const forgotPassword = catchAsync(async (req, res) => {
-  const resetPasswordToken = await tokenService.generateToken(req.body.email);
-  await emailService.sendResetPasswordEmail(req.body.email, resetPasswordToken);
-  res.status(httpStatus.NO_CONTENT).json({ success: true });
+  const user = await authService.requestPasswordReset(req, res);
+
+  return user;
 });
 
-export { register, login, forgotPassword };
+const resetPassword = catchAsync(async (req, res) => {
+  const user = await authService.resetPassword(req, res);
+
+  return user;
+});
+
+export { register, login, forgotPassword, resetPassword };
