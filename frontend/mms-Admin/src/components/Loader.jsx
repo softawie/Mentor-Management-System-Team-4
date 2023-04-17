@@ -1,3 +1,4 @@
+import React from "react";
 import { Box } from "@mui/material";
 import { ThreeDots } from "react-loader-spinner";
 import { usePalette } from "../theme/theme";

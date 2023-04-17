@@ -1,4 +1,4 @@
-// import dashboardroutes from "./dashboard/index"
+import React from "react";
 import BackgroundLayout from "../layouts/BackgroundLayout.jsx";
 import DashboardLayout from "../layouts/DashboardLayout.jsx";
 import authroutes from "./auth/index.jsx";

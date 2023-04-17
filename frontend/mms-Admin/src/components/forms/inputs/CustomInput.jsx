@@ -1,3 +1,4 @@
+import React from "react";
 import { useField } from "formik";
 
 function CustomInput({ label, ...props }) {
@@ -15,3 +16,4 @@ function CustomInput({ label, ...props }) {
     </div>
   );
 }
+export default CustomInput;

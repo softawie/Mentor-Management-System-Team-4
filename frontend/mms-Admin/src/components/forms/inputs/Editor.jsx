@@ -1,3 +1,4 @@
+import React from "react";
 import { EditorInput as TinyMCEEditorInput } from 'tinymce';
 import { EditorInput } from '@tinymce/tinymce-react';
 
