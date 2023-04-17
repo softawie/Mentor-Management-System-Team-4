@@ -45,6 +45,9 @@ function MenuItem(props) {
 
 MenuItem.propTypes = {
   active: PropTypes.bool,
+  name: PropTypes.string,
+  path: PropTypes.string,
+  icon: PropTypes.node,
 };
 
 export default MenuItem;
