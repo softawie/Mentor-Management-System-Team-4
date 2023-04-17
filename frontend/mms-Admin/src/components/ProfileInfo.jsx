@@ -31,9 +31,9 @@ function ProfileInfo() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: "24px",
+              fontSize: "16px",
               fontWeight: 400,
-              lineHeight: "40px",
+              lineHeight: "27px",
               fontFamily: "Mukta",
               ml: 2,
               color: palette.secondary.main,
@@ -56,9 +56,9 @@ function ProfileInfo() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: "24px",
+              fontSize: "16px",
               fontWeight: 400,
-              lineHeight: "40px",
+              lineHeight: "27px",
               fontFamily: "Mukta",
               ml: 2,
               color: palette.secondary.main,
@@ -93,9 +93,9 @@ function ProfileInfo() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: "24px",
+              fontSize: "16px",
               fontWeight: 400,
-              lineHeight: "40px",
+              lineHeight: "27px",
               fontFamily: "Mukta",
               ml: 2,
               color: palette.secondary.main,
@@ -118,9 +118,9 @@ function ProfileInfo() {
           <Typography
             variant="h2"
             sx={{
-              fontSize: "24px",
+              fontSize: "16px",
               fontWeight: 400,
-              lineHeight: "40px",
+              lineHeight: "27px",
               fontFamily: "Mukta",
               ml: 2,
               color: palette.secondary.main,

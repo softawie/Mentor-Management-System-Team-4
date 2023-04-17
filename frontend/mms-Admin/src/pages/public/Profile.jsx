@@ -10,7 +10,6 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
 import { usePalette } from "../../theme/theme";
 import NigeriaMap from "../../assets/images/Group 404.png";
 
@@ -115,11 +114,11 @@ function Profile() {
             <Typography
               variant="h2"
               sx={{
-                fontSize: "24px",
+                fontSize: "16px",
                 fontWeight: 400,
-                lineHeight: "40px",
+                lineHeight: "27px",
                 fontFamily: "Mukta",
-                color: palette.secondary.main,
+                color: "#4D4D4D",
               }}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent

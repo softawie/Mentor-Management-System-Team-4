@@ -1,7 +1,6 @@
 import React from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import React from "react";
 import { usePalette } from "../../theme/theme";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";

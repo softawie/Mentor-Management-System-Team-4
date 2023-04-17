@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Stack, Typography } from "@mui/material";
-import React from "react";
 
 import { usePalette } from "../../theme/theme";
 function SignupForm() {

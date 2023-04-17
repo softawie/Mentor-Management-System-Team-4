@@ -43,7 +43,7 @@ function MenuItem(props) {
   );
 }
 
-export default MenuItem;
 MenuItem.propTypes = {
   active: PropTypes.bool.isRequired,
 };
+export default MenuItem;

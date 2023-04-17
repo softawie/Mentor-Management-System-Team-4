@@ -17,7 +17,11 @@ function CustomInput({ label, ...props }) {
     </div>
   );
 }
-export default CustomInput;
 CustomInput.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  key: PropTypes.string,
 };
+
+export default CustomInput;
