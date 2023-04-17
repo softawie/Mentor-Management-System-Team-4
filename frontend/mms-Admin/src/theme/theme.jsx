@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+import React from "react";
 import { alpha, createTheme, useTheme } from "@mui/material";
 
 const themeColors = {
