@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import {
   ListItemButton,
   ListItemIcon,
@@ -43,3 +44,6 @@ function MenuItem(props) {
 }
 
 export default MenuItem;
+MenuItem.propTypes = {
+  active: PropTypes.bool.isRequired,
+};

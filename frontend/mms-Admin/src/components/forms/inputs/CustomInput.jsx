@@ -1,5 +1,6 @@
 import React from "react";
 import { useField } from "formik";
+import PropTypes from "prop-types";
 
 function CustomInput({ label, ...props }) {
   const [field, meta] = useField(props);
@@ -17,3 +18,6 @@ function CustomInput({ label, ...props }) {
   );
 }
 export default CustomInput;
+CustomInput.propTypes = {
+  label: PropTypes.string.isRequired,
+};

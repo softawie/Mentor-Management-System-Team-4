@@ -4,9 +4,11 @@ import { useFormik } from "formik";
 import React from "react";
 import { usePalette } from "../../theme/theme";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function ForgotPasswordForm() {
   const initialValues = { email: "", password: "" };
+  const navigate = useNavigate()
   const palette = usePalette();
   const onSubmit = () => {
     toast.success("Login Successful");
