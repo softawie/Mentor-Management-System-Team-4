@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function ForgotPasswordForm() {
   const initialValues = { email: "", password: "" };
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const palette = usePalette();
   const onSubmit = () => {
     toast.success("Login Successful");
