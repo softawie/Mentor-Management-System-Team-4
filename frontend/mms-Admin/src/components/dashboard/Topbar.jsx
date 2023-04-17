@@ -39,9 +39,11 @@ export default function AppHeader() {
 
   // const [showClearIcon, setShowClearIcon] = useState("none");
 
-  const handleChange = (event) => {
-    // setShowClearIcon(event.target.value === "" ? "none" : "flex");
-  };
+  // const handleChange = (event) => {
+  //   // setShowClearIcon(event.target.value === "" ? "none" : "flex");
+  //   setShowClearIcon(event.target.value);
+  //   console.log(showClearIcon);
+  // };
 
   return (
     <AppBar sx={{ bg: palette.primary }}>
@@ -89,7 +91,7 @@ export default function AppHeader() {
               >
                 <TextField
                   variant="outlined"
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   // label="search for anything"
                   InputProps={{
                     startAdornment: (
