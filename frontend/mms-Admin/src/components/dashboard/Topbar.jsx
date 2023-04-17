@@ -10,7 +10,6 @@ import {
   Avatar,
   Grid,
   IconButton,
-  InputBase,
   ListItemIcon,
   Menu,
   MenuItem,
@@ -18,7 +17,6 @@ import {
   Typography,
   Stack,
   TextField,
-  FormControl,
   InputAdornment,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +37,7 @@ export default function AppHeader() {
     setAnchorEl(null);
   };
 
-  const [showClearIcon, setShowClearIcon] = useState("none");
+  // const [showClearIcon, setShowClearIcon] = useState("none");
 
   const handleChange = (event) => {
     setShowClearIcon(event.target.value === "" ? "none" : "flex");

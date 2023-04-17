@@ -3,6 +3,7 @@ import { Button, Stack, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import React from "react";
 import { usePalette } from "../../theme/theme";
+import { toast } from "react-toastify";
 
 function ForgotPasswordForm() {
   const initialValues = { email: "", password: "" };
