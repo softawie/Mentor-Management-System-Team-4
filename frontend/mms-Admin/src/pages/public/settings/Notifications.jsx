@@ -6,8 +6,8 @@ import DiscussionNotification from "../../../components/DiscussionNotification";
 import { Formik, useFormik } from "formik";
 
 const initialValues = {
-  in_app_post_notification: false,
   email_post_notification: false,
+  in_app_post_notification: false,
   email_program_notification: false,
   in_app_program_notification: false,
   email_task_notification: false,
@@ -18,8 +18,6 @@ const initialValues = {
   in_app_report_notification: false,
   email_comment_on_my_post_notification: false,
   in_app_comment_on_my_post_notification: false,
-  email_post_notification: false,
-  in_app_post_notification: false,
   email_comment_notification: false,
   in_app_comment_notification: false,
   email_mention_notification: false,
