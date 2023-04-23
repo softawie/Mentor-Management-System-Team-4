@@ -174,11 +174,10 @@ function GeneralNotificationSwitches({ values, handleChange }) {
   );
 }
 
-export default GeneralNotificationSwitches;
-
 GeneralNotificationSwitches.propTypes = {
   values: PropTypes.object,
   handleChange: PropTypes.func,
   children: PropTypes.node,
   label: PropTypes.string,
 };
+export default GeneralNotificationSwitches;

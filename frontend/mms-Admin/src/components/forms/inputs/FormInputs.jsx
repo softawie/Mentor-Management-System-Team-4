@@ -48,4 +48,11 @@ function FormInputs({ initialValues, validationSchema, onSubmit, inputField }) {
   );
 }
 
+FormInputs.propTypes = {
+  initialValues: PropTypes.object,
+  validationSchema: PropTypes.object,
+  onSubmit: PropTypes.func,
+  inputField: PropTypes.func,
+};
+
 export default FormInputs;

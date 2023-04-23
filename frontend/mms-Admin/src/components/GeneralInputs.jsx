@@ -12,6 +12,7 @@ import { Field, Formik, useFormik } from "formik";
 import { countries } from "../pages/public/settings/countries";
 // import CustomInput from "./forms/inputs/CustomInput";
 import GeneralSocialInputs from "./GeneralSocialInputs";
+import PropTypes from "prop-types";
 
 const GeneralInputSchema = Yup.object().shape({
   firstname: Yup.string().required("First name is required"),
@@ -178,7 +179,7 @@ function GeneralInputs() {
               </Typography>
               <Box sx={{ flexGrow: 1, width: "100%" }}>
                 <Field name="country">
-                  {({ field, form }) => (
+                  {({ field }) => (
                     <Autocomplete
                       {...field}
                       id="country-select-demo"
@@ -288,4 +289,8 @@ function GeneralInputs() {
   );
 }
 
+GeneralSocialInputs.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
 export default GeneralInputs;

@@ -6,6 +6,7 @@ import {
   AiOutlineInstagram,
 } from "react-icons/ai";
 import { TfiTwitter } from "react-icons/tfi";
+import PropTypes from "prop-types";
 
 const Form = ({ label, children }) => (
   <Stack
@@ -257,5 +258,14 @@ function GeneralSocialInputs({ errors, touched, values, handleChange }) {
     </Stack>
   );
 }
+
+GeneralSocialInputs.propTypes = {
+  errors: PropTypes.object,
+  touched: PropTypes.object,
+  values: PropTypes.object,
+  handleChange: PropTypes.func,
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
 
 export default GeneralSocialInputs;

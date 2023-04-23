@@ -174,7 +174,6 @@ function DiscussionNotificationSwitches({ values, handleChange }) {
   );
 }
 
-export default DiscussionNotificationSwitches;
 
 DiscussionNotificationSwitches.propTypes = {
   values: PropTypes.object,
@@ -182,3 +181,5 @@ DiscussionNotificationSwitches.propTypes = {
   children: PropTypes.node,
   label: PropTypes.string,
 };
+
+export default DiscussionNotificationSwitches;

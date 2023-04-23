@@ -57,16 +57,7 @@ function Password() {
     console.log(values);
   };
 
-  const {
-    errors,
-    touched,
-    values,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-    getFieldValue,
-  } = useFormik({
+  const { errors, touched, values, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema: PasswordSchema,
     onSubmit,
@@ -87,7 +78,9 @@ function Password() {
                   error={
                     touched.current_password && Boolean(errors.current_password)
                   }
-                  helperText={touched.current_password && errors.current_password}
+                  helperText={
+                    touched.current_password && errors.current_password
+                  }
                   sx={{ width: "100%" }}
                 />
               </Form>
@@ -111,7 +104,9 @@ function Password() {
                   error={
                     touched.confirm_password && Boolean(errors.confirm_password)
                   }
-                  helperText={touched.confirm_password && errors.confirm_password}
+                  helperText={
+                    touched.confirm_password && errors.confirm_password
+                  }
                   sx={{ width: "100%" }}
                 />
               </Form>

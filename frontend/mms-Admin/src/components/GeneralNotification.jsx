@@ -81,9 +81,8 @@ function GeneralNotification({ values, handleChange }) {
   );
 }
 
-export default GeneralNotification;
-
 GeneralNotification.propTypes = {
   values: PropTypes.object,
   handleChange: PropTypes.func,
 };
+export default GeneralNotification;
