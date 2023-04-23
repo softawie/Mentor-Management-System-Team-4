@@ -4,6 +4,8 @@ import * as Yup from "yup";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { Formik, useFormik } from "formik";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+
 
 const PasswordSchema = Yup.object().shape({
   current_password: Yup.string().required("Current password is required"),
