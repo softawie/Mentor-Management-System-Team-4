@@ -9,7 +9,7 @@ import Archive from "./Archive";
 import Support from "./Support";
 import PropTypes from "prop-types";
 import { usePalette } from "../../../theme/theme";
-import Faq from "./FAQ";
+import Faq from "./Faq";
 
 const useStyles = makeStyles((theme) => ({
   root: {
