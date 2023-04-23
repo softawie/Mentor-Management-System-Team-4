@@ -70,6 +70,12 @@ const SwitchForm = ({ label, children }) => (
     {children}
   </Stack>
 );
+
+SwitchForm.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
+
 function DiscussionNotificationSwitches({ values, handleChange }) {
   const classes = useStyles();
 
@@ -173,7 +179,6 @@ function DiscussionNotificationSwitches({ values, handleChange }) {
     </Stack>
   );
 }
-
 
 DiscussionNotificationSwitches.propTypes = {
   values: PropTypes.object,

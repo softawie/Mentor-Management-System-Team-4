@@ -33,6 +33,11 @@ const Form = ({ label, children }) => (
   </Stack>
 );
 
+Form.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
+
 function DiscussionNotification({ values, handleChange }) {
   return (
     <Form label="Discussion Notifications">

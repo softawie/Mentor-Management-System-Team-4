@@ -53,6 +53,12 @@ const Form = ({ label, children }) => (
     <Box sx={{ flexGrow: 1, width: "100%" }}>{children}</Box>
   </Stack>
 );
+
+Form.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
+
 function GeneralInputs() {
   const initialValues = {
     firstname: "",

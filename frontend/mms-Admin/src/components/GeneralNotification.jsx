@@ -32,6 +32,12 @@ const Form = ({ label, children }) => (
   </Stack>
 );
 
+Form.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
+
+
 function GeneralNotification({ values, handleChange }) {
   return (
     <Form label="General Notifications">
