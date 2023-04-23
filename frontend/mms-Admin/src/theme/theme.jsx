@@ -10,6 +10,7 @@ const themeColors = {
   background: "#FFFFFF",
   text: "#FFFFFF",
   main: "#F7FEFF",
+  black: "#333333",
 };
 
 const theme = createTheme({
@@ -22,9 +23,8 @@ const theme = createTheme({
       main: themeColors.primary,
       contrastText: themeColors.text,
     },
-
     common: {
-      // black: themeColors.black,
+      black: themeColors.black,
       main: themeColors.main,
       white: themeColors.text,
     },
@@ -36,6 +36,7 @@ const theme = createTheme({
       main: themeColors.error,
       contrastText: themeColors.text,
     },
+ 
     warning: {
       main: themeColors.warning,
       contrastText: themeColors.text,
