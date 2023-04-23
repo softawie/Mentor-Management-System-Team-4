@@ -126,28 +126,6 @@ function LoginForm() {
             </Typography>
           </Stack>
         </Button>
-
-        <Stack
-          direction="row"
-          sx={{ justifyContent: "space-between", width: "100%" }}
-        >
-          <Box fullWidth></Box>
-          <Link to="/signup" style={{ textDecoration: "none" }}>
-            <Typography
-              variant="h3"
-              sx={{
-                fontSize: "16px",
-                fontWeight: 600,
-                lineHeight: "27px",
-                fontFamily: "Mukta",
-                color: "#141414",
-              }}
-            >
-              New User? Signup
-            </Typography>
-          </Link>
-          <Box fullWidth></Box>
-        </Stack>
       </Stack>
     </form>
   );

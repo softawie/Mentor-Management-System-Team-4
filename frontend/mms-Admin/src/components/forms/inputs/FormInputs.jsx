@@ -3,13 +3,7 @@ import { Formik, Form, useFormik } from "formik";
 import CustomInput from "./CustomInput";
 import { Button } from "@mui/material";
 
-function FormInputs({
-  initialValues,
-  validationSchema,
-  onSubmit,
-  inputField,
-  inputField,
-}) {
+function FormInputs({ initialValues, validationSchema, onSubmit, inputField }) {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
@@ -46,7 +40,9 @@ function FormInputs({
           />
         ))}
 
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit} type="submit" variant="contained">
+          Submit
+        </Button>
       </Form>
     </Formik>
   );
