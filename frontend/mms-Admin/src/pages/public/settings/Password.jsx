@@ -52,6 +52,11 @@ const Form = ({ label, children }) => (
   </Stack>
 );
 
+Form.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
+
 function Password() {
   const onSubmit = (values) => {
     console.log(values);

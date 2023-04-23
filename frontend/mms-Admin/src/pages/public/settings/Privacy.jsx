@@ -80,6 +80,10 @@ const SwitchForm = ({ label, children }) => (
   </Stack>
 );
 
+SwitchForm.propTypes = {
+  children: PropTypes.node,
+  label: PropTypes.string,
+};
 function Privacy() {
   const classes = useStyles();
 
