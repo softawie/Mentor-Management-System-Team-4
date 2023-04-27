@@ -132,6 +132,19 @@ const updateCredential = async (payload, userId) => {
 };
 
 /**
+ * @description - Function to get credentials from the table
+ * @param {Integer} userId
+ */
+const getUserCredential = (userId) => {
+  return Credential.findOne({
+    where: {
+      user_id: userId,
+    },
+    raw: true,
+  });
+};
+
+/**
  * @description - calls function that request for password reset
  * @param {Object} req
  * @param {Object} res
@@ -160,6 +173,44 @@ const requestPasswordReset = async (req, res) => {
       success: true,
       passToken,
       message: 'you will receive a mail, if you signed up with this email',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: 'something went wrong',
+    });
+  }
+};
+
+/**
+ * @description - calls function that modify user's password
+ * @param {Object} req
+ * @param {Object} res
+ * @returns {Object} Response object
+ */
+const changePassword = async (req, res) => {
+  const { id } = req.user;
+  const { password, currentPassword } = req.body;
+
+  try {
+    const userCredential = await getUserCredential(id);
+    const valid = await bcrypt.compare(currentPassword, userCredential.hashed_password);
+
+    if (!valid) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid password',
+      });
+    }
+
+    const newPassword = await hashPassword(password);
+
+    // if valid previous password, update the password
+    await updateCredential({ hashed_password: newPassword }, id);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Password changed successfully',
     });
   } catch (error) {
     return res.status(500).json({
@@ -224,4 +275,4 @@ const resetPassword = async (req, res) => {
   }
 };
 
-export { registerUser, requestPasswordReset, loginUser, updateCredential, resetPassword };
+export { registerUser, requestPasswordReset, loginUser, updateCredential, resetPassword, changePassword, getUserCredential };
