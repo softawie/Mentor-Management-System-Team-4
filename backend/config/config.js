@@ -32,6 +32,8 @@ const envVarsSchema = Joi.object()
     DB_PORT: Joi.number().description('Database port'),
     DB_HOST: Joi.string().description('Database host'),
     DB_HOST_PRODUCTION: Joi.string().description('Database production url'),
+    GOOGLE_CLIENT_ID: Joi.string().description('Google client ID'),
+    GOOGLE_CLIENT_SECRET: Joi.string().description('Google client secret'),
   })
   .unknown();
 
@@ -52,6 +54,8 @@ const config = {
     port: envVars.DB_PORT,
     dialect: 'postgres',
     logging: false,
+    seederStorage: 'sequelize',
+    seederStorageTableName: 'SequelizeData',
     dialectOptions: {
       multipleStatements: true,
       prependSearchPath: true,
@@ -65,6 +69,8 @@ const config = {
     port: 5432,
     dialect: 'postgres',
     logging: false,
+    seederStorage: 'sequelize',
+    seederStorageTableName: 'SequelizeData',
     dialectOptions: {
       multipleStatements: true,
       prependSearchPath: true,
@@ -77,6 +83,10 @@ const config = {
     resetPasswordExpirationMinutes: envVars.JWT_RESET_PASSWORD_EXPIRATION_MINUTES,
     verifyEmailExpirationMinutes: envVars.JWT_VERIFY_EMAIL_EXPIRATION_MINUTES,
     expires: envVars.JWT_EXPIRATION,
+  },
+  googleAuth: {
+    clientId: envVars.GOOGLE_CLIENT_ID,
+    clientSecret: envVars.GOOGLE_CLIENT_SECRET,
   },
   mailgun: {
     apiKey: envVars.MAILGUN_API_KEY,
