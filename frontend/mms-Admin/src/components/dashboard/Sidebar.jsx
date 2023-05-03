@@ -15,6 +15,7 @@ import { MdOutlineAccountBox } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BiUser, BiMessageAlt, BiMessageDetail } from "react-icons/bi";
 import { RxDashboard } from "react-icons/rx";
+import {HiLogout} from "react-icons/hi";
 import { FiUsers, FiSettings } from "react-icons/fi";
 import Report from "../../../src/assets/images/reports.svg";
 import Certificate from "../../../src/assets/images/certificate.svg";
@@ -145,7 +146,29 @@ function Sidebar() {
           <MenuItem
             path="/settings"
             name="Settings"
-            icon={<FiSettings size={25} color={palette.secondary.main} />}
+            icon={
+              <FiSettings
+                size={25}
+                color={
+                  location.pathname === "/settings" ? "#333333" : "#808080"
+                }
+              />
+            }
+            sx={{ backgroundColor: "#FFFFFF" }}
+            active={location.pathname === "/settings"}
+          />
+
+          <MenuItem
+            path="/login"
+            name="Logout"
+            icon={
+              <HiLogout
+                size={25}
+                color={location.pathname === "/login" ? "#333333" : "#808080"}
+              />
+            }
+            sx={{ backgroundColor: "#FFFFFF" }}
+            active={location.pathname === "/login"}
           />
         </Stack>
       </Drawer>

@@ -22,3 +22,10 @@ export const resetPassword = {
     password: Joi.string().required().custom(password),
   }),
 };
+
+export const changePassword = {
+  body: Joi.object().keys({
+    password: Joi.string().required().custom(password),
+    currentPassword: Joi.string().required(),
+  }),
+};

@@ -3,7 +3,6 @@ import BackgroundLayout from "../layouts/BackgroundLayout.jsx";
 import DashboardLayout from "../layouts/DashboardLayout.jsx";
 import authroutes from "./auth/index.jsx";
 import Dashboard from "./dashboard/Dashboard.jsx";
-// import MentorList from "./dashboard/mentors/MentorList.jsx";
 import publicroutes from "./public/index.jsx";
 import adminroutes from "./dashboard/index.jsx";
 let element = [
@@ -18,7 +17,7 @@ let element = [
             index: true,
             element: <Dashboard />,
           },
-          publicroutes,
+          ...publicroutes,
           adminroutes,
         ],
       },
