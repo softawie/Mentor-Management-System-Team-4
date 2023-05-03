@@ -7,6 +7,8 @@ import { MdOutlinePhotoSizeSelectActual } from "react-icons/md";
 import { CiFaceSmile } from "react-icons/ci";
 import { Formik, useFormik } from "formik";
 import { AiOutlineRight } from "react-icons/ai";
+import PropTypes from "prop-types";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -228,5 +230,10 @@ function LiveChat({ setIsOpen, setMessage }) {
     </form>
   );
 }
+
+LiveChat.propTypes = {
+  setIsOpen: PropTypes.func,
+  setMessage: PropTypes.func,
+};
 
 export default LiveChat;
