@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent } from "@material-ui/core";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { Formik, useFormik } from "formik";
 import { ImAttachment } from "react-icons/im";
 import { BsChatText } from "react-icons/bs";
 import * as Yup from "yup";
+import LiveChat from "../../../components/LiveChat";
 
 const supportSchema = Yup.object().shape({
   name: Yup.string().required("Please enter your name"),
@@ -22,17 +23,18 @@ const initialValues = {
   message: "",
 };
 function Support() {
+  const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleLiveChatOpen = () => {
+    setIsLiveChatOpen(true);
+  };
+
   const onSubmit = (values, action) => {
     console.log(values);
     action.resetForm();
   };
-  const {
-    errors,
-    touched,
-    values,
-    handleChange,
-    handleSubmit,
-  } = useFormik({
+  const { errors, touched, values, handleChange, handleSubmit } = useFormik({
     initialValues,
     validationSchema: supportSchema,
     onSubmit,
@@ -40,7 +42,7 @@ function Support() {
   });
 
   return (
-    <Stack direction={"column"} spacing={10} width={"100%"}>
+    <Stack direction={"column"} spacing={10} width={"100%"} position="relative">
       <Card>
         <CardContent>
           {/* Notifications settings form goes here */}
@@ -124,7 +126,8 @@ function Support() {
 
       <Stack direction={"row"} justifyContent={"space-between"} width="100%">
         <div></div>
-        <Box
+        <Button
+          variant="text"
           sx={{
             backgroundColor: "#E6FDFE",
             borderRadius: "40px",
@@ -135,10 +138,19 @@ function Support() {
             height: "66px",
             cursor: "pointer",
           }}
+          onClick={handleLiveChatOpen}
         >
           <BsChatText size={24} />
-        </Box>
+        </Button>
       </Stack>
+      {isLiveChatOpen && (
+        <LiveChat
+          isOpen={isLiveChatOpen}
+          setIsOpen={setIsLiveChatOpen}
+          message={message}
+          setMessage={setMessage}
+        />
+      )}
     </Stack>
   );
 }

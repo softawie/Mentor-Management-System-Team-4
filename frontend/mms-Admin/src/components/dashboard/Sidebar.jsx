@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Box,
-  // Divider,
-  Drawer,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
-// import { EmojiObjects, School } from "@mui/icons-material";
+import { Box, Drawer, Stack, Toolbar, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import MenuItem from "./MenuItem";
 import { drawerWidth, usePalette } from "../../theme/theme";
@@ -15,7 +7,7 @@ import { MdOutlineAccountBox } from "react-icons/md";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { BiUser, BiMessageAlt, BiMessageDetail } from "react-icons/bi";
 import { RxDashboard } from "react-icons/rx";
-import {HiLogout} from "react-icons/hi";
+import { HiLogout } from "react-icons/hi";
 import { FiUsers, FiSettings } from "react-icons/fi";
 import Report from "../../../src/assets/images/reports.svg";
 import Certificate from "../../../src/assets/images/certificate.svg";

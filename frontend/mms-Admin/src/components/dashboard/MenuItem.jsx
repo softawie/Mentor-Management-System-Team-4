@@ -7,7 +7,6 @@ import {
   styled,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-// import { usePalette } from "../../theme/theme";
 
 const ItemButton = styled(ListItemButton)(({ theme, selected }) => ({
   backgroundColor: selected ? "#FFFFFF" : "transparent",
@@ -15,7 +14,6 @@ const ItemButton = styled(ListItemButton)(({ theme, selected }) => ({
 }));
 function MenuItem(props) {
   const { active, name, path, icon } = props;
-  // const palette = usePalette();
 
   const navigate = useNavigate();
 

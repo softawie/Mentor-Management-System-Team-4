@@ -159,7 +159,9 @@ function Privacy() {
                 direction={"row"}
               >
                 <Box width={"100%"}></Box>
-                <Button type="submit">Submit</Button>
+                <Button type="submit" sx={{ width: "150px" }}>
+                  Save Changes
+                </Button>
               </Stack>
             </Stack>
           </Formik>

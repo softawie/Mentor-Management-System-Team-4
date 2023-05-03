@@ -1,13 +1,55 @@
 import React from "react";
-import { Card, CardContent } from "@material-ui/core";
+import { Stack, Card } from "@mui/material";
+import ArchiveInfo from "../../../components/ArchiveInfo";
+import {
+  getShowArchiveLoading,
+  getShowArchiveitemsToDisplay,
+} from "../../../redux/PaletteReducer";
+import Loader from "../../../components/Loader";
 
 function Archive() {
+  const itemsToDisplay = getShowArchiveitemsToDisplay();
+  const loading = getShowArchiveLoading();
+
   return (
     <Card>
-      <CardContent>
-        {/* Notifications settings form goes here */}
-        Archive
-      </CardContent>
+      <Stack direction={"column"} alignItems={"center"} width={"100%"}>
+        {/* Archive settings form goes here */}
+        <Stack
+          alignItems={"center"}
+          sx={{
+            border: "1px solid #E6E6E6",
+            borderRadius: "5px",
+            width: "100%",
+          }}
+        >
+          <Stack
+            direction={"column"}
+            alignItems={"center"}
+            width={"100%"}
+            gap={1}
+            p={2}
+          >
+            {/* Archieve data map */}
+            {loading ? (
+              <>
+                <Loader />
+              </>
+            ) : (
+              <>
+                {itemsToDisplay.map(({ logo: Logo, title, date, time }) => (
+                  <ArchiveInfo
+                    logo={<Logo size={26} />}
+                    title={title}
+                    date={date}
+                    time={time}
+                  />
+                ))}
+              </>
+            )}
+          </Stack>
+        </Stack>
+      </Stack>
     </Card>
   );
 }
