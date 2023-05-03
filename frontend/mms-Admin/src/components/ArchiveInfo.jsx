@@ -3,7 +3,9 @@ import { HiOutlineClock } from "react-icons/hi";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { Stack, Typography } from "@mui/material";
 import { usePalette } from "../theme/theme";
-function ArchiveInfo({ logo: Logo, title, date, time }) {
+import PropTypes from "prop-types";
+
+const ArchiveInfo = ({ logo: Logo, title, date, time }) => {
   const palette = usePalette();
   return (
     <Stack
@@ -69,6 +71,12 @@ function ArchiveInfo({ logo: Logo, title, date, time }) {
       </Stack>
     </Stack>
   );
-}
+};
 
+ArchiveInfo.propTypes = {
+  logo: PropTypes.element.isRequired,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+};
 export default ArchiveInfo;

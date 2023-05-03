@@ -144,12 +144,7 @@ function Support() {
         </Button>
       </Stack>
       {isLiveChatOpen && (
-        <LiveChat
-          isOpen={isLiveChatOpen}
-          setIsOpen={setIsLiveChatOpen}
-          message={message}
-          setMessage={setMessage}
-        />
+        <LiveChat setIsOpen={setIsLiveChatOpen} setMessage={setMessage} />
       )}
     </Stack>
   );

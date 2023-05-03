@@ -4,11 +4,8 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import questionsData from "../../../data/faqData";
 import { useDispatch } from "react-redux";
 import { SET_FAQ } from "../../../redux/FaqReducer";
-import { FaMinus, FaPlus } from "react-icons/fa";
-import { usePalette } from "../../../theme/theme";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 function Faq() {
-  const palette = usePalette();
   const questions = questionsData;
   const dispatch = useDispatch();
   const [openQuestions, setOpenQuestions] = useState([]);
@@ -22,8 +19,6 @@ function Faq() {
   useEffect(() => {
     dispatch(SET_FAQ(questions));
   }, [questions, dispatch]);
-
-  const answerRef = useRef(null);
 
   const handleQuestionClick = (index) => {
     if (openQuestions.includes(index)) {

@@ -37,13 +37,15 @@ function Archive() {
               </>
             ) : (
               <>
-                {itemsToDisplay.map(({ logo: Logo, title, date, time }) => (
-                  <ArchiveInfo
-                    logo={<Logo size={26} />}
-                    title={title}
-                    date={date}
-                    time={time}
-                  />
+                {itemsToDisplay.map(({ logo: Logo, title, date, time }, id) => (
+                  <Stack width={"100%"} key={id}>
+                    <ArchiveInfo
+                      logo={<Logo size={26} />}
+                      title={title}
+                      date={date}
+                      time={time}
+                    />
+                  </Stack>
                 ))}
               </>
             )}

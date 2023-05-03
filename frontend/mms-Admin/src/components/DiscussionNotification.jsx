@@ -87,9 +87,8 @@ function DiscussionNotification({ values, handleChange }) {
   );
 }
 
-export default DiscussionNotification;
-
 DiscussionNotification.propTypes = {
   values: PropTypes.object,
   handleChange: PropTypes.func,
 };
+export default DiscussionNotification;

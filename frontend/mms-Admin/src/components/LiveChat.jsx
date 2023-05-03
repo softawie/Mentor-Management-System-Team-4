@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LiveChat({ setIsOpen, message, setMessage, isOpen }) {
+function LiveChat({ setIsOpen, setMessage }) {
   const classes = useStyles();
 
   const handleClose = () => {
@@ -42,8 +42,7 @@ function LiveChat({ setIsOpen, message, setMessage, isOpen }) {
   };
 
   const onSubmit = (values, action) => {
-    console.log(values);
-    console.log(action);
+    setMessage(values);
     action.resetForm();
   };
 
@@ -192,7 +191,6 @@ function LiveChat({ setIsOpen, message, setMessage, isOpen }) {
                     name="message"
                     onChange={handleChange}
                     value={values.message}
-                    fullWidth
                     style={{
                       outline: "none",
                       width: "100%",
