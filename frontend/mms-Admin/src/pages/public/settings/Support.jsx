@@ -22,9 +22,12 @@ const initialValues = {
   title: "",
   message: "",
 };
+
 function Support() {
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const [message, setMessage] = useState("");
+
+  console.log(message);
 
   const handleLiveChatOpen = () => {
     setIsLiveChatOpen(true);

@@ -9,7 +9,7 @@ import { Formik, useFormik } from "formik";
 import { AiOutlineRight } from "react-icons/ai";
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
     flexDirection: "column",
