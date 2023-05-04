@@ -1,74 +1,98 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { useFormik } from "formik";
+import { Formik, useFormik } from "formik";
+
+const initialValues = {
+  email: "",
+};
 import { usePalette } from "../../theme/theme";
-import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
-
 function ForgotPasswordForm() {
-  const initialValues = { email: "", password: "" };
-  const navigate = useNavigate();
   const palette = usePalette();
-  const onSubmit = () => {
-    toast.success("Login Successful");
-    navigate("/dashboard");
+  const [email, setEmail] = useState("");
+
+  const onSubmit = (values) => {
+    setEmail(values);
   };
-
-  const formik = useFormik({ initialValues, onSubmit });
+  const { handleChange, handleSubmit } = useFormik({
+    initialValues,
+    onSubmit,
+  });
   return (
-    <Stack
-      direction="column"
-      spacing={3}
-      sx={{ alignItems: "start", textAlign: "start" }}
-    >
-      <Stack
-        spacing={4}
-        sx={{ width: "100%", alignItems: "start", minWidth: { md: "426px" } }}
-      >
-        <Typography
-          variant="h2"
-          sx={{
-            fontSize: "32px",
-            fontWeight: 700,
-            lineHeight: "53px",
-            fontFamily: "Mukta",
-            color: "#141414",
-          }}
-        >
-          Set new password
-        </Typography>
-
+    <form onSubmit={handleSubmit}>
+      <Formik initialValues={initialValues}>
         <Stack
           direction="column"
-          spacing={2}
-          sx={{ width: "100%", alignItems: "center" }}
+          spacing={3}
+          sx={{
+            alignItems: "start",
+            textAlign: "start",
+            width: ["100%", "440px"],
+            px: 4,
+          }}
         >
-          <TextField
-            required
-            name="password"
-            onChange={formik.handleChange}
-            label="Password"
-            type="password"
-            fullWidth
-          />
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: "16px",
-              fontWeight: 400,
-              lineHeight: "27px",
-              fontFamily: "Mukta",
-              color: palette.secondary.main,
-            }}
-          >
-            *Your new password must be different from previously used password.
-          </Typography>
+          <Stack direction="column" spacing={1}>
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: "32px",
+                fontWeight: 700,
+                lineHeight: "53px",
+                fontFamily: "Mukta",
+                color: "#141414",
+              }}
+            >
+              Forgot Password?
+            </Typography>
+
+            <Typography
+              variant="h2"
+              sx={{
+                fontSize: "24px",
+                fontWeight: 400,
+                lineHeight: "40px",
+                fontFamily: "Mukta",
+                color: palette.secondary.main,
+              }}
+            >
+              {email
+                ? "   An email has been sent to your registered email."
+                : "Please enter your registered email to reset your password."}
+            </Typography>
+
+            {email ? (
+              <>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontSize: "24px",
+                    fontWeight: 400,
+                    lineHeight: "40px",
+                    fontFamily: "Mukta",
+                    color: palette.secondary.main,
+                  }}
+                >
+                  Follow the link to reset your password.
+                </Typography>
+              </>
+            ) : (
+              <>
+                <TextField
+                  required
+                  name="email"
+                  onChange={handleChange}
+                  label="Enter your email"
+                  type="email"
+                  fullWidth
+                />
+              </>
+            )}
+          </Stack>
+          <Button variant="contained" type="submit" fullWidth sx={{ p: 1 }}>
+            Done
+          </Button>
         </Stack>
-        <Button variant="contained" fullWidth sx={{ p: 1 }}>
-          Reset Password
-        </Button>
-      </Stack>
-    </Stack>
+      </Formik>
+    </form>
   );
 }
 

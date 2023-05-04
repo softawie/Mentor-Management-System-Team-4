@@ -7,60 +7,8 @@ import utils from '../utils/auth';
 import models from '../database/models';
 import config from '../config/config';
 
-const { User, Credential } = models;
+const { Credential } = models;
 const { hashPassword } = utils;
-
-/**
- * Create a user
- * @param {Object} userBody
- * @param {Object} transaction
- * @returns {Promise<User>}
- */
-const registerUser = async (userBody, transaction) => {
-  const { body, query } = userBody;
-  const { email, password, loginType } = body;
-  const { userType } = query;
-
-  // insert into users table
-  const t = transaction;
-  let payload;
-
-  const [{ dataValues }, created] = await User.findOrCreate({
-    where: { email },
-    includes: { model: Credential },
-    defaults: { email, user_type: userType || 'admin' },
-    transaction: t,
-  });
-
-  let user = dataValues;
-
-  if (created) {
-    if (loginType) {
-      payload = {
-        user_id: user.user_id,
-        login_type: loginType,
-      };
-    } else {
-      const hashedPassword = await hashPassword(password);
-
-      payload = {
-        user_id: user.user_id,
-        hashed_password: hashedPassword,
-        login_type: 'local',
-      };
-    }
-
-    const credentials = await Credential.create(payload, {
-      transaction: t,
-    });
-
-    // remove password from credential data
-    delete credentials.dataValues.hashed_password;
-    user = { ...user, ...credentials.dataValues };
-  }
-
-  return user;
-};
 
 /**
  * @description - calls function that request for password reset
@@ -73,19 +21,27 @@ const loginUser = async (body) => {
 
   const user = await getUserByEmail(email);
 
-  if (user && user.Credential.login_type !== 'local') {
-    return {
-      status: 400,
-      success: false,
-      error: 'please sign in through your google account',
-    };
-  }
-
   if (!user) {
     return {
       status: 401,
       success: false,
       error: 'invalid email or password',
+    };
+  }
+
+  if (user && user.user_role !== 'admin' && !email.includes('andela')) {
+    return {
+      status: 401,
+      success: false,
+      error: 'Only users with Andela email and admin can login',
+    };
+  }
+
+  if (user && user.Credential.login_type !== 'local') {
+    return {
+      status: 400,
+      success: false,
+      error: 'please sign in through your google account',
     };
   }
 
@@ -132,6 +88,19 @@ const updateCredential = async (payload, userId) => {
 };
 
 /**
+ * @description - Function to get credentials from the table
+ * @param {Integer} userId
+ */
+const getUserCredential = (userId) => {
+  return Credential.findOne({
+    where: {
+      user_id: userId,
+    },
+    raw: true,
+  });
+};
+
+/**
  * @description - calls function that request for password reset
  * @param {Object} req
  * @param {Object} res
@@ -160,6 +129,44 @@ const requestPasswordReset = async (req, res) => {
       success: true,
       passToken,
       message: 'you will receive a mail, if you signed up with this email',
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      error: 'something went wrong',
+    });
+  }
+};
+
+/**
+ * @description - calls function that modify user's password
+ * @param {Object} req
+ * @param {Object} res
+ * @returns {Object} Response object
+ */
+const changePassword = async (req, res) => {
+  const { id } = req.user;
+  const { password, currentPassword } = req.body;
+
+  try {
+    const userCredential = await getUserCredential(id);
+    const valid = await bcrypt.compare(currentPassword, userCredential.hashed_password);
+
+    if (!valid) {
+      return res.status(401).json({
+        success: false,
+        message: 'Invalid password',
+      });
+    }
+
+    const newPassword = await hashPassword(password);
+
+    // if valid previous password, update the password
+    await updateCredential({ hashed_password: newPassword }, id);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Password changed successfully',
     });
   } catch (error) {
     return res.status(500).json({
@@ -224,4 +231,4 @@ const resetPassword = async (req, res) => {
   }
 };
 
-export { registerUser, requestPasswordReset, loginUser, updateCredential, resetPassword };
+export { requestPasswordReset, loginUser, updateCredential, resetPassword };

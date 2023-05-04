@@ -2,14 +2,9 @@ import React from "react";
 import { Formik, Form, useFormik } from "formik";
 import CustomInput from "./CustomInput";
 import { Button } from "@mui/material";
+import PropTypes from "prop-types";
 
-function FormInputs({
-  initialValues,
-  validationSchema,
-  onSubmit,
-  inputField,
-  inputField,
-}) {
+function FormInputs({ initialValues, validationSchema, onSubmit, inputField }) {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
@@ -46,10 +41,19 @@ function FormInputs({
           />
         ))}
 
-        <Button onClick={handleSubmit}>Submit</Button>
+        <Button onClick={handleSubmit} type="submit" variant="contained">
+          Submit
+        </Button>
       </Form>
     </Formik>
   );
 }
+
+FormInputs.propTypes = {
+  initialValues: PropTypes.object,
+  validationSchema: PropTypes.object,
+  onSubmit: PropTypes.func,
+  inputField: PropTypes.func,
+};
 
 export default FormInputs;
