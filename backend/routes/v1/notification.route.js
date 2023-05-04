@@ -7,10 +7,12 @@ import * as notificationController from '../../controllers/notification.controll
 const router = express.Router();
 
 // Define your notification routes here
-router.route('/')
+router
+  .route('/')
   .get(verifyToken, validate(notificationValidation.getNotifications), notificationController.getNotifications);
 
-router.route('/:notificationId')
+router
+  .route('/:notificationId')
   .get(verifyToken, validate(notificationValidation.getNotification), notificationController.getNotifications);
 
 export default router;

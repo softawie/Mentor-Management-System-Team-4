@@ -46,6 +46,7 @@ const createProfile = async (userBody) => {
 const queryUsers = async (limit, page) => {
   const offset = limit * (page - 1);
 
+  // CREATE???????
   const { count, rows } = await User.findAndCountAll({
     limit,
     offset,

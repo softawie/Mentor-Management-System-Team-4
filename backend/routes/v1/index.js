@@ -4,7 +4,6 @@ import userRoute from './user.route';
 import notificationRoute from './notification.route';
 import config from '../../config/config';
 
-
 const router = express.Router();
 
 const defaultRoutes = [
