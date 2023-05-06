@@ -7,6 +7,7 @@
   "repository": "https://github.com:ALCOpenSource/Mentor-Management-System-Team-4.git",
   "author": "Martins Aloba",
   "license": "MIT",
+  "type": "module",
   "engines": {
     "node": ">=14.0.0"
   },
