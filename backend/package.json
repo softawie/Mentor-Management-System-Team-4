@@ -7,7 +7,6 @@
   "repository": "https://github.com:ALCOpenSource/Mentor-Management-System-Team-4.git",
   "author": "Martins Aloba",
   "license": "MIT",
-  "type": "module",
   "engines": {
     "node": ">=14.0.0"
   },
@@ -47,6 +46,7 @@
     "mailgun.js": "^8.0.2",
     "moment": "^2.24.0",
     "morgan": "^1.9.1",
+    "nodemailer": "^6.9.1",
     "passport": "^0.6.0",
     "passport-google-oauth2": "^0.2.0",
     "passport-jwt": "^4.0.0",

@@ -6,14 +6,9 @@ import * as authController from '../../controllers/auth.controller';
 
 const router = express.Router();
 
-const { login, forgotPassword, resetPassword, googleAuthLogin, googleAuthCallback, googleAuthSuccess } = authController;
+const { register, login, forgotPassword, resetPassword, changePassword } = authController;
 
-router.get('/success', googleAuthSuccess);
-router.get('/failed', (_req, res) => {
-  res.status(401).json({ success: false, message: 'login failed' });
-});
-router.get('/google/callback', googleAuthCallback);
-router.get('/google', googleAuthLogin);
+router.post('/register', validate(authValidation.register), register);
 router.post('/login', validate(authValidation.login), login);
 router.post('/forgot', validate(authValidation.forgotPassword), forgotPassword);
 router.post('/reset', validate(authValidation.resetPassword), resetPassword);
