@@ -1,13 +1,14 @@
-import React from "react";
-import routes from "./pages/routes";
-import { BrowserRouter, useRoutes } from "react-router-dom";
-const Router = () => useRoutes(routes);
+import Loader from "./components/Loader";
+import PublicRouter from "./pages/router/public";
+import ProtectedRouter from "./pages/router/protected";
 
 function App() {
+  let isLoggedIn = true;
   return (
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    <div>
+      {isLoggedIn ? <ProtectedRouter /> : <PublicRouter />}
+      {/* <Loader /> */}
+    </div>
   );
 }
 
