@@ -29,7 +29,12 @@ if (window.self === window.top) {
   );
 } else {
   root.render(
-    <StatusPage code="403" title={"403"} helperText={""} btnText={""} />,
+    <StatusPage
+      code="403"
+      title={"403"}
+      helperText={""}
+      btnText={"Go to Dashboard"}
+    />,
     document.getElementById("root")
   );
 }

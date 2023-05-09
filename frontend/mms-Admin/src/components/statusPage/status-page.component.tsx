@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { statusPageStyles } from "./style.component";
 import { css } from "aphrodite";
-import { Container, Button } from "@mui/material";
+import { Container, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import {
   NotFoundErrorImg,
@@ -55,18 +55,34 @@ export default function StatusPage(props: LocaleProps) {
           )}
         </Container>
         <Container>
-          {/* <Text
+          <Typography
             variant="h3"
-            gutterBottom
+            sx={{
+              color: "#333333",
+              fontSize: "20px",
+              fontWeight: 600,
+              lineHeight: "33px",
+              fontFamily: "Mukta",
+            }}
             className={css(statusPageStyles.title)}
           >
             {props.title}
-          </Text> */}
+          </Typography>
         </Container>
         <Container style={{ padding: "20px", paddingTop: "5px" }}>
-          {/* <Text className={css(statusPageStyles.helperText)}>
-            {props.helperText}
-          </Text> */}
+          <Typography
+            variant="h3"
+            sx={{
+              fontSize: "20px",
+              fontWeight: 600,
+              lineHeight: "33px",
+              fontFamily: "Mukta",
+              color: "#333333",
+            }}
+            className={css(statusPageStyles.helperText)}
+          >
+            {props.helperText}{" "}
+          </Typography>
         </Container>
         <Container>
           <Button
