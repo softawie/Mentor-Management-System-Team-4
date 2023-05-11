@@ -32,8 +32,8 @@ const CommonRouter = (props) => {
           path={Paths.systemError}
           element={
             <StatusPage
-              code="403"
-              title={"403"}
+              code=""
+              title={"System error"}
               helperText={""}
               btnText={"Go to Dashboard"}
             />
@@ -43,8 +43,8 @@ const CommonRouter = (props) => {
           path={Paths.pageNotFound}
           element={
             <StatusPage
-              code="403"
-              title={"403"}
+              code="404"
+              title={"Page not found"}
               helperText={""}
               btnText={"Go to Dashboard"}
             />
