@@ -37,14 +37,6 @@ export default function AppHeader() {
     setAnchorEl(null);
   };
 
-  // const [showClearIcon, setShowClearIcon] = useState("none");
-
-  // const handleChange = (event) => {
-  //   // setShowClearIcon(event.target.value === "" ? "none" : "flex");
-  //   setShowClearIcon(event.target.value);
-  //   console.log(showClearIcon);
-  // };
-
   return (
     <AppBar sx={{ bg: palette.primary }}>
       <Toolbar>
