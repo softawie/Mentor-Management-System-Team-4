@@ -1,18 +1,19 @@
 import express from 'express';
-import verifyToken from '../../middlewares/auth';
 import validate from '../../middlewares/validate';
 import notificationValidation from '../../validations/notification.validation';
 import * as notificationController from '../../controllers/notification.controller';
 
 const router = express.Router();
 
-// Define your notification routes here
 router
   .route('/')
-  .get(verifyToken, validate(notificationValidation.getNotifications), notificationController.getNotifications);
+  .get(notificationController.getNotifications)
+  .post(validate(notificationValidation.createNotification), notificationController.createNotification);
 
 router
   .route('/:notificationId')
-  .get(verifyToken, validate(notificationValidation.getNotification), notificationController.getNotifications);
+  .get(notificationController.getNotification)
+  .put(validate(notificationValidation.updateNotification), notificationController.updateNotification)
+  .delete(notificationController.deleteNotification);
 
 export default router;
