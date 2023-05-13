@@ -34,6 +34,8 @@ const envVarsSchema = Joi.object()
     DB_HOST_PRODUCTION: Joi.string().description('Database production url'),
     GOOGLE_CLIENT_ID: Joi.string().description('Google client ID'),
     GOOGLE_CLIENT_SECRET: Joi.string().description('Google client secret'),
+    GOOGLE_CLIENT_EMAIL: Joi.string().description('Google User email'),
+    GOOGLE_OAUTH_REFRESH_TOKEN: Joi.string().description('Google User email'),
   })
   .unknown();
 
@@ -94,6 +96,17 @@ const config = {
     from: envVars.EMAIL_FROM,
   },
   client_url: envVars.CLIENT_URL,
+  gmail: {
+    host: envVars.SMTP_HOST,
+    port: envVars.SMTP_PORT,
+    service: 'gmail',
+    auth: {
+      type: 'OAuth2',
+      user: envVars.SMTP_USERNAME,
+      accessToken: envVars.GOOGLE_OAUTH_ACCESS_TOKEN,
+      refreshToken: envVars.GOOGLE_OAUTH_REFRESH_TOKEN,
+    },
+  },
 };
 
 module.exports = config;

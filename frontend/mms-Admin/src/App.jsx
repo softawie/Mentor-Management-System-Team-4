@@ -1,14 +1,10 @@
-import React from "react";
-import routes from "./pages/routes";
-import { BrowserRouter, useRoutes } from "react-router-dom";
-const Router = () => useRoutes(routes);
+import PublicRouter from "./pages/router/public";
+import ProtectedRouter from "./pages/router/protected";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
-  );
+  let isLoggedIn = true;
+  // eslint-disable-next-line react/react-in-jsx-scope
+  return <div>{isLoggedIn ? <ProtectedRouter /> : <PublicRouter />}</div>;
 }
 
 export default App;
