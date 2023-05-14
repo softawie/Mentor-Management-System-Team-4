@@ -25,4 +25,10 @@ const resetPassword = catchAsync(async (req, res) => {
   return user;
 });
 
-export { register, login, forgotPassword, resetPassword };
+const changePassword = catchAsync(async (req, res) => {
+  const user = await authService.changePassword(req, res);
+
+  return user;
+});
+
+export { register, login, forgotPassword, resetPassword, changePassword };

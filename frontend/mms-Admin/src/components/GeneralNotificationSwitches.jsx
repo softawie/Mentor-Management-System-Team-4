@@ -76,7 +76,6 @@ SwitchForm.propTypes = {
   label: PropTypes.string,
 };
 
-
 function GeneralNotificationSwitches({ values, handleChange }) {
   const classes = useStyles();
 
@@ -85,15 +84,15 @@ function GeneralNotificationSwitches({ values, handleChange }) {
       <SwitchForm label="All Notifications">
         <Stack direction={"row"} spacing={2}>
           <Switch
-            id="email_post_notification"
-            checked={values.email_post_notification}
+            id="email_all_notifications"
+            checked={values.email_all_notifications}
             onChange={handleChange}
             focusVisibleClassName=".Mui-focusVisible"
             className={classes.root}
           />
           <Switch
-            id="in_app_post_notification"
-            checked={values.in_app_post_notification}
+            id="in_app_all_notifications"
+            checked={values.in_app_all_notifications}
             onChange={handleChange}
             focusVisibleClassName=".Mui-focusVisible"
             className={classes.root}

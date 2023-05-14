@@ -1,5 +1,6 @@
-import Mailgun from 'mailgun.js';
-import formData from 'form-data';
+/* import Mailgun from 'mailgun.js';
+import formData from 'form-data'; */
+import nodemailer from 'nodemailer';
 import config from '../config/config';
 
 /**
@@ -9,7 +10,8 @@ import config from '../config/config';
  * @param {string} text
  * @returns {Promise}
  */
-const sendEmail = async (to, subject, text) => {
+
+/* const sendEmail = async (to, subject, text) => {
   const mailgun = new Mailgun(formData);
   const client = mailgun.client({
     key: config.mailgun.apiKey,
@@ -23,8 +25,16 @@ const sendEmail = async (to, subject, text) => {
     // 'h:X-Mailgun-Variables': JSON.stringify(data.variables || {}),
   };
   await client.messages.create(config.mailgun.domain, emailData);
-};
+}; */
 
+const sendEmail = async (to, subject, text) => {
+  const transporter = nodemailer.createTransport(config.gmail);
+  await transporter.sendMail({
+    to,
+    subject,
+    text,
+  });
+};
 /**
  * Send reset password email
  * @param {string} to

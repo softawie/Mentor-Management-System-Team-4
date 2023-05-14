@@ -6,6 +6,8 @@ import DiscussionNotification from "../../../components/DiscussionNotification";
 import { Formik, useFormik } from "formik";
 
 const initialValues = {
+  email_all_notifications: false,
+  in_app_all_notifications: false,
   email_post_notification: false,
   in_app_post_notification: false,
   email_program_notification: false,
@@ -56,7 +58,7 @@ function Notifications() {
                   direction={"row"}
                 >
                   <Box width={"100%"}></Box>
-                  <Button type="submit">Submit</Button>
+                  <Button type="submit" sx={{width: "150px"}} >Save Changes</Button>
                 </Stack>
               </Stack>
             </Formik>

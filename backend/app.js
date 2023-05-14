@@ -3,11 +3,12 @@ import helmet from 'helmet';
 import xss from 'xss-clean';
 import compression from 'compression';
 import cors from 'cors';
+import expressSession from 'express-session';
 import passport from 'passport';
 import httpStatus from 'http-status';
 import config from './config/config';
 import morgan from './config/morgan';
-import jwtStrategy from './config/passport';
+import { jwtStrategy, googleAuthStrategy } from './config/passport';
 import routes from './routes/v1';
 import { errorConverter, errorHandler } from './middlewares/error';
 import ApiError from './utils/ApiError';
@@ -17,6 +18,18 @@ const app = express();
 if (config.env !== 'test') {
   app.use(morgan.successHandler);
   app.use(morgan.errorHandler);
+}
+
+const sessionConfig = {
+  secret: 'session_secret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {},
+};
+
+if (app.get('env') === 'production') {
+  app.set('trust proxy', 1);
+  sessionConfig.cookie.secure = true;
 }
 
 // set security HTTP headers
@@ -31,16 +44,35 @@ app.use(express.urlencoded({ extended: true }));
 // sanitize request data
 app.use(xss());
 
+// use express sessions
+app.use(expressSession(sessionConfig));
+
 // gzip compression
 app.use(compression());
 
 // enable cors
-app.use(cors());
-app.options('*', cors());
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    methods: 'GET,POST,PUT,DELETE',
+    credentials: true,
+  })
+);
 
 // jwt authentication
 app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+});
+
 passport.use('jwt', jwtStrategy);
+passport.use('google', googleAuthStrategy);
 
 // load all v1 api routes
 app.use('/api/v1', routes);

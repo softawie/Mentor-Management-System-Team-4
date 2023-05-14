@@ -40,7 +40,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
-      user_type: {
+      user_role: {
         type: DataTypes.STRING,
         allowNull: false,
       },
