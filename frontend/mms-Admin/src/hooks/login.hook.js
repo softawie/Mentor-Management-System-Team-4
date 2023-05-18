@@ -11,15 +11,15 @@ import { useFormik } from "formik";
 export default function useLogin() {
   const palette = usePalette();
   const navigate = useNavigate();
+
   const initialValues = { email: "", password: "" };
 
   const doLogin = async () => {
     const res = await loginMock(); // TODO: replace this service with real service login()
     console.log("res", res);
     store.dispatch(authenticate());
-    toast
-      .success("Login Successful")
-      .then(navigate(Paths.home, { replace: true }));
+    toast.success("Login Successful");
+    navigate(Paths.home, { replace: true });
   };
   const formik = useFormik({ initialValues, doLogin });
 
