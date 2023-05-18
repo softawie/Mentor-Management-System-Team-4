@@ -4,7 +4,7 @@ import store from "src/redux/store";
 import { storeItem } from "src/utils/localStorage";
 import { setToken } from "src/redux/actions/token.action";
 
-const login = async (data) => {
+const login = async () => {
   // eslint-disable-next-line no-useless-catch
   try {
     const requestData =
