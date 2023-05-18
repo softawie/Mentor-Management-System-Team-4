@@ -5,7 +5,7 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import {
   SET_ITEMS_TO_DISPLAY,
   getShowArchiveFilteredItems,
-} from "../redux/PaletteReducer";
+} from "../redux/reducers/PaletteReducer.reducer";
 import { useDispatch } from "react-redux";
 
 const Pagination = () => {
