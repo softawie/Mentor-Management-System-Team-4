@@ -15,8 +15,9 @@ export default function useLogin() {
   const initialValues = { email: "", password: "" };
 
   const doLogin = async () => {
-    const res = await loginMock(); // TODO: replace this service with real service login()
-    console.log("res", res);
+    // const res =
+    await loginMock(); // TODO: replace this service with real service login()
+    // console.log("res", res);
     store.dispatch(authenticate());
     toast.success("Login Successful");
     navigate(Paths.home, { replace: true });
