@@ -1,24 +1,13 @@
 import React from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
-import { useFormik } from "formik";
 // import { ThreeDots } from "react-loader-spinner";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
+import useLogin from "src/hooks/login.hook";
 
-import { usePalette } from "../../theme/theme";
 function LoginForm() {
-  const palette = usePalette();
-  const navigate = useNavigate();
+  const { doLogin, palette, formik } = useLogin();
 
-  const initialValues = { email: "", password: "" };
-
-  const onSubmit = () => {
-    toast.success("Login Successful");
-    navigate("/dashboard");
-  };
-
-  const formik = useFormik({ initialValues, onSubmit });
   return (
     <form onSubmit={formik.handleSubmit}>
       <Stack
@@ -74,7 +63,12 @@ function LoginForm() {
             fullWidth
           />
         </Stack>
-        <Button variant="contained" fullWidth sx={{ p: 1 }}>
+        <Button
+          onClick={() => doLogin()}
+          variant="contained"
+          fullWidth
+          sx={{ p: 1 }}
+        >
           Login
         </Button>
 
