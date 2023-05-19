@@ -13,9 +13,6 @@ import routes from './routes/v1';
 import { errorConverter, errorHandler } from './middlewares/error';
 import ApiError from './utils/ApiError';
 
-// Import the setting routes
-import settingRoutes from './routes/v1/setting.route';
-
 const app = express();
 
 if (config.env !== 'test') {
@@ -79,10 +76,6 @@ passport.use('google', googleAuthStrategy);
 
 // load all v1 api routes
 app.use('/api/v1', routes);
-
-// Register the setting routes
-app.use('/api/v1/settings', settingRoutes);
-
 app.get('/', (_req, res) => {
   res.json({ message: 'Welcome to mentors management system app!' });
 });
