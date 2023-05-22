@@ -1,11 +1,11 @@
 import initialState from "./initialState";
-import { STOPLOADING, SETLOADING } from "../actions/actionTypes";
+import { HIDELOADER, SHOWLOADER } from "../actions/actionTypes";
 
 const loaderReducer = (state = initialState.isLoading, action) => {
   switch (action.type) {
-    case SETLOADING:
+    case SHOWLOADER:
       return true;
-    case STOPLOADING:
+    case HIDELOADER:
       return false;
     default:
       return state;

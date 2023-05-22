@@ -1,17 +1,17 @@
 import axios from "axios";
-// import store from "src/redux/store";
+// import {store} from "src/redux/store";
 import { BASE_URL } from "../AppConfig";
 import requestInterceptor from "./interceptor";
 import { PropTypes } from "prop-types";
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
-  timeout: import.meta.env.REACT_APP_TIMEOUT,
+  timeout: import.meta.env.VITE_TIMEOUT,
 });
 
 requestInterceptor(axiosClient);
 
-export const sendRequest = async () => {
+export const sendRequest = async (myParams) => {
   let defaultParams = {
     url: "",
     method: "GET",
@@ -20,32 +20,16 @@ export const sendRequest = async () => {
     withLoading: true,
     headers: {},
     responseType: null,
-    enableSignature: true,
   };
+  let newParam = { ...defaultParams, ...myParams };
+  // eslint-disable-next-line no-useless-catch
   try {
-    // if (defaultParams.withLoading) {
-    //   store.loader.setLoading(true);
-    // }
-    defaultParams.headers.basicAuth = defaultParams.basicAuth;
-    const response = await axiosClient(defaultParams.url, defaultParams);
+    // newParam.headers.basicAuth = newParam.basicAuth;
+    const response = await axiosClient(newParam.url, newParam);
     if (response) {
-      // if (defaultParams.withLoading) {
-      //   store.loader.setLoading(false);
-      // }
-      if (response.status !== 200) {
-        throw response;
-      }
       return response.data;
-    } else {
-      // if (defaultParams.withLoading) {
-      //   store.loader.setLoading(false);
-      // }
     }
   } catch (error) {
-    console.log("error;", error);
-    // if (defaultParams.withLoading) {
-    //   store.loader.setLoading(false);
-    // }
     throw error;
   }
 };

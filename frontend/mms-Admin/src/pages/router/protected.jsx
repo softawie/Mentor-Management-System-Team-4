@@ -8,6 +8,7 @@ const DashboardLayout = lazy(() => import("../../layouts/DashboardLayout"));
 const Dashboard = lazy(() => import("../dashboard/Dashboard"));
 const Settings = lazy(() => import("../public/settings/Settings"));
 const Profile = lazy(() => import("../public/Profile"));
+const Mentors = lazy(() => import("../dashboard/mentors/ListMentor"));
 
 const ProtectedRouter = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const ProtectedRouter = () => {
         <Route index element={<Dashboard />} />
         <Route path={Paths.settings} element={<Settings />} />
         <Route path={Paths.profile} element={<Profile />} />
+        <Route path={Paths.mentors} element={<Mentors />} />
       </Route>
     </CommonRouter>
   );

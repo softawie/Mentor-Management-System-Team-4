@@ -4,9 +4,9 @@ const isLogin = JSON.parse(localStorage.getItem("IS_LOGIN"));
 const token = localStorage.getItem("token");
 
 const initialState = {
-  isLoggedIn: isLogin,
+  isLoggedIn: false,
   isLoading: false,
-  token: token,
+  token: null,
   registerData: null,
   redirection: REDIRECTION_TYPE.WAITING,
 };

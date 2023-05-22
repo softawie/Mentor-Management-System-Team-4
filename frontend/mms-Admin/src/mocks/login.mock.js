@@ -1,8 +1,9 @@
-import store from "src/redux/store";
+import { store } from "src/redux/store";
 import { storeItem } from "src/utils/localStorage";
 import { setToken } from "src/redux/actions/token.action";
 
-const loginMock = async () => {
+const loginMock = async (values) => {
+  console.log("values:", values);
   try {
     const mockRes = {
       user: {

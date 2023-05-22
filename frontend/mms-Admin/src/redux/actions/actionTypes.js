@@ -1,8 +1,8 @@
 export const AUTHENTICATE = "AUTHENTICATE";
 export const UNAUTHENTICATE = "UNAUTHENTICATE";
 
-export const SETLOADING = "SETLOADING";
-export const STOPLOADING = "STOPLOADING";
+export const SHOWLOADER = "SHOWLOADER";
+export const HIDELOADER = "HIDELOADER";
 
 export const SETTOKEN = "SETTOKEN";
 export const CLEARTOKEN = "CLEARTOKEN";

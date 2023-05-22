@@ -5,9 +5,7 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers/rootReducer";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { persistReducer } from "redux-persist";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import storage from "redux-persist/lib/storage";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -24,4 +22,4 @@ const store = createStore(
   composeEnhancer(applyMiddleware(thunk))
 );
 
-export default store;
+export { store };
