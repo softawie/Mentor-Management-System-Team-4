@@ -1,28 +1,36 @@
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { usePalette } from "src/theme/theme";
-import { loginMock } from "src/mocks/login";
+// import { loginMock } from "src/mocks/login.mock";
 import { authenticate } from "src/redux/actions/authenticate.action";
-import store from "src/redux/store";
+import { store } from "src/redux/store";
 import Paths from "src/pages/router/paths";
 import { useFormik } from "formik";
-// import { login } from "src/services/login";
-
+import { login } from "src/services/login";
+import { showLoader, hideLoader } from "src/redux/actions/loading.action";
 export default function useLogin() {
   const palette = usePalette();
   const navigate = useNavigate();
-
   const initialValues = { email: "", password: "" };
 
-  const doLogin = async () => {
-    // const res =
-    await loginMock(); // TODO: replace this service with real service login()
-    // console.log("res", res);
+  const onSubmit = async (values) => {
+    store.dispatch(showLoader());
+    await login(values);
     store.dispatch(authenticate());
-    toast.success("Login Successful");
+    store.dispatch(hideLoader());
     navigate(Paths.home, { replace: true });
   };
-  const formik = useFormik({ initialValues, doLogin });
+  const { handleChange, handleSubmit, setFieldValue, values } = useFormik({
+    initialValues,
+    onSubmit,
+  });
 
-  return { doLogin, palette, navigate, initialValues, formik };
+  return {
+    palette,
+    navigate,
+    initialValues,
+    handleChange,
+    handleSubmit,
+    values,
+    setFieldValue,
+  };
 }

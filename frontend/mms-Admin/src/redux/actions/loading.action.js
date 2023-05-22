@@ -1,13 +1,13 @@
 import * as types from "./actionTypes";
 
-export function setLoading() {
+export function showLoader() {
   return {
-    type: types.SETLOADING,
+    type: types.SHOWLOADER,
   };
 }
 
-export function stopLoading() {
+export function hideLoader() {
   return {
-    type: types.STOPLOADING,
+    type: types.HIDELOADER,
   };
 }

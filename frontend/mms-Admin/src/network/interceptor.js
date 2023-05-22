@@ -1,5 +1,5 @@
 import { v1 as uuidv1 } from "uuid";
-import store from "src/redux/store";
+import { store } from "src/redux/store";
 import { getBasicAuthToken } from "src/utils/helper";
 import { Buffer } from "buffer";
 import { useNavigate } from "react-router";
