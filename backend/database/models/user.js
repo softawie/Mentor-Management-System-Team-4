@@ -79,7 +79,18 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.associate = ({ Credential, Program, Invite, Mentor, MentorManager, Report, Notification, Message, Participant, Setting }) => {
+  User.associate = ({
+    Credential,
+    Program,
+    Invite,
+    Mentor,
+    MentorManager,
+    Report,
+    Notification,
+    Message,
+    Participant,
+    Setting,
+  }) => {
     User.hasOne(Credential, {
       foreignKey: 'user_id',
     });

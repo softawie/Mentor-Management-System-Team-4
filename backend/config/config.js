@@ -103,7 +103,7 @@ const config = {
       user: envVars.SMTP_USERNAME,
       refreshToken: envVars.GOOGLE_OAUTH_REFRESH_TOKEN,
       clientId: envVars.GOOGLE_CLIENT_ID,
-      clientSecret: envVars.GOOGLE_CLIENT_SECRET
+      clientSecret: envVars.GOOGLE_CLIENT_SECRET,
     },
   },
 };
