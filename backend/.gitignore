@@ -16,3 +16,6 @@ coverage
 .DS_Store
 
 build/
+database/models/seeders
+
+database/users.js

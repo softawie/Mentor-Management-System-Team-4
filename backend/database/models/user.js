@@ -79,8 +79,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  User.associate = ({ Credential, Program, Invite, Mentor, MentorManager, Report, Notification, Message, Participant }) => {
+  User.associate = ({
+    Credential,
+    Program,
+    Invite,
+    Mentor,
+    MentorManager,
+    Report,
+    Notification,
+    Message,
+    Participant,
+    Setting,
+  }) => {
     User.hasOne(Credential, {
+      foreignKey: 'user_id',
+    });
+    User.hasOne(Setting, {
       foreignKey: 'user_id',
     });
     User.hasMany(Program, {

@@ -100,6 +100,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      user_id: {
+        type: DataTypes.BIGINT,
+        unique: true,
+        allowNull: false,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -117,6 +122,12 @@ module.exports = (sequelize, DataTypes) => {
       timestamps: true,
     }
   );
+
+  Setting.associate = ({ User }) => {
+    Setting.belongsTo(User, {
+      foreignKey: 'user_id',
+    });
+  };
 
   return Setting;
 };
