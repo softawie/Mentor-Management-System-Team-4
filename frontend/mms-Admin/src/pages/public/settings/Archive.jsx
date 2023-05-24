@@ -4,7 +4,7 @@ import ArchiveInfo from "../../../components/ArchiveInfo";
 import {
   getShowArchiveLoading,
   getShowArchiveitemsToDisplay,
-} from "../../../redux/reducers/PaletteReducer.reducer";
+} from "../../../redux/PaletteReducer";
 import Loader from "../../../components/Loader";
 
 function Archive() {

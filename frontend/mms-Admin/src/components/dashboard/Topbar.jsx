@@ -21,7 +21,6 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Person } from "@material-ui/icons";
-import { logout } from "src/services/login";
 
 export default function AppHeader() {
   // const classes = useStyles();
@@ -147,7 +146,7 @@ export default function AppHeader() {
                       </ListItemIcon>
                       Profile
                     </MenuItem>
-                    <MenuItem onClick={logout}>
+                    <MenuItem>
                       <ListItemIcon>{/* <IoMdLogOut /> */}</ListItemIcon>
                       Logout
                     </MenuItem>
