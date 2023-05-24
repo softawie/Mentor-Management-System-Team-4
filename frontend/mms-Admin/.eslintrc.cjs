@@ -24,6 +24,5 @@ module.exports = {
   plugins: ["import", "react"],
   rules: {
     "import/no-extraneous-dependencies": "error",
-    "react/react-in-jsx-scope": "off",
   },
 };

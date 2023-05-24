@@ -13,10 +13,6 @@ const Paths = {
   // Protected
   profile: "/profile",
   settings: "/settings",
-  mentors: "/mentors",
-  create: "create",
-  editmentor: ":id/edit",
-  viewmentor: ":id",
 };
 
 export default Paths;
@@ -27,13 +23,6 @@ export const publicRoutes = [
   Paths.forgotPassword,
 ];
 
-export const protectedRoutes = [
-  Paths.profile,
-  Paths.settings,
-  Paths.mentors,
-  Paths.create,
-  Paths.editmentor,
-  Paths.viewmentor,
-];
+export const protectedRoutes = [Paths.profile, Paths.settings];
 
 export const commonRoutes = [Paths.home, Paths[403]];

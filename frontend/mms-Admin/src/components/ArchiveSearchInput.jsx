@@ -7,7 +7,7 @@ import {
   SET_ARCHIVE_FILTERED_ITEMS,
   SET_ARCHIVE_LOADING,
   getShowArchiveitems,
-} from "../redux/reducers/PaletteReducer.reducer";
+} from "../redux/PaletteReducer";
 
 function ArchiveSearchInput() {
   const dispatch = useDispatch();

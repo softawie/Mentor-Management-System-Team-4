@@ -8,9 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import store from "./redux/store";
 import StatusPage from "./components/statusPage/status-page.component";
-import { CookiesProvider } from "react-cookie";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -22,9 +21,7 @@ if (window.self === window.top) {
           <CssBaseline />
           <ToastContainer />
           <BrowserRouter>
-            <CookiesProvider>
-              <App />
-            </CookiesProvider>
+            <App />
           </BrowserRouter>
         </ThemeProvider>
       </Provider>
