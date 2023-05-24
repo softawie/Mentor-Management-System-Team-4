@@ -1,0 +1,8 @@
+const REDIRECTION_TYPE = {
+  WAITING: "WAITING",
+  BLOCKED: "BLOCKED",
+  ALLOWED: "ALLOWED",
+};
+const AL = "AL";
+
+export { REDIRECTION_TYPE, AL };
