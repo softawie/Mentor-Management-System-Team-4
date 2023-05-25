@@ -17,6 +17,7 @@ const Paths = {
   create: "create",
   editmentor: ":id/edit",
   viewmentor: ":id",
+  messages: "/messages",
 };
 
 export default Paths;
@@ -34,6 +35,7 @@ export const protectedRoutes = [
   Paths.create,
   Paths.editmentor,
   Paths.viewmentor,
+  Paths.messages,
 ];
 
 export const commonRoutes = [Paths.home, Paths[403]];

@@ -1,12 +1,11 @@
 import axios from "axios";
-// import {store} from "src/redux/store";
-import { BASE_URL } from "../AppConfig";
 import requestInterceptor from "./interceptor";
 import { PropTypes } from "prop-types";
+import { BASE_URL } from "src/utils/constants";
 
 const axiosClient = axios.create({
   baseURL: BASE_URL,
-  timeout: import.meta.env.VITE_TIMEOUT,
+  timeout: 301800,
 });
 
 requestInterceptor(axiosClient);
@@ -24,7 +23,6 @@ export const sendRequest = async (myParams) => {
   let newParam = { ...defaultParams, ...myParams };
   // eslint-disable-next-line no-useless-catch
   try {
-    // newParam.headers.basicAuth = newParam.basicAuth;
     const response = await axiosClient(newParam.url, newParam);
     if (response) {
       return response.data;

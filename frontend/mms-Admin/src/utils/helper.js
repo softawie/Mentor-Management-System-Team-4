@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import { AL_BASIC_USERNAME, AL_BASIC_PASSWORD } from "../AppConfig";
-import { AL } from "src/utils/constants";
 
 export const useIsMobile = (customWidth) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -22,8 +20,4 @@ export const useIsMobile = (customWidth) => {
   });
 
   return isMobile;
-};
-
-export const getBasicAuthToken = (chn) => {
-  if (chn === AL) return `${AL_BASIC_USERNAME}:${AL_BASIC_PASSWORD}`;
 };

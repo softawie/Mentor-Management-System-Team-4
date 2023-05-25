@@ -3,6 +3,6 @@ const REDIRECTION_TYPE = {
   BLOCKED: "BLOCKED",
   ALLOWED: "ALLOWED",
 };
-const AL = "AL";
+const BASE_URL = "https://mms-team4.onrender.com";
 
-export { REDIRECTION_TYPE, AL };
+export { REDIRECTION_TYPE, BASE_URL };

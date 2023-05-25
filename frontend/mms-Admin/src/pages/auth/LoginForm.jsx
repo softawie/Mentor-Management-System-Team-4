@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
 import { FcGoogle } from "react-icons/fc";
-// import { ThreeDots } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import useLogin from "src/hooks/login.hook";
 import { Formik } from "formik";
@@ -75,7 +74,6 @@ function LoginForm() {
                 setFieldValue("email", e.target.value);
                 e.preventDefault();
               }}
-              // onChange={handleChange}
               label="Email "
               type="email"
               fullWidth
