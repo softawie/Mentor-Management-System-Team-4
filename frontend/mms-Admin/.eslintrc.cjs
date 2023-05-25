@@ -1,28 +1,28 @@
 module.exports = {
-    "env": {
-      "browser": true,
-      "es2021": true
+  settings: {
+    react: {
+      version: "detect",
     },
-    "extends": [
-      "eslint:recommended",
-      "plugin:react/recommended"
-    ],
-    "overrides": [
-    ],
-    "parserOptions": {
-      "ecmaVersion": "latest",
-      "sourceType": "module"
+  },
+  env: {
+    browser: true,
+    es2021: true,
+  },
+  extends: [
+    "plugin:react/jsx-runtime",
+    "eslint:recommended",
+    "plugin:react/recommended",
+  ],
+  overrides: [],
+  parserOptions: {
+    ecmaVersion: "latest",
+    sourceType: "module",
+    ecmaFeatures: {
+      jsx: true,
     },
-    "plugins": [
-      "react"
-    ],
-    "rules": {
-    },
-    "plugins": [
-      "import"
-    ],
-    "rules": {
-      "import/no-extraneous-dependencies": "error"
-    }
-  }
-  
+  },
+  plugins: ["import", "react"],
+  rules: {
+    "import/no-extraneous-dependencies": "error",
+  },
+};
