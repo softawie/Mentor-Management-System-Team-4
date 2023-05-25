@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import { usePalette } from "src/theme/theme";
 import { useFormik } from "formik";
-import { resetPass } from "src/services/password";
+import { resetPass } from "src/services/forgotpass";
 import Paths from "src/pages/router/paths";
 import { showLoader, hideLoader } from "src/redux/actions/loading.action";
 import { store } from "src/redux/store";
