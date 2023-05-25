@@ -6,9 +6,9 @@ import Loader from "src/components/Loader";
 
 function ForgotPasswordForm() {
   const isLoading = useSelector((state) => state.isLoading);
-
-  const { handleChange, handleSubmit, palette, initialValues, email } =
+  const { setFieldValue, handleSubmit, palette, initialValues, email, values } =
     useForgotPass();
+
   return isLoading ? (
     <Loader isOpen={true} />
   ) : (
@@ -73,7 +73,15 @@ function ForgotPasswordForm() {
                 <TextField
                   required
                   name="email"
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    setFieldValue("email", e.target.value);
+                  }}
+                  onCopy={(e) => {
+                    e.preventDefault();
+                  }}
+                  onCut={(e) => {
+                    e.preventDefault();
+                  }}
                   label="Enter your email"
                   type="email"
                   fullWidth
@@ -82,13 +90,13 @@ function ForgotPasswordForm() {
             )}
           </Stack>
           <Button
-            onClick={() => alert("dfdfdf")}
+            disabled={!values.email}
             variant="contained"
             type="submit"
             fullWidth
             sx={{ p: 1 }}
           >
-            Done
+            {!email ? "Reset Password" : "DONE"}
           </Button>
         </Stack>
       </Formik>
