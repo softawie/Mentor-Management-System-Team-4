@@ -1,23 +1,17 @@
-import React, { useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { Formik, useFormik } from "formik";
+import { Formik } from "formik";
+import useForgotPass from "src/hooks/forgotpass.hook";
+import { useSelector } from "react-redux";
+import Loader from "src/components/Loader";
 
-const initialValues = {
-  email: "",
-};
-import { usePalette } from "../../theme/theme";
 function ForgotPasswordForm() {
-  const palette = usePalette();
-  const [email, setEmail] = useState("");
+  const isLoading = useSelector((state) => state.isLoading);
 
-  const onSubmit = (values) => {
-    setEmail(values);
-  };
-  const { handleChange, handleSubmit } = useFormik({
-    initialValues,
-    onSubmit,
-  });
-  return (
+  const { handleChange, handleSubmit, palette, initialValues, email } =
+    useForgotPass();
+  return isLoading ? (
+    <Loader isOpen={true} />
+  ) : (
     <form onSubmit={handleSubmit}>
       <Formik initialValues={initialValues}>
         <Stack
@@ -87,7 +81,13 @@ function ForgotPasswordForm() {
               </>
             )}
           </Stack>
-          <Button variant="contained" type="submit" fullWidth sx={{ p: 1 }}>
+          <Button
+            onClick={() => alert("dfdfdf")}
+            variant="contained"
+            type="submit"
+            fullWidth
+            sx={{ p: 1 }}
+          >
             Done
           </Button>
         </Stack>

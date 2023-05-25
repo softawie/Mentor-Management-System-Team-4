@@ -14,7 +14,7 @@ import Pagination from "../../../components/Pagination";
 import ArchiveSearchInput from "../../../components/ArchiveSearchInput";
 import { archiveData } from "../../../data/archiveData";
 import { useDispatch } from "react-redux";
-import { ITEMS_TO_DISPLAY } from "../../../redux/PaletteReducer";
+import { ITEMS_TO_DISPLAY } from "../../../redux/reducers/PaletteReducer.reducer";
 import { useEffect } from "react";
 
 const useStyles = makeStyles((theme) => ({

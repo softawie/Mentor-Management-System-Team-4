@@ -1,12 +1,25 @@
-import { configureStore } from "@reduxjs/toolkit";
-import PalleteReducer from "./PaletteReducer";
-import FaqReducer from "./FaqReducer";
+import {
+  legacy_createStore as createStore,
+  compose,
+  applyMiddleware,
+} from "redux";
+import thunk from "redux-thunk";
+import rootReducer from "./reducers/rootReducer";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const store = configureStore({
-  reducer: {
-    pagination: PalleteReducer,
-    faq: FaqReducer,
-  },
-});
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-export default store;
+const persistConfig = {
+  key: "root",
+  storage,
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+const store = createStore(
+  persistedReducer,
+  composeEnhancer(applyMiddleware(thunk))
+);
+
+export { store };
