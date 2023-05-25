@@ -15,7 +15,6 @@ const forgotPass = async (data) => {
     });
     storeItem(tokenInfo.token, tokenInfo.access_token);
     store.dispatch(setToken(tokenInfo.access_token));
-
     return tokenInfo;
   } catch (error) {
     console.log("error;", error);
@@ -24,4 +23,20 @@ const forgotPass = async (data) => {
   }
 };
 
-export { forgotPass };
+const resetPass = async (data) => {
+  try {
+    const requestData = { password: data.password };
+    const tokenInfo = await sendRequest({
+      url: `${ENDPOINTS.resetPass}token=${data.token}`,
+      method: METHODS.POST,
+      data: requestData,
+    });
+
+    return tokenInfo;
+  } catch (error) {
+    console.log("error;", error);
+    throw error;
+  }
+};
+
+export { forgotPass, resetPass };

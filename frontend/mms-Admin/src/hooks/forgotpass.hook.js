@@ -15,30 +15,32 @@ export default function useForgotPass() {
   const [email, setEmail] = useState("");
 
   const onSubmit = async (values) => {
-    setEmail(values);
+    setEmail(values.email);
+    store.dispatch(showLoader());
     let resp = await forgotPass(values);
-    if (resp.user.success) {
-      store.dispatch(showLoader());
-      toast.success("You will receive a mail");
+    toast.success("You will receive a mail");
+    if (resp.success) {
+      navigate(`${Paths.resetPassword}?token=${resp.passToken} `, {
+        state: { token: resp.passToken },
+      });
       store.dispatch(hideLoader());
-      navigate(Paths.home, { replace: true });
     } else {
-      store.dispatch(hideLoader());
-      toast.error(resp.user.error);
+      toast.error(resp.error);
     }
   };
-  const { handleChange, handleSubmit } = useFormik({
+
+  const { setFieldValue, handleSubmit, values } = useFormik({
     initialValues,
     onSubmit,
   });
 
   return {
     onSubmit,
-    handleChange,
+    setFieldValue,
     handleSubmit,
     palette,
-    navigate,
     initialValues,
     email,
+    values,
   };
 }
