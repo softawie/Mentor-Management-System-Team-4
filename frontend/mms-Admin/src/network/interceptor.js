@@ -1,7 +1,4 @@
 import { v1 as uuidv1 } from "uuid";
-import { store } from "src/redux/store";
-import { getBasicAuthToken } from "src/utils/helper";
-import { Buffer } from "buffer";
 import { useNavigate } from "react-router";
 import Paths from "src/pages/router/paths";
 
@@ -20,12 +17,7 @@ function requestInterceptor(axiosInstance) {
 
   axiosInstance.interceptors.request.use(
     (config) => {
-      const token = store.getState().token;
       const modifiedConfig = config;
-      const basicAuthToken = getBasicAuthToken(modifiedConfig.headers.CHN);
-      modifiedConfig.headers.Authorization = modifiedConfig.headers.basicAuth
-        ? `Basic ${Buffer.from(basicAuthToken, "utf8").toString("base64")}`
-        : `Bearer ${token}`;
       modifiedConfig.headers["X-Correlation-ID"] = uuidv1();
       modifiedConfig.headers.accept = "application/json";
       return modifiedConfig;
