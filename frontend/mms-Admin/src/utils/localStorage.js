@@ -14,7 +14,7 @@ const storageKeys = {
   msg: "MSG",
   vid: "vid",
   type: "type",
-  IS_LOGIN: "IS_LOGIN",
+  IS_LOGIN: true,
   token: "token",
 };
 

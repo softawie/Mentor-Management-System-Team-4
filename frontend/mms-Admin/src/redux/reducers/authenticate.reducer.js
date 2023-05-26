@@ -1,5 +1,9 @@
 import initialState from "./initialState";
-import { AUTHENTICATE, UNAUTHENTICATE } from "../actions/actionTypes";
+import {
+  AUTHENTICATE,
+  UNAUTHENTICATE,
+  IS_LOGED_IN,
+} from "../actions/actionTypes";
 
 const authenticateReducer = (state = initialState.isLoggedIn, action) => {
   switch (action.type) {
@@ -7,6 +11,8 @@ const authenticateReducer = (state = initialState.isLoggedIn, action) => {
       return true;
     case UNAUTHENTICATE:
       return false;
+    case IS_LOGED_IN:
+      return action.data;
     default:
       return state;
   }

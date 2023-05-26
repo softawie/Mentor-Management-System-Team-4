@@ -1,5 +1,6 @@
 export const AUTHENTICATE = "AUTHENTICATE";
 export const UNAUTHENTICATE = "UNAUTHENTICATE";
+export const IS_LOGED_IN = "IS_LOGED_IN";
 
 export const SHOWLOADER = "SHOWLOADER";
 export const HIDELOADER = "HIDELOADER";

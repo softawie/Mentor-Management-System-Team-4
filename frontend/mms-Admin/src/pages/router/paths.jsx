@@ -8,7 +8,7 @@ const Paths = {
   // Public
   login: "/login",
   forgotPassword: "/forgot-password",
-  resetPassword: "/reset",
+  resetPassword: "/reset-password",
 
   // Protected
   profile: "/profile",

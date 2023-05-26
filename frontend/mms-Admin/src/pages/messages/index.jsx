@@ -5,18 +5,14 @@ import Divider from "@material-ui/core/Divider";
 import TextField from "@material-ui/core/TextField";
 import List from "@material-ui/core/List";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Fab from "@material-ui/core/Fab";
-import SendIcon from "@material-ui/icons/Send";
+// import Fab from "@material-ui/core/Fab";
+// import SendIcon from "@material-ui/icons/Send";
 
 import {
   Avatar,
-  Box,
-  Button,
   ListItem,
-  ListItemAvatar,
   ListItemText,
   Stack,
-  Typography,
   ListItemButton,
 } from "@mui/material";
 const useStyles = makeStyles({
