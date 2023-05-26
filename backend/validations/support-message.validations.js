@@ -9,15 +9,13 @@ const createMessage = {
   }),
 };
 
-
 const getUserMessage = {
-    params: Joi.object().keys({
-      id: Joi.string().required(),
-    }),
-  };
+  params: Joi.object().keys({
+    id: Joi.string().required(),
+  }),
+};
 
-
-  export default {
-    createMessage,
-    getUserMessage
-  }
+export default {
+  createMessage,
+  getUserMessage,
+};

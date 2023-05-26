@@ -1,59 +1,58 @@
 module.exports = (sequelize, DataTypes) => {
-    const Support_Message = sequelize.define(
-        'Support_Message',
-        {
-            message_id: {
-                type: DataTypes.BIGINT,
-                primaryKey: true,
-                autoIncrement: true,
-                allowNull: false,
-              },
+  const SupportMessage = sequelize.define(
+    'SupportMessage',
+    {
+      message_id: {
+        type: DataTypes.BIGINT,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
 
-              email: {
-                type: DataTypes.STRING,
-                allowNull: false,
-              },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
 
-              title: {
-                type: DataTypes.STRING,
-                allowNull: false,
-              },
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
 
-              body: {
-                type: DataTypes.STRING,
-                allowNull: false,
-              },
+      body: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
 
-              user_id: {
-                type: DataTypes.BIGINT,
-                unique: true,
-                allowNull: false,
-              },
-              created_at: {
-                type: DataTypes.DATE,
-                allowNull: false,
-                defaultValue: sequelize.fn('NOW'),
-              },
-              updated_at: {
-                type: DataTypes.DATE,
-              },
+      user_id: {
+        type: DataTypes.BIGINT,
+        unique: true,
+        allowNull: false,
+      },
+      created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        defaultValue: sequelize.fn('NOW'),
+      },
+      updated_at: {
+        type: DataTypes.DATE,
+        defaultValue: sequelize.fn('NOW'),
+      },
+    },
+    {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      underscore: true,
+      tableName: 'settings',
+      timestamps: true,
+    }
+  );
 
-        },
-        {
-            createdAt: 'created_at',
-            updatedAt: 'updated_at',
-            underscore: true,
-            tableName: 'settings',
-            timestamps: true,
-          }
-        
-    );
+  SupportMessage.associate = ({ User }) => {
+    SupportMessage.belongsTo(User, {
+      foreignKey: 'user_id',
+    });
+  };
 
-    Support_Message.associate = ({ User }) => {
-        Support_Message.belongsTo(User, {
-          foreignKey: 'user_id',
-        });
-      };
-    
-      return Support_Message;
-}
+  return SupportMessage;
+};

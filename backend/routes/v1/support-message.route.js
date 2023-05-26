@@ -10,6 +10,4 @@ router
   .get(SupportMessageController.getAllSupportMessage)
   .post(validate(SupportMessageValidation.createMessage), SupportMessageController.createSupportMessage);
 
-  router
-  .route('/:id')
-  .get(validate(SupportMessageValidation.getUserMessage), SupportMessageController.userSupportMessage)
+router.route('/:id').get(validate(SupportMessageValidation.getUserMessage), SupportMessageController.userSupportMessage);
