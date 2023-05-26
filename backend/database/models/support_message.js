@@ -43,7 +43,7 @@ module.exports = (sequelize, DataTypes) => {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       underscore: true,
-      tableName: 'settings',
+      tableName: 'SupportMessage',
       timestamps: true,
     }
   );
