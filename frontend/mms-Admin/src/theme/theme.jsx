@@ -36,7 +36,7 @@ const theme = createTheme({
       main: themeColors.error,
       contrastText: themeColors.text,
     },
- 
+
     warning: {
       main: themeColors.warning,
       contrastText: themeColors.text,
