@@ -78,7 +78,7 @@ function CardTop({ icon, toptext, bottomtext, increment}) {
 
 CardTop.propTypes = {
   icon: PropTypes.node,
-  label: PropTypes.string,
+  toptext: PropTypes.string,
   bottomtext: PropTypes.string,
   increment: PropTypes.number
 };
