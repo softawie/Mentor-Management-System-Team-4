@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Typography } from "@material-ui/core";
-
+import PropTypes from "prop-types"
 import {Box, Stack} from '@mui/material';
 
 
@@ -83,4 +83,6 @@ function CardTop({ toptext, bottomtext, increment, icon }) {
   );
 }
 
+CardTop.propTypes = {toptext: PropTypes.node,
+label: PropTypes.string};
 export default CardTop;

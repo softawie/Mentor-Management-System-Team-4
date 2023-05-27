@@ -27,7 +27,9 @@ function LinearProgressWithLabel(props) {
     </Box>
   );
 }
-
+LinearProgressWithLabel.propTypes = {
+  value : PropTypes.number
+};
 const ProgramItem = ({title, progress, date}) => {
   return (
     <Stack sx={{ bgcolor: "#E6FDFE" }}>
