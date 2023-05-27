@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import React from "react";
+import PropTypes from "prop-types";
 
 
 
@@ -38,4 +39,6 @@ const ReportItem = ({title, icon}) => {
   );
 };
 
+
+ReportItem.PropTypes = {title: PropTypes.node};
 export default ReportItem;

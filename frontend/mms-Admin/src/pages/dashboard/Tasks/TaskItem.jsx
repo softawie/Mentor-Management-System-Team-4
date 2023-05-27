@@ -13,6 +13,7 @@ import {
   import React from "react";
   import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
   import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
+  import PropTypes from "prop-types"
   
   
   
@@ -40,5 +41,6 @@ import {
     );
   };
   
+  TasktItem.PropTypes = {title: PropTypes.node};
   export default TaskItem;
   
