@@ -16,14 +16,14 @@ function LinearProgressWithLabel({value, ...rest}) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" color="text.secondary">{`${Math.round(value)}%`}</Typography>
+        <Typography variant="body2" color="text.secondary">{value}</Typography>
       </Box>
       <Box sx={{ width: "100%", mr: 1 }}>
         <LinearProgress variant="determinate" {...rest} />
       </Box>
     </Box>
   );
-};
+}
 
 LinearProgressWithLabel.propTypes = {
   value: PropTypes.number
@@ -47,7 +47,8 @@ const ProgramItem = ({title, progress, date}) => {
 };
 
 ProgramItem.propTypes = {
-title: PropTypes.node,
-label: PropTypes.string
+  title: PropTypes.node,
+  label: PropTypes.string
 };
+
 export default ProgramItem;
