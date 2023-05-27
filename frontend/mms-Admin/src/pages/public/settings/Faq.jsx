@@ -3,7 +3,7 @@ import { Card, CardContent } from "@material-ui/core";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import questionsData from "../../../data/faqData";
 import { useDispatch } from "react-redux";
-import { SET_FAQ } from "../../../redux/reducers/FaqReducer.reducer";
+import { SET_FAQ } from "src/redux/feature/FaqSlice";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 function Faq() {
   const questions = questionsData;
