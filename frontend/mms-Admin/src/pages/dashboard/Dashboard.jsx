@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-
+import PropTypes from "prop-types"
 import { Grid } from "@mui/material";
 import ProgramList from "./Programs/ProgramList";
 
@@ -192,4 +192,6 @@ function Dashboard() {
   );
 }
 
+CardTop.propTypes = {toptext: PropTypes.node,
+label : PropTypes.string,};
 export default Dashboard;

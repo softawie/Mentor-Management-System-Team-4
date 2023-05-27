@@ -82,5 +82,6 @@ function CardTop({ icon, toptext, bottomtext, increment}) {
   );
 }
 
-CardTop.PropTypes = {icon: PropTypes.node};
+CardTop.propTypes = {icon: PropTypes.node,
+label: PropTypes.string};
 export default CardTop;

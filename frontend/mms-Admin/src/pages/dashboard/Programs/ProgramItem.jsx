@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import Ellipse from "../../../assets/images/Ellipse.png";
+import PropTypes from "prop-types"
 
 
 function LinearProgressWithLabel(props) {
@@ -44,4 +45,6 @@ const ProgramItem = ({title, progress, date}) => {
   );
 };
 
+ProgramItem.propTypes = {title: PropTypes.node,
+label : PropTypes.string,};
 export default ProgramItem;

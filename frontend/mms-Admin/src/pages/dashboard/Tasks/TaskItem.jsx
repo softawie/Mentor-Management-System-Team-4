@@ -41,6 +41,7 @@ import {
     );
   };
   
-  TasktItem.PropTypes = {title: PropTypes.node};
+  TaskItem.propTypes = {title: PropTypes.node,
+  label: PropTypes.string,};
   export default TaskItem;
   
