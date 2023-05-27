@@ -1,13 +1,13 @@
 import {
-    Box,
+    
    
     Typography,
     Stack,
     ListItem,
-    Avatar,
+   
     ListItemAvatar,
     ListItemText,
-    Icon,
+  
   } from "@mui/material";
   
   import React from "react";
@@ -16,7 +16,7 @@ import {
   
   
   
-  const TaskItem = ({title, date}) => {
+  const TaskItem = ({title}) => {
     return (
       <Stack sx={{ bgcolor: "#E6FDFE" }}>
         <ListItem>

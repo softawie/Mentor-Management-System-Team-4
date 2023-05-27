@@ -1,7 +1,5 @@
 import React from "react";
 import { Box, Stack, Typography, Button, Grid } from "@mui/material";
-import ArticleOutlinedIcon from "@mui/icons-material/ArticleOutlined";
-import ShopOutlinedIcon from "@mui/icons-material/ShopOutlined";
 import TaskItem from "./TaskItem";
 
 const TaskList = () => {

@@ -1,20 +1,20 @@
 import {
-  Box,
+ 
  
   Typography,
   Stack,
   ListItem,
-  Avatar,
+ 
   ListItemAvatar,
   ListItemText,
-  Icon,
+ 
 } from "@mui/material";
-import { fontWeight } from "@mui/system";
+
 import React from "react";
 
 
 
-const ReportItem = ({title, author, date, icon}) => {
+const ReportItem = ({title, icon}) => {
   return (
     <Stack sx={{ bgcolor: "#E6FDFE" }}>
       <ListItem>
