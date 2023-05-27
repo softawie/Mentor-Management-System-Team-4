@@ -40,6 +40,8 @@ const ReportItem = ({title, icon}) => {
 };
 
 
-ReportItem.propTypes = {title: PropTypes.node, 
-label: propTypes.string,};
+ReportItem.propTypes = {
+title: PropTypes.node, 
+label: PropTypes.string
+};
 export default ReportItem;
