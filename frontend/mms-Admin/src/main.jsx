@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import "./index.css";
 import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import store from "./redux/store";
 import StatusPage from "./components/statusPage/status-page.component";
 import { CookiesProvider } from "react-cookie";
 

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Loader from "src/components/Loader";
 
 function ForgotPasswordForm() {
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector((state) => state.loader.show);
   const { setFieldValue, handleSubmit, palette, initialValues, email, values } =
     useForgotPass();
 

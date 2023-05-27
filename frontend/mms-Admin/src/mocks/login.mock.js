@@ -1,6 +1,4 @@
-import { store } from "src/redux/store";
 import { storeItem } from "src/utils/localStorage";
-import { setToken } from "src/redux/actions/token.action";
 
 const loginMock = async (values) => {
   console.log("values:", values);
@@ -31,7 +29,7 @@ const loginMock = async (values) => {
       },
     };
     storeItem(mockRes.user.token, mockRes.access_token);
-    store.dispatch(setToken(mockRes.access_token));
+    // store.dispatch(setToken(mockRes.access_token));
 
     return mockRes;
   } catch (error) {
