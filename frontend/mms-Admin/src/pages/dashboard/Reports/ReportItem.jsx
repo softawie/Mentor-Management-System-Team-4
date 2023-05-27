@@ -1,19 +1,12 @@
 import {
- 
- 
   Typography,
   Stack,
   ListItem,
- 
   ListItemAvatar,
   ListItemText,
- 
 } from "@mui/material";
-
 import React from "react";
 import PropTypes from "prop-types";
-
-
 
 const ReportItem = ({title, icon}) => {
   return (
@@ -34,14 +27,12 @@ const ReportItem = ({title, icon}) => {
              </Stack>}
         ></ListItemText>
       </ListItem>
-      
     </Stack>
   );
 };
 
-
 ReportItem.propTypes = {
-title: PropTypes.node, 
-label: PropTypes.string
+icon: PropTypes.node, 
+title: PropTypes.string
 };
 export default ReportItem;
