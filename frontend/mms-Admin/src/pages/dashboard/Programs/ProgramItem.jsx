@@ -25,14 +25,10 @@ function LinearProgressWithLabel({value, ...rest}) {
   );
 }
 
-LinearProgressWithLabel.propTypes = {
-  value: PropTypes.number
-};
-
 const ProgramItem = ({title, progress, date}) => {
   return (
     <Stack sx={{ bgcolor: "#E6FDFE" }}>
-      <ListItem>
+      <ListItem>object
         <ListItemAvatar>
           <Avatar src={Ellipse} />
         </ListItemAvatar>
@@ -46,9 +42,14 @@ const ProgramItem = ({title, progress, date}) => {
   );
 };
 
+LinearProgressWithLabel.propTypes = {
+  value: PropTypes.number
+};
+
 ProgramItem.propTypes = {
   title: PropTypes.node,
-  label: PropTypes.string
+  progress: PropTypes.number,
+  date: PropTypes.object
 };
 
 export default ProgramItem;
