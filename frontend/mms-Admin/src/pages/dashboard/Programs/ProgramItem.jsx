@@ -47,6 +47,8 @@ const ProgramItem = ({title, progress, date}) => {
   );
 };
 
-ProgramItem.propTypes = {title: PropTypes.node,
-label : PropTypes.string,};
+ProgramItem.propTypes = {
+title: PropTypes.node,
+label: PropTypes.string
+};
 export default ProgramItem;
