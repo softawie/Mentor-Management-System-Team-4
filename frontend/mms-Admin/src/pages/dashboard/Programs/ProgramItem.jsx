@@ -28,7 +28,7 @@ function LinearProgressWithLabel(props) {
   );
 }
 LinearProgressWithLabel.propTypes = {
-  value : PropTypes.number
+  value: PropTypes.number
 };
 const ProgramItem = ({title, progress, date}) => {
   return (
