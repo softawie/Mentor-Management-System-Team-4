@@ -9,27 +9,26 @@ import {
   ListItemText,
 } from "@mui/material";
 import React from "react";
+import PropTypes from "prop-types";
 import Ellipse from "../../../assets/images/Ellipse.png";
-import PropTypes from "prop-types"
 
-
-function LinearProgressWithLabel(props) {
+function LinearProgressWithLabel({value, ...rest}) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Box sx={{ minWidth: 35 }}>
-        <Typography variant="body2" color="text.secondary">{`${Math.round(
-          props.value
-        )}%`}</Typography>
+        <Typography variant="body2" color="text.secondary">{`${Math.round(value)}%`}</Typography>
       </Box>
       <Box sx={{ width: "100%", mr: 1 }}>
-        <LinearProgress variant="determinate" {...props} />
+        <LinearProgress variant="determinate" {...rest} />
       </Box>
     </Box>
   );
-}
+};
+
 LinearProgressWithLabel.propTypes = {
   value: PropTypes.number
 };
+
 const ProgramItem = ({title, progress, date}) => {
   return (
     <Stack sx={{ bgcolor: "#E6FDFE" }}>
