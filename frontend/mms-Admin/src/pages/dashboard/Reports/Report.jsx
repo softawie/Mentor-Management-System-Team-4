@@ -1,10 +1,6 @@
 import React from "react";
-
-import { Typography } from "@material-ui/core";
-
-import {Box, Stack} from '@mui/material';
 import PropTypes from "prop-types"
-
+import {Box, Stack, Typography } from '@mui/material';
 
 function CardTop({ icon, toptext, bottomtext, increment}) {
   return (
@@ -75,13 +71,16 @@ function CardTop({ icon, toptext, bottomtext, increment}) {
         </Stack>
       </Box>
       {icon}
-        
-      
     </Stack>
   </Box>
   );
 }
 
-CardTop.propTypes = {icon: PropTypes.node,
-label: PropTypes.string};
+CardTop.propTypes = {
+  icon: PropTypes.node,
+  label: PropTypes.string,
+  bottomtext: PropTypes.string,
+  increment: PropTypes.number
+};
+
 export default CardTop;
