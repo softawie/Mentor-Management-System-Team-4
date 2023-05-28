@@ -1,5 +1,5 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@mui/styles";
 import { Box, Button, Paper, Stack, Typography } from "@mui/material";
 import Logo from "../assets/images/Logo-Onley.svg";
 import { BsXLg } from "react-icons/bs";

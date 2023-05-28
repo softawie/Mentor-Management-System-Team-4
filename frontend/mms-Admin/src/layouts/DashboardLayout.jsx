@@ -1,19 +1,22 @@
 import React from "react";
 import { Box, Toolbar, useTheme } from "@mui/material";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 import { drawerWidth } from "../theme/theme";
 import Topbar from "../components/dashboard/Topbar";
 import Sidebar from "../components/dashboard/Sidebar";
+import axios from "axios";
+import { useAuth } from "src/store/auth.reducer";
 
 export default function DashboardLayout() {
   const theme = useTheme();
 
-  //   const auth = useAuth();
+     const auth = useAuth();
 
-  //   if (!auth.token) return <Navigate to="/login" />;
+     if (!auth.token) return <Navigate to="/login" />;
 
-  //   axios.defaults.headers.common.Authorization = `Bearer ${auth.token}`;
+     axios.defaults.headers.common.Authorization = `Bearer ${auth.token}`;
+     axios.defaults.headers["x-access-token"] = auth.token
 
   return (
     <Box sx={{ display: "flex", height: "100%" }}>

@@ -15,7 +15,4 @@ export default defineConfig({
     }),
     jsconfigPaths(),
   ],
-  rollupOptions: {
-    input: "src/index.jsx",
-  },
 });

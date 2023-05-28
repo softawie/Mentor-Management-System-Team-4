@@ -101,8 +101,8 @@ function Sidebar() {
             sx={{ backgroundColor: "#FFFFFF" }}
             active={location.pathname === "/"}
           />
-          <MenuItem path="/task" name="Tasks" icon={<img src={Task} />} />
-          <MenuItem path="/report" name="Reports" icon={<img src={Report} />} />
+          <MenuItem path="/tasks" name="Tasks" icon={<img src={Task} />} />
+          <MenuItem path="/reports" name="Reports" icon={<img src={Report} />} />
           <MenuItem
             path="/mentors"
             name="Mentors"
@@ -131,7 +131,7 @@ function Sidebar() {
             icon={<BiMessageAlt size={25} color={palette.secondary.main} />}
           />
           <MenuItem
-            path="/discussion"
+            path="/discussions"
             name="Discussion Forum"
             icon={<BiMessageDetail size={25} color={palette.secondary.main} />}
           />
