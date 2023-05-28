@@ -97,14 +97,13 @@ const config = {
   },
   client_url: envVars.CLIENT_URL,
   gmail: {
-    host: envVars.SMTP_HOST,
-    port: envVars.SMTP_PORT,
     service: 'gmail',
     auth: {
       type: 'OAuth2',
       user: envVars.SMTP_USERNAME,
-      accessToken: envVars.GOOGLE_OAUTH_ACCESS_TOKEN,
       refreshToken: envVars.GOOGLE_OAUTH_REFRESH_TOKEN,
+      clientId: envVars.GOOGLE_CLIENT_ID,
+      clientSecret: envVars.GOOGLE_CLIENT_SECRET,
     },
   },
 };
