@@ -5,7 +5,7 @@ import { Formik, useFormik } from "formik";
 import { ImAttachment } from "react-icons/im";
 import { BsChatText } from "react-icons/bs";
 import * as Yup from "yup";
-import LiveChat from "../../../components/LiveChat";
+import LiveChat from "../../components/LiveChat";
 
 const supportSchema = Yup.object().shape({
   name: Yup.string().required("Please enter your name"),

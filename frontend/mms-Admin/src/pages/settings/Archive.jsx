@@ -1,12 +1,12 @@
 import React from "react";
 import { Stack, Card } from "@mui/material";
-import ArchiveInfo from "../../../components/ArchiveInfo";
-import {
+ import {
   getShowArchiveLoading,
   getShowArchiveitemsToDisplay,
 } from "src/redux/feature/PaletteSlice";
-import Loader from "../../../components/Loader";
-
+import ArchiveInfo from "src/components/ArchiveInfo";
+import Loader from "src/components/Loader";
+ 
 function Archive() {
   const itemsToDisplay = getShowArchiveitemsToDisplay();
   const loading = getShowArchiveLoading();
@@ -56,3 +56,4 @@ function Archive() {
   );
 }
 export default Archive;
+

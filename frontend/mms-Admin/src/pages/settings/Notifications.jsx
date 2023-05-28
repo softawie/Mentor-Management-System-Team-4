@@ -1,8 +1,8 @@
 import React from "react";
 import { Card, CardContent } from "@material-ui/core";
 import { Box, Button, Stack } from "@mui/material";
-import GeneralNotification from "../../../components/GeneralNotification";
-import DiscussionNotification from "../../../components/DiscussionNotification";
+import GeneralNotification from "../../components/GeneralNotification";
+import DiscussionNotification from "../../components/DiscussionNotification";
 import { Formik, useFormik } from "formik";
 
 const initialValues = {

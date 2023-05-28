@@ -1,15 +1,10 @@
-import React, { lazy, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router";
+import React, { useEffect } from "react";
+import { useNavigate, useLocation, useRoutes } from "react-router";
 import Paths, { publicRoutes } from "./paths";
 import CommonRouter from "./common";
-import { Route } from "react-router";
+import pages from "..";
 
-const DashboardLayout = lazy(() => import("../../layouts/DashboardLayout"));
-const Dashboard = lazy(() => import("../dashboard/Dashboard"));
-const Settings = lazy(() => import("../public/settings/Settings"));
-const Profile = lazy(() => import("../public/Profile"));
-const Mentors = lazy(() => import("../dashboard/mentors/ListMentor"));
-const Messages = lazy(() => import("../messages/index"));
+const Router = () => useRoutes(pages);
 
 const ProtectedRouter = () => {
   const navigate = useNavigate();
@@ -23,13 +18,7 @@ const ProtectedRouter = () => {
 
   return (
     <CommonRouter>
-      <Route path={Paths.home} element={<DashboardLayout />}>
-        <Route index element={<Dashboard />} />
-        <Route path={Paths.settings} element={<Settings />} />
-        <Route path={Paths.profile} element={<Profile />} />
-        <Route path={Paths.mentors} element={<Mentors />} />
-        <Route path={Paths.messages} element={<Messages />} />
-      </Route>
+      <Router />
     </CommonRouter>
   );
 };
