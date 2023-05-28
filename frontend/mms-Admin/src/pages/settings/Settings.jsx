@@ -1,21 +1,17 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import { Tab, Tabs, Stack, Typography, Box } from "@mui/material";
-import General from "./General";
-import Password from "./Password";
-import Notifications from "./Notifications";
-import Privacy from "./Privacy";
-import Archive from "./Archive";
-import Support from "./Support";
+import { Box, Stack, Tab, Tabs, Typography } from "@mui/material";
+import { makeStyles } from "@mui/styles";
 import PropTypes from "prop-types";
-import { usePalette } from "../../theme/theme";
-import Faq from "./Faq";
-import Pagination from "../../components/Pagination";
+import { useState } from "react";
 import ArchiveSearchInput from "../../components/ArchiveSearchInput";
-import { archiveData } from "../../data/archiveData";
-import { useDispatch } from "react-redux";
-import { ITEMS_TO_DISPLAY } from "src/redux/feature/PaletteSlice";
-import { useEffect } from "react";
+import Pagination from "../../components/Pagination";
+import { usePalette } from "../../theme/theme";
+import Archive from "./Archive";
+import Faq from "./Faq";
+import General from "./General";
+import Notifications from "./Notifications";
+import Password from "./Password";
+import Privacy from "./Privacy";
+import Support from "./Support";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,14 +54,6 @@ function Settings() {
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
-
-  //This is the archive data from the database
-  const data = archiveData;
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(ITEMS_TO_DISPLAY(data));
-  }, [data, dispatch]);
 
   return (
     <Stack direction="column">

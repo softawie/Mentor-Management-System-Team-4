@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardContent } from "@material-ui/core";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material";
 import { Formik, useFormik } from "formik";
 import { ImAttachment } from "react-icons/im";
 import { BsChatText } from "react-icons/bs";

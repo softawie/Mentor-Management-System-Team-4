@@ -1,9 +1,8 @@
 import React from "react";
-import { Card, CardContent } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import { Box, Button, Stack, Switch, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Stack, Switch, Typography } from "@mui/material";
 import { Formik, useFormik } from "formik";
 import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   width: 42,

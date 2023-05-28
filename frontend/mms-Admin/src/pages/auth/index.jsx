@@ -6,10 +6,9 @@ import ResetPasswordForm from "./ResetPasswordForm";
 
 export default {
     element: <AuthLayout/>,
-    path: "login",
     children: [
         {
-            index: true,
+            path: "login",
             element: <LoginForm />
         },
         {

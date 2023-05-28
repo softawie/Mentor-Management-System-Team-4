@@ -1,9 +1,8 @@
 import React from "react";
-import { Avatar, Stack, Typography, Button } from "@mui/material";
-import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardContent } from "@material-ui/core";
+import { Avatar, Stack, Typography, Button, Card, CardContent } from "@mui/material";
 import GeneralInputs from "../../components/GeneralInputs";
 import { usePalette } from "../../theme/theme";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles(() => ({
   avatar: {

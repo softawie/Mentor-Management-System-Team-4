@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { usePalette } from "../theme/theme";
 import AuthLogoAndText from "../components/AuthLogoAndText";
@@ -13,33 +13,13 @@ export default function AuthLayout() {
         height: "100vh",
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          // justifyContent: "center",
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            padding: "0",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "100%",
-            width: "100%",
-            "@media (max-width: 1280px)": {
-              justifyContent: "space-between",
-            },
-          }}
-        >
+      <Grid container columns={2} sx={{ height: "100%" }}>
+        <Grid item xs={0} sm={1} sx={{display:["none","none","block"]}}>
           <Box
             sx={{
               position: "relative",
               width: "100%",
-              maxWidth: { lg: "50%" },
+
               height: "100%",
               display: "flex",
               justifyContent: "center",
@@ -50,25 +30,11 @@ export default function AuthLayout() {
           >
             <AuthLogoAndText />
           </Box>
-          <Box
-            sx={{
-              position: "relative",
-              width: "100%",
-              maxWidth: { lg: "50%" },
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              margin: "auto",
-              backgroundColor: palette.common.white,
-              paddingX: { sm: 16, lg: 8 },
-              paddingY: { xs: 10, lg: 24 },
-            }}
-          >
-            <Outlet />
-          </Box>
-        </Box>
-      </Box>
+        </Grid>
+        <Grid item xs={2} sm={2} md={1} sx={{ justifyContent: "center", alignItems: "center", display: "flex" }}>
+          <Outlet />
+        </Grid>
+      </Grid>
     </Box>
   );
 }

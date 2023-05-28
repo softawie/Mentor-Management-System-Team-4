@@ -1,45 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Card, CardContent } from "@material-ui/core";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import questionsData from "../../data/faqData";
-import { useDispatch } from "react-redux";
-import { SET_FAQ } from "src/redux/feature/FaqSlice";
+import { Box, Button, Card, CardContent, Stack, Typography } from "@mui/material";
+import React  from "react";
+import { useState } from "react";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
+import questionsData from "../../data/faqData";
 function Faq() {
   const questions = questionsData;
-  const dispatch = useDispatch();
-  const [openQuestions, setOpenQuestions] = useState([]);
 
-  // Create an array of refs, one for each question
-  const answerRefs = useRef(questions.map(() => React.createRef()));
-
-  // Create an object to store animation timeouts for each question
-  const [animationTimeouts, setAnimationTimeouts] = useState({});
-
-  useEffect(() => {
-    dispatch(SET_FAQ(questions));
-  }, [questions, dispatch]);
-
-  const handleQuestionClick = (index) => {
-    if (openQuestions.includes(index)) {
-      setOpenQuestions(openQuestions.filter((i) => i !== index));
-      clearTimeout(animationTimeouts[index]);
-      setAnimationTimeouts((prev) => ({
-        ...prev,
-        [index]: null,
-      }));
-      answerRefs.current[index].current.style.maxHeight = "0px";
-    } else {
-      const timeouts = { ...animationTimeouts };
-      timeouts[index] = setTimeout(() => {
-        answerRefs.current[
-          index
-        ].current.style.maxHeight = `${answerRefs.current[index].current.scrollHeight}px`;
-      }, 0);
-      setAnimationTimeouts(timeouts);
-      setOpenQuestions([...openQuestions, index]);
-    }
-  };
+  const openQuestions = useState([0])
 
   return (
     // <Card>
@@ -83,7 +50,6 @@ function Faq() {
                 >
                   <Button
                     variant="text"
-                    onClick={() => handleQuestionClick(index)}
                   >
                     {openQuestions.includes(index) ? (
                       <AiOutlineMinusCircle size={26} />
@@ -109,7 +75,6 @@ function Faq() {
                     overflow: "hidden",
                     transition: "max-height 0.5s ease-in-out",
                   }}
-                  ref={answerRefs.current[index]}
                 >
                   <Typography
                     sx={{
