@@ -1,8 +1,8 @@
 import { sendRequest } from "src/network/https";
 import { ENDPOINTS, METHODS } from "src/network/endpoints";
-import { store } from "src/redux/store";
+// import { store } from "src/redux/store";
 import { storeItem } from "src/utils/localStorage";
-import { setToken } from "src/redux/actions/token.action";
+// import { setToken } from "src/redux/actions/token.action";
 
 const forgotPass = async (data) => {
   try {
@@ -14,7 +14,7 @@ const forgotPass = async (data) => {
       data: requestData,
     });
     storeItem(tokenInfo.token, tokenInfo.access_token);
-    store.dispatch(setToken(tokenInfo.access_token));
+    // store.dispatch(setToken(tokenInfo.access_token));
     return tokenInfo;
   } catch (error) {
     console.log("error;", error);

@@ -1,6 +1,5 @@
 import React from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import useLogin from "src/hooks/login.hook";
 import { Formik } from "formik";
@@ -18,7 +17,7 @@ function LoginForm() {
   const { handleSubmit, palette, initialValues, setFieldValue, values } =
     useLogin();
   const [showPassword, setShowPassword] = React.useState(false);
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector((state) => state.loader.show);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -27,7 +26,7 @@ function LoginForm() {
   };
 
   return isLoading ? (
-    <Loader isOpen={true} />
+    <Loader isOpen={isLoading} />
   ) : (
     <form onSubmit={handleSubmit}>
       <Formik initialValues={initialValues}>
@@ -145,28 +144,6 @@ function LoginForm() {
               </Typography>
             </Link>
           </Stack>
-
-          <Button variant="outlined" fullWidth sx={{}}>
-            <Stack
-              direction="row"
-              spacing={2}
-              sx={{ alignItems: "center", display: "flex" }}
-            >
-              <FcGoogle size={26} />
-              <Typography
-                variant="h3"
-                sx={{
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  lineHeight: "30px",
-                  fontFamily: "Mukta",
-                  color: "#023C40",
-                }}
-              >
-                signin with Google
-              </Typography>
-            </Stack>
-          </Button>
         </Stack>
       </Formik>
     </form>

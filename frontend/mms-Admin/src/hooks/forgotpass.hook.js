@@ -5,25 +5,26 @@ import { usePalette } from "src/theme/theme";
 import { useFormik } from "formik";
 import { forgotPass } from "src/services/password";
 import Paths from "src/pages/router/paths";
-import { showLoader, hideLoader } from "src/redux/actions/loading.action";
-import { store } from "src/redux/store";
+import { useDispatch } from "react-redux";
+import { enableLoader, disableLoader } from "src/redux/feature/loaderSlice";
 
 export default function useForgotPass() {
   const initialValues = { email: "" };
   const palette = usePalette();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
 
   const onSubmit = async (values) => {
     setEmail(values.email);
-    store.dispatch(showLoader());
+    dispatch(enableLoader());
     let resp = await forgotPass(values);
     toast.success("You will receive a mail");
     if (resp.success) {
       navigate(`${Paths.resetPassword}?token=${resp.passToken} `, {
         state: { token: resp.passToken },
       });
-      store.dispatch(hideLoader());
+      dispatch(disableLoader());
     } else {
       toast.error(resp.error);
     }

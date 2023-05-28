@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import Loader from "src/components/Loader";
 
 function ResetPasswordForm() {
-  const isLoading = useSelector((state) => state.isLoading);
+  const isLoading = useSelector((state) => state.loader.show);
   const { setFieldValue, handleSubmit, palette, initialValues, values } =
     useResetPass();
   return isLoading ? (
