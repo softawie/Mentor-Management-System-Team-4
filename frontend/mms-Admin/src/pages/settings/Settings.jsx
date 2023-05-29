@@ -12,8 +12,9 @@ import Notifications from "./Notifications";
 import Password from "./Password";
 import Privacy from "./Privacy";
 import Support from "./Support";
+import theme from "../../theme/theme";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     display: "flex",
@@ -25,10 +26,10 @@ const useStyles = makeStyles((theme) => ({
   },
   tabPanel: {
     width: "100%",
-    paddingLLeft: theme.spacing(3),
+    paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3),
   },
-}));
+});
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
