@@ -1,133 +1,166 @@
-import React from "react";
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { FcGoogle } from "react-icons/fc";
+
+import { Email, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Button, IconButton, InputAdornment, Stack, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
-// import { ThreeDots } from "react-loader-spinner";
-import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup"
+import { useState } from "react";
+import { Navigate, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import Loader from "src/components/Loader";
+import { useLoginMutation } from "src/services/auth.service";
+import { usePalette } from "src/theme/theme";
+import { useAuth } from "src/store/auth.reducer";
 
-import { usePalette } from "../../theme/theme";
 function LoginForm() {
-  const palette = usePalette();
-  const navigate = useNavigate();
 
-  const initialValues = { email: "", password: "" };
+  const [login, { isLoading }] = useLoginMutation();
 
-  const onSubmit = () => {
-    toast.success("Login Successful");
-    navigate("/dashboard");
+  const auth = useAuth();
+
+  const navigate = useNavigate()
+
+  const palette = usePalette()
+
+  const onSubmit = async (values) => {
+    const rest = await login(values).unwrap();
+    console.log(rest);
+    toast('Login successfully', { type: 'success' });
+    navigate('/');
+  }
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
   };
 
-  const formik = useFormik({ initialValues, onSubmit });
-  return (
-    <form onSubmit={formik.handleSubmit}>
-      <Stack
-        spacing={4}
-        sx={{ width: "100%", alignItems: "start", minWidth: { md: "426px" } }}
-      >
-        <Stack
-          direction="column"
-          //   spacing={1}
-          sx={{ textAlign: "start", alignItems: "start" }}
-        >
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: "32px",
-              fontWeight: 700,
-              lineHeight: "53px",
-              fontFamily: "Mukta",
-              color: "#141414",
-            }}
-          >
-            Welcome!
-          </Typography>
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    onSubmit,
+    validationSchema: Yup.object().shape({
+      email: Yup.string().email().required(),
+      password: Yup.string().required()
+    })
+  })
 
-          <Typography
-            variant="h2"
-            sx={{
-              fontSize: "24px",
-              fontWeight: 400,
-              lineHeight: "40px",
-              fontFamily: "Mukta",
-              color: palette.secondary.main,
-            }}
-          >
-            Login to continue
-          </Typography>
-        </Stack>
-        <Stack spacing={2} sx={{ width: "100%", alignItems: "center" }}>
+  if (auth.token) {
+    return <Navigate to="/" />
+  }
+
+  return isLoading ? (
+    <Loader isOpen={isLoading} />
+  ) : (
+    <Stack spacing={2} sx={{ width: "100%", px: [4, 8, 16, 32] }}>
+      <Typography
+        variant="h2"
+        sx={{
+          fontSize: "32px",
+          fontWeight: 700,
+          lineHeight: "53px",
+          fontFamily: "Mukta",
+          color: "#141414",
+        }}
+      >
+        Welcome!
+      </Typography>
+      <Typography
+        variant="h2"
+        sx={{
+          fontSize: "24px",
+          fontWeight: 400,
+          lineHeight: "40px",
+          fontFamily: "Mukta",
+          color: palette.secondary.main,
+        }}
+      >
+        Login to continue
+      </Typography>
+
+      <form onSubmit={formik.handleSubmit}>
+        <Stack spacing={2} >
           <TextField
             required
             name="email"
             onChange={formik.handleChange}
-            label="Email "
+            label="Email Address"
             type="email"
-            fullWidth
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Email />
+                </InputAdornment>
+              ),
+            }}
           />
           <TextField
-            required
             name="password"
+            type={showPassword ? "text" : "password"}
             onChange={formik.handleChange}
-            label="Password"
-            type="password"
+            onCopy={(e) => {
+              e.preventDefault();
+            }}
+            onCut={(e) => {
+              e.preventDefault();
+            }}
             fullWidth
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            }
+            label="Password"
           />
-        </Stack>
-        <Button variant="contained" fullWidth sx={{ p: 1 }}>
-          Login
-        </Button>
 
-        <Stack
-          direction="row"
-          sx={{
-            textAlign: "start",
-            alignItems: "start",
-            justifyContent: "space-between",
-            width: "100%",
-          }}
-        >
-          <Box></Box>
-          <Link to="/forgot-password" style={{ textDecoration: "none" }}>
-            <Typography
-              variant="span"
-              sx={{
-                fontSize: "16px",
-                fontWeight: 600,
-                lineHeight: "27px",
-                fontFamily: "Mukta",
-                color: "#141414",
-                cursor: "pointer",
-              }}
-            >
-              Forgot Password?
-            </Typography>
-          </Link>
-        </Stack>
-
-        <Button variant="outlined" fullWidth sx={{}}>
-          <Stack
-            direction="row"
-            spacing={2}
-            sx={{ alignItems: "center", display: "flex" }}
+          <Button
+            disabled={!formik.isValid}
+            variant="contained"
+            fullWidth
+            sx={{ p: 1 }}
+            type="submit"
           >
-            <FcGoogle size={26} />
-            <Typography
-              variant="h3"
-              sx={{
-                fontSize: "18px",
-                fontWeight: 600,
-                lineHeight: "30px",
-                fontFamily: "Mukta",
-                color: "#023C40",
-              }}
-            >
-              signin with Google
-            </Typography>
-          </Stack>
-        </Button>
+            Login
+          </Button>
+        </Stack>
+      </form >
+      <Stack
+        direction="row"
+        sx={{
+          textAlign: "start",
+          alignItems: "start",
+          justifyContent: "space-between",
+          width: "100%",
+        }}
+      >
+
+        <Typography
+          variant="span"
+          sx={{
+            fontSize: "16px",
+            fontWeight: 600,
+            lineHeight: "27px",
+            fontFamily: "Mukta",
+            color: "#141414",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/forgot-password")}
+        >
+          Forgot Password?
+        </Typography>
+
       </Stack>
-    </form>
+    </Stack>
   );
 }
 

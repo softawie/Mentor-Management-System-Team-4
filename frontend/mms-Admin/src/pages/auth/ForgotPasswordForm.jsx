@@ -1,97 +1,112 @@
-import React, { useState } from "react";
 import { Button, Stack, TextField, Typography } from "@mui/material";
-import { Formik, useFormik } from "formik";
+import { useFormik } from "formik";
+import * as Yup from "yup"
+import Loader from "src/components/Loader";
+import { useForgotPasswordMutation } from "src/services/auth.service";
+import { usePalette } from "src/theme/theme";
+import { useState } from "react";
 
-const initialValues = {
-  email: "",
-};
-import { usePalette } from "../../theme/theme";
 function ForgotPasswordForm() {
   const palette = usePalette();
-  const [email, setEmail] = useState("");
+  const [forgotPassword, { isLoading }] = useForgotPasswordMutation();
 
-  const onSubmit = (values) => {
-    setEmail(values);
-  };
-  const { handleChange, handleSubmit } = useFormik({
-    initialValues,
+  const [isReset, setReset] = useState(false)
+
+  const onSubmit = async (values) => {
+    const rest = await forgotPassword(values).unwrap();
+    console.log(rest);
+    if(rest.success) setReset(true);
+  }
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
     onSubmit,
-  });
-  return (
-    <form onSubmit={handleSubmit}>
-      <Formik initialValues={initialValues}>
-        <Stack
-          direction="column"
-          spacing={3}
-          sx={{
-            alignItems: "start",
-            textAlign: "start",
-            width: ["100%", "440px"],
-            px: 4,
-          }}
-        >
-          <Stack direction="column" spacing={1}>
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: "32px",
-                fontWeight: 700,
-                lineHeight: "53px",
-                fontFamily: "Mukta",
-                color: "#141414",
-              }}
-            >
-              Forgot Password?
-            </Typography>
+    validationSchema: Yup.object().shape({ email: Yup.string().email().required() })
+  })
 
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: "24px",
-                fontWeight: 400,
-                lineHeight: "40px",
-                fontFamily: "Mukta",
-                color: palette.secondary.main,
-              }}
-            >
-              {email
-                ? "   An email has been sent to your registered email."
-                : "Please enter your registered email to reset your password."}
-            </Typography>
+  return isLoading ? (
+    <Loader isOpen={true} />
+  ) : (
+    <form onSubmit={formik.handleSubmit}>
+      <Stack
+        direction="column"
+        spacing={3}
+        sx={{
+          alignItems: "start",
+          textAlign: "start",
+          width: ["100%", "440px"],
+          px: 4,
+        }}
+      >
+        <Stack direction="column" spacing={1}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: "32px",
+              fontWeight: 700,
+              lineHeight: "53px",
+              fontFamily: "Mukta",
+              color: "#141414",
+            }}
+          >
+            Forgot Password?
+          </Typography>
 
-            {email ? (
-              <>
-                <Typography
-                  variant="h2"
-                  sx={{
-                    fontSize: "24px",
-                    fontWeight: 400,
-                    lineHeight: "40px",
-                    fontFamily: "Mukta",
-                    color: palette.secondary.main,
-                  }}
-                >
-                  Follow the link to reset your password.
-                </Typography>
-              </>
-            ) : (
-              <>
-                <TextField
-                  required
-                  name="email"
-                  onChange={handleChange}
-                  label="Enter your email"
-                  type="email"
-                  fullWidth
-                />
-              </>
-            )}
-          </Stack>
-          <Button variant="contained" type="submit" fullWidth sx={{ p: 1 }}>
-            Done
-          </Button>
+          <Typography
+            variant="h2"
+            sx={{
+              fontSize: "24px",
+              fontWeight: 400,
+              lineHeight: "40px",
+              fontFamily: "Mukta",
+              color: palette.secondary.main,
+            }}
+          >
+            {isReset
+              ? "   An email has been sent to your registered email."
+              : "Please enter your registered email to reset your password."}
+          </Typography>
+
+          {isReset ? (
+            <>
+              <Typography
+                variant="h2"
+                sx={{
+                  fontSize: "24px",
+                  fontWeight: 400,
+                  lineHeight: "40px",
+                  fontFamily: "Mukta",
+                  color: palette.secondary.main,
+                }}
+              >
+                Follow the link to reset your password.
+              </Typography>
+            </>
+          ) : (
+            <>
+              <TextField
+                required
+                name="email"
+                onChange={formik.handleChange}
+                label="Enter your email"
+                type="email"
+                fullWidth
+              />
+            </>
+          )}
         </Stack>
-      </Formik>
+        <Button
+          disabled={!formik.isValid}
+          variant="contained"
+          type="submit"
+          fullWidth
+          sx={{ p: 1 }}
+        >
+          {!isReset ? "Reset Password" : "DONE"}
+        </Button>
+      </Stack>
     </form>
   );
 }

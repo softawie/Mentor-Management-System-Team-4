@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { BiMessageAlt, BiBell } from "react-icons/bi";
-import MenuIcon from "@material-ui/icons/Menu";
 import Logo from "../../assets/images/Logo-Onley.svg";
 import { usePalette } from "../../theme/theme";
 import { FiSearch } from "react-icons/fi";
@@ -11,7 +10,6 @@ import {
   Grid,
   IconButton,
   ListItemIcon,
-  Menu,
   MenuItem,
   Toolbar,
   Typography,
@@ -20,10 +18,17 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Person } from "@material-ui/icons";
+import { Menu, Person } from "@mui/icons-material";
+import { useLogoutMutation } from "src/services/auth.service";
+import { useAuth } from "src/store/auth.reducer";
 
 export default function AppHeader() {
   // const classes = useStyles();
+  const [logout] = useLogoutMutation();
+  const auth = useAuth()
+
+  const handleLogout = async ()=>await logout(auth?.user?.email)
+
   const navigate = useNavigate();
   const palette = usePalette();
   const openProfile = () => navigate("/profile");
@@ -73,7 +78,7 @@ export default function AppHeader() {
                 aria-label="menu"
                 sx={{ mr: 2, display: ["block", "block", "none"] }}
               >
-                <MenuIcon />
+                <Menu />
               </IconButton>
 
               <Stack
@@ -146,7 +151,7 @@ export default function AppHeader() {
                       </ListItemIcon>
                       Profile
                     </MenuItem>
-                    <MenuItem>
+                    <MenuItem onClick={handleLogout}>
                       <ListItemIcon>{/* <IoMdLogOut /> */}</ListItemIcon>
                       Logout
                     </MenuItem>

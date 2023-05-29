@@ -9,7 +9,7 @@ import {
 import React from "react";
 import * as Yup from "yup";
 import { Field, Formik, useFormik } from "formik";
-import { countries } from "../pages/public/settings/countries";
+import { countries } from "../pages/settings/countries";
 // import CustomInput from "./forms/inputs/CustomInput";
 import GeneralSocialInputs from "./GeneralSocialInputs";
 import PropTypes from "prop-types";
