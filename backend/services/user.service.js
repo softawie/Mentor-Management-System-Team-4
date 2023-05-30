@@ -1,6 +1,19 @@
+/* eslint-disable camelcase */
 import models from '../database/models';
 
 const { User, Credential } = models;
+
+/**
+ * Query users by role
+ * @param {String} user_role
+ * @returns {Promise<User[]>}
+ */
+
+const getUsersByRole = async (user_role) => {
+  return User.findAll({
+    where: { user_role },
+  });
+};
 
 /**
  * Create a user profile
@@ -26,6 +39,8 @@ const createProfile = async (userBody) => {
       linkedIn,
       twitter,
       image_url: imageUrl,
+      has_fill_profile: true,
+      has_change_password: true,
     },
     {
       where: { email },
@@ -95,4 +110,4 @@ const getUserByEmail = async (email) => {
   });
 };
 
-export { createProfile, queryUsers, getUserById, getUserByEmail };
+export { getUsersByRole, createProfile, queryUsers, getUserById, getUserByEmail };

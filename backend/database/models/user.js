@@ -69,6 +69,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         defaultValue: sequelize.fn('NOW'),
       },
+      reset_password_code: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
+      password_code_expire: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      has_change_password: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      has_fill_profile: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       createdAt: 'created_at',

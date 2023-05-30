@@ -24,4 +24,13 @@ const getUser = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, data: user });
 });
 
-export { createProfile, getUsers, getUser };
+const getUsersByRole = catchAsync(async (req, res) => {
+  const users = await userService.getUsersByRole(req.params.role);
+  if (!users) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'Users not found');
+  }
+
+  res.status(httpStatus.OK).json({ success: true, data: users });
+});
+
+export { createProfile, getUsers, getUser, getUsersByRole };

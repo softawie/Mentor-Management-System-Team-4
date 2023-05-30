@@ -1,10 +1,10 @@
 import Joi from 'joi';
 import { password } from './custom.validation';
 
-export const register = {
+export const createUser = {
   body: Joi.object().keys({
     email: Joi.string().required().email(),
-    password: Joi.string().required().custom(password),
+    user_role: Joi.string().required(),
   }),
 };
 
@@ -22,11 +22,9 @@ export const forgotPassword = {
 };
 
 export const resetPassword = {
-  query: Joi.object().keys({
-    token: Joi.string().required(),
-  }),
   body: Joi.object().keys({
     password: Joi.string().required().custom(password),
+    passcode: Joi.string().required(),
   }),
 };
 

@@ -16,6 +16,6 @@ coverage
 .DS_Store
 
 build/
-database/models/seeders
+database/models/seeders/20230524012420-create-admins-users.js
 
 database/users.js
