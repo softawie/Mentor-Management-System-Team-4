@@ -1,13 +1,15 @@
+/* eslint-disable camelcase */
+import { nanoid } from 'nanoid';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { getUserByEmail, getUserById } from './user.service';
-import { sendResetPasswordEmail } from './email.service';
+import { sendEmail, sendResetPasswordEmail } from './email.service';
 import { generateToken } from './token.service';
 import utils from '../utils/auth';
 import models from '../database/models';
 import config from '../config/config';
 
-const { User, Credential } = models;
+const { User, Credential, Setting } = models;
 const { hashPassword } = utils;
 
 /**
@@ -16,10 +18,8 @@ const { hashPassword } = utils;
  * @param {Object} transaction
  * @returns {Promise<User>}
  */
-const registerUser = async (userBody, transaction) => {
-  const { body, query } = userBody;
-  const { email, password, loginType } = body;
-  const { userType } = query;
+const createUser = async (body, transaction) => {
+  const { email, user_role, loginType } = body;
 
   // insert into users table
   const t = transaction;
@@ -28,17 +28,19 @@ const registerUser = async (userBody, transaction) => {
   const [{ dataValues }, created] = await User.findOrCreate({
     where: { email },
     includes: { model: Credential },
-    defaults: { email, user_type: userType || 'admin' },
+    defaults: { email, user_role: user_role || 'admin' },
     transaction: t,
   });
 
   let user = dataValues;
 
+  const password = nanoid();
+
   if (created) {
     if (loginType) {
       payload = {
         user_id: user.user_id,
-        login_type: loginType,
+        login_type: loginType || 'local',
       };
     } else {
       const hashedPassword = await hashPassword(password);
@@ -54,9 +56,36 @@ const registerUser = async (userBody, transaction) => {
       transaction: t,
     });
 
+    await Setting.create(
+      {
+        user_id: user.user_id,
+      },
+      {
+        transaction: t,
+      }
+    );
+
     // remove password from credential data
     delete credentials.dataValues.hashed_password;
     user = { ...user, ...credentials.dataValues };
+
+    await sendEmail(
+      user.email,
+      'Mentor Manager System Account',
+      `
+    Dear ${user_role.charAt(0).toUpperCase() + user_role.slice(1)},
+    Welcome to join MMS.
+    Kindly find below your credentials:
+    login:  ${user.email}
+    password: ${password}
+    MMS URL: ${config.client_url}
+    Kindly change your password and update your profile.
+  
+    Best Regards,
+    MMS Account Manager
+  
+    `
+    );
   }
 
   return user;
@@ -275,4 +304,4 @@ const resetPassword = async (req, res) => {
   }
 };
 
-export { registerUser, requestPasswordReset, loginUser, updateCredential, resetPassword, changePassword, getUserCredential };
+export { createUser, requestPasswordReset, loginUser, updateCredential, resetPassword, changePassword, getUserCredential };

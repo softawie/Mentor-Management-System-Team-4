@@ -2,7 +2,9 @@ import jwt from 'jsonwebtoken';
 import config from '../config/config';
 
 const verifyToken = async (req, res, next) => {
-  const token = req.headers['x-access-token'];
+  const auth = req.headers.authorization || req.headers['x-access-token'];
+
+  const token = auth && auth.startsWith('Bearer') ? auth.split(' ').pop() : auth;
 
   if (!token) {
     return res.status(401).json({
