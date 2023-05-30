@@ -7,6 +7,7 @@ import * as userController from '../../controllers/user.controller';
 const router = express.Router();
 
 router.route('/').get(verifyToken, validate(userValidation.getUsers), userController.getUsers);
+router.route('/:role').get(verifyToken, validate(userValidation.getUsersByRole), userController.getUsersByRole);
 router.route('/profile').put(verifyToken, validate(userValidation.createProfile), userController.createProfile);
 router.route('/:userId').get(verifyToken, validate(userValidation.getUser), userController.getUser);
 

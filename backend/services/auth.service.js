@@ -1,13 +1,12 @@
 /* eslint-disable camelcase */
-import { nanoid } from 'nanoid';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import { getUserByEmail, getUserById } from './user.service';
+import { nanoid } from 'nanoid';
+import config from '../config/config';
+import models from '../database/models';
+import utils from '../utils/auth';
 import { sendEmail, sendResetPasswordEmail } from './email.service';
 import { generateToken } from './token.service';
-import utils from '../utils/auth';
-import models from '../database/models';
-import config from '../config/config';
+import { getUserByEmail } from './user.service';
 
 const { User, Credential, Setting } = models;
 const { hashPassword } = utils;
@@ -196,7 +195,20 @@ const requestPasswordReset = async (req, res) => {
 
     const passToken = generateToken({ userId });
 
-    await sendResetPasswordEmail(email, passToken);
+    const passcode = nanoid(5);
+
+    await sendResetPasswordEmail(email, passcode);
+
+    const date = new Date();
+
+    date.setDate(date.getDate() + 1);
+
+    await User.update(
+      { reset_password_code: passcode },
+      {
+        where: { email },
+      }
+    );
 
     return res.status(201).json({
       success: true,
@@ -256,11 +268,9 @@ const changePassword = async (req, res) => {
  * @returns {Object} Response object
  */
 const resetPassword = async (req, res) => {
-  const { password } = req.body;
-  const { token } = req.query;
-
+  const { password, passcode } = req.body;
   try {
-    if (!token) {
+    if (!passcode) {
       return res.status(401).json({
         status: 401,
         success: false,
@@ -268,17 +278,19 @@ const resetPassword = async (req, res) => {
       });
     }
 
-    const { userId } = await jwt.verify(token, config.jwt.secret);
+    const user = await User.findOne({ where: { reset_password_code: passcode } });
 
-    if (!userId) {
+    // const { userId } = await jwt.verify(token, config.jwt.secret);
+
+    if (!user) {
       return res.status(401).json({
         status: 401,
         success: false,
-        message: 'Invalid token provided',
+        message: 'Invalid passcode provided',
       });
     }
 
-    const user = await getUserById(userId);
+    // const user = await getUserById(userId);
 
     if (!user) {
       return res.status(404).json({
@@ -290,7 +302,14 @@ const resetPassword = async (req, res) => {
     const newPassword = await hashPassword(password);
 
     // if user, update the password
-    await updateCredential({ hashed_password: newPassword }, userId);
+    await updateCredential({ hashed_password: newPassword }, user.user_id);
+
+    await User.update(
+      { reset_password_code: null },
+      {
+        where: { user_id: user.user_id },
+      }
+    );
 
     return res.status(200).json({
       success: true,

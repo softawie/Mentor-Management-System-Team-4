@@ -2,7 +2,7 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.addColumn('users', 'reset_password_code', {
-      type: Sequelize.DataTypes.BIGINT,
+      type: Sequelize.DataTypes.STRING,
       allowNull: true,
     });
     await queryInterface.addColumn('users', 'password_code_expire', {

@@ -28,9 +28,15 @@ const getUser = {
     userId: Joi.number().integer(),
   }),
 };
+const getUsersByRole = {
+  params: Joi.object().keys({
+    role: Joi.string().required(),
+  }),
+};
 
 export default {
   createProfile,
   getUsers,
   getUser,
+  getUsersByRole,
 };
