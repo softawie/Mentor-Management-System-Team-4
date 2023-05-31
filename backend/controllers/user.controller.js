@@ -1,10 +1,16 @@
+/* eslint-disable camelcase */
 import httpStatus from 'http-status';
 import ApiError from '../utils/ApiError';
 import catchAsync from '../utils/catchAsync';
-import { userService } from '../services';
+import { userService, ApprovalRequestService } from '../services';
 
-const createProfile = catchAsync(async (req, res) => {
-  const user = await userService.createProfile(req);
+const updateProfile = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  let user = await userService.getUserById(id);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
+  }
+  user = await userService.updateProfile(req.body, id);
   res.status(httpStatus.CREATED).json({ success: true, data: user });
 });
 
@@ -15,8 +21,8 @@ const getUsers = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, data: result });
 });
 
-const getUser = catchAsync(async (req, res) => {
-  const user = await userService.getUserById(req.params.userId);
+const getUserById = catchAsync(async (req, res) => {
+  const user = await userService.getUserById(req.params.id);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, 'User not found');
   }
@@ -33,4 +39,10 @@ const getUsersByRole = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, data: users });
 });
 
-export { createProfile, getUsers, getUser, getUsersByRole };
+const getUserApprovalRequests = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const approvals = await ApprovalRequestService.findAllUserId(id);
+  res.status(httpStatus.OK).json({ success: true, data: approvals });
+});
+
+export { updateProfile, getUsers, getUserById, getUsersByRole, getUserApprovalRequests };

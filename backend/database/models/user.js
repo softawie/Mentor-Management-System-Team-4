@@ -85,6 +85,30 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      technical_proficiency: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      previous_programs: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      availability_to_join: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      program_interest: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      mentor_before: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      years_of_experience: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
     {
       createdAt: 'created_at',
@@ -106,6 +130,8 @@ module.exports = (sequelize, DataTypes) => {
     Message,
     Participant,
     Setting,
+    ApprovalRequest,
+    SupportMessage,
   }) => {
     User.hasOne(Credential, {
       foreignKey: 'user_id',
@@ -135,6 +161,12 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'sender_id',
     });
     User.hasMany(Participant, {
+      foreignKey: 'user_id',
+    });
+    User.hasMany(ApprovalRequest, {
+      foreignKey: 'user_id',
+    });
+    User.hasMany(SupportMessage, {
       foreignKey: 'user_id',
     });
   };
