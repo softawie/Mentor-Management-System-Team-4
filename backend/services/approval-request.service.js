@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import models from '../database/models';
 
-const { ApprovalRequest } = models;
+const { ApprovalRequest, User } = models;
 
 /**
  * Create an ApprovalRequest
@@ -47,15 +47,51 @@ const findById = async (pk) => {
  * Get user's ApprovalRequests
  * @param {Object} reqbody
  */
-const findAll = async () => {
-  return ApprovalRequest.findAll();
+const findAll = async (limit, page) => {
+  const offset = limit * (page - 1);
+
+  const { count, rows } = await ApprovalRequest.findAndCountAll({
+    limit,
+    offset,
+    order: [['updated_at', 'DESC']],
+    include: [
+      {
+        model: User,
+        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
+      },
+    ],
+  });
+
+  const pages = Math.ceil(count / limit);
+  const currentPage = Math.floor(offset / limit) + 1;
+  const nextPage = currentPage === pages ? null : currentPage + 1;
+  const prevPage = currentPage === 1 ? null : currentPage - 1;
+
+  return {
+    rows,
+    meta: {
+      limit,
+      pages,
+      currentPage,
+      nextPage,
+      prevPage,
+    },
+  };
 };
 /**
  * Get All ApprovalRequests
  * @param {Object} reqbody
  */
 const findAllUserId = async (user_id) => {
-  return ApprovalRequest.findAll({ where: { user_id } });
+  return ApprovalRequest.findAll({
+    where: { user_id },
+    include: [
+      {
+        model: User,
+        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
+      },
+    ],
+  });
 };
 
 export { create, update, destroy, findById, findAllUserId, findAll };

@@ -29,7 +29,8 @@ const updateApprovalRequest = catchAsync(async (req, res) => {
 });
 
 const getApprovalRequests = catchAsync(async (req, res) => {
-  const approvals = await ApprovalRequestService.findAll();
+  const { limit = 50, page = 1 } = req.query;
+  const approvals = await ApprovalRequestService.findAll(limit, page);
   res.status(httpStatus.OK).json({ success: true, data: approvals });
 });
 

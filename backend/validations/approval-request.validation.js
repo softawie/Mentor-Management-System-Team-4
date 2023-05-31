@@ -26,10 +26,16 @@ const deleteApprovalRequest = {
     id: Joi.string().required(),
   }),
 };
-
+const getAllApprovalRequests = {
+  query: Joi.object().keys({
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+  }),
+};
 export default {
   updateApprovalRequest,
   getApprovalRequest,
   deleteApprovalRequest,
   createApprovalRequest,
+  getAllApprovalRequests,
 };

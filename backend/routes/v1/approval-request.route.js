@@ -6,7 +6,6 @@ import * as approvalRequest from '../../controllers/approval-request.controller'
 
 const router = express.Router();
 
-// router.route('/').get(verifyToken, approvalRequest.findAll);
 router
   .route('/create')
   .post(verifyToken, validate(approvalValidation.createApprovalRequest), approvalRequest.createApprovalRequest);
@@ -16,5 +15,6 @@ router
 router
   .route('/:id')
   .put(verifyToken, validate(approvalValidation.updateApprovalRequest), approvalRequest.updateApprovalRequest);
+router.route('/').get(verifyToken, validate(approvalValidation.getAllApprovalRequests), approvalRequest.getApprovalRequests);
 
 export default router;
