@@ -12,6 +12,7 @@ const { User, Credential } = models;
 const getUsersByRole = async (user_role) => {
   return User.findAll({
     where: { user_role },
+    attributes: { exclude: ['reset_password_code'] },
   });
 };
 
@@ -20,36 +21,25 @@ const getUsersByRole = async (user_role) => {
  * @param {Object} userBody
  * @returns {Promise<User>}
  */
-const createProfile = async (userBody) => {
-  const { body, user: userEmail } = userBody;
-  const { firstName, lastName, bio, website, country, city, gitHub, linkedIn, instagram, twitter, imageUrl } = body;
-  const { email } = userEmail;
+const updateProfile = async (body, user_id) => {
+  const { imageUrl, ...rest } = body;
 
   const user = await User.update(
     {
-      firstName,
-      lastName,
-      email,
-      bio,
-      website,
-      country,
-      city,
-      gitHub,
-      instagram,
-      linkedIn,
-      twitter,
       image_url: imageUrl,
+      ...rest,
       has_fill_profile: true,
       has_change_password: true,
     },
     {
-      where: { email },
+      where: { user_id },
+      attributes: { exclude: ['reset_password_code', 'password_code_expire'] },
       returning: true,
       plain: true,
     }
   );
 
-  return user[1].dataValues;
+  return user;
 };
 
 /**
@@ -66,6 +56,7 @@ const queryUsers = async (limit, page) => {
     limit,
     offset,
     order: [['updated_at', 'DESC']],
+    attributes: { exclude: ['reset_password_code'] },
   });
 
   const pages = Math.ceil(count / limit);
@@ -110,4 +101,4 @@ const getUserByEmail = async (email) => {
   });
 };
 
-export { getUsersByRole, createProfile, queryUsers, getUserById, getUserByEmail };
+export { getUsersByRole, updateProfile, queryUsers, getUserById, getUserByEmail };

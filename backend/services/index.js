@@ -3,5 +3,6 @@ import * as emailService from './email.service';
 import * as userService from './user.service';
 import * as tokenService from './token.service';
 import * as notificationService from './notification.service';
+import * as ApprovalRequestService from './approval-request.service';
 
-export { authService, emailService, userService, tokenService, notificationService };
+export { authService, emailService, userService, tokenService, notificationService, ApprovalRequestService };

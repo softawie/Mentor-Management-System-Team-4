@@ -2,6 +2,7 @@ import express from 'express';
 import authRoute from './auth.route';
 import userRoute from './user.route';
 import notificationRoute from './notification.route';
+import approvalRoute from './approval-request.route';
 import settingRoutes from './setting.route';
 import config from '../../config/config';
 
@@ -23,6 +24,10 @@ const defaultRoutes = [
   {
     path: '/setting',
     route: settingRoutes,
+  },
+  {
+    path: '/approvals',
+    route: approvalRoute,
   },
 ];
 
