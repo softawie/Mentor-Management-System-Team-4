@@ -6,6 +6,13 @@ const createApprovalRequest = {
     email: Joi.string().email().required(),
   }),
 };
+const createProgramRequest = {
+  body: Joi.object().keys({
+    category: Joi.string().required(),
+    email: Joi.string().email().required(),
+    program_id: Joi.number().required(),
+  }),
+};
 const updateApprovalRequest = {
   params: Joi.object().keys({
     id: Joi.string().required(),
@@ -45,4 +52,5 @@ export default {
   createApprovalRequest,
   getAllApprovalRequests,
   findAllByCategory,
+  createProgramRequest,
 };
