@@ -10,10 +10,11 @@ const { ApprovalRequest, User } = models;
  * @returns {Promise<ApprovalRequest>}
  */
 const create = async (body) => {
-  const { category, user_id } = body;
+  const { category, user_id, program_id } = body;
   return ApprovalRequest.create({
     user_id,
     category,
+    program_id,
   });
 };
 
