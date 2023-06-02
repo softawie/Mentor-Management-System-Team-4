@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BIGINT,
         allowNull: false,
       },
-      role: {
+      category: {
         type: DataTypes.STRING,
         allowNull: false,
       },
