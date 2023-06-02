@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
+import { Op } from 'sequelize';
 import models from '../database/models';
-const { Op } = require('sequelize');
 
 const { Program, User, ApprovalRequest } = models;
 
