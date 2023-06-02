@@ -163,8 +163,10 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(Participant, {
       foreignKey: 'user_id',
     });
-    User.hasMany(ApprovalRequest, {
+    User.belongsToMany(Program, {
+      through: ApprovalRequest,
       foreignKey: 'user_id',
+      otherKey: 'program_id',
     });
     User.hasMany(SupportMessage, {
       foreignKey: 'user_id',

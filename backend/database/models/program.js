@@ -53,8 +53,10 @@ module.exports = (sequelize, DataTypes) => {
     Program.belongsTo(User, {
       foreignKey: 'created_by',
     });
-    Program.hasMany(ApprovalRequest, {
+    Program.belongsToMany(User, {
+      through: ApprovalRequest,
       foreignKey: 'program_id',
+      otherKey: 'user_id',
     });
     Program.hasMany(Report, {
       foreignKey: 'program_id',
