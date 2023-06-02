@@ -43,7 +43,7 @@ const getApprovalRequestById = catchAsync(async (req, res) => {
   res.status(httpStatus.OK).json({ success: true, data: approval });
 });
 const findAllByCategory = catchAsync(async (req, res) => {
-  const { category } = req.query;
+  const { category } = req.params;
   const approval = await ApprovalRequestService.findAllByCategory(category);
   if (!approval) {
     throw new ApiError(httpStatus.NOT_FOUND, `Approval request not found`);
