@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.BIGINT,
         allowNull: false,
       },
+      program_id: {
+        type: DataTypes.BIGINT,
+        allowNull: true,
+      },
       category: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -39,9 +43,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  ApprovalRequest.associate = ({ User }) => {
+  ApprovalRequest.associate = ({ User, Program }) => {
     ApprovalRequest.belongsTo(User, {
       foreignKey: 'user_id',
+    });
+    ApprovalRequest.belongsTo(Program, {
+      foreignKey: 'program_id',
     });
   };
 
