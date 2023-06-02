@@ -2,7 +2,7 @@ import Joi from 'joi';
 
 const createApprovalRequest = {
   body: Joi.object().keys({
-    role: Joi.string().required(),
+    category: Joi.string().required(),
     email: Joi.string().email().required(),
   }),
 };
