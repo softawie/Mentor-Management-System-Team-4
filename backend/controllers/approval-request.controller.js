@@ -5,7 +5,7 @@ import catchAsync from '../utils/catchAsync';
 import { ApprovalRequestService, userService } from '../services';
 
 const createApprovalRequest = catchAsync(async (req, res) => {
-  const { email, category } = req.body;
+  const { email, category, program_id } = req.body;
   const user = await userService.getUserByEmail(email);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, `User with email: ${email} not found`);
@@ -13,6 +13,7 @@ const createApprovalRequest = catchAsync(async (req, res) => {
   const approval = await ApprovalRequestService.create({
     user_id: user.user_id,
     category,
+    program_id,
   });
   res.status(httpStatus.CREATED).json({ success: true, data: approval });
 });
