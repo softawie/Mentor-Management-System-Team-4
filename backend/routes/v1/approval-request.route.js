@@ -16,5 +16,7 @@ router
   .route('/:id')
   .put(verifyToken, validate(approvalValidation.updateApprovalRequest), approvalRequest.updateApprovalRequest);
 router.route('/').get(verifyToken, validate(approvalValidation.getAllApprovalRequests), approvalRequest.getApprovalRequests);
-
+router
+  .route('/category/:category')
+  .get(verifyToken, validate(approvalValidation.findAllByCategory), approvalRequest.findAllByCategory);
 export default router;

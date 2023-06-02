@@ -2,8 +2,19 @@ import Joi from 'joi';
 
 const createApprovalRequest = {
   body: Joi.object().keys({
-    role: Joi.string().required(),
+    category: Joi.string().valid('mentor', 'mentor-manager', 'program').required(),
     email: Joi.string().email().required(),
+    program_id: Joi.number().when('category', {
+      is: Joi.valid('program'),
+      then: Joi.required(),
+    }),
+  }),
+};
+const createProgramRequest = {
+  body: Joi.object().keys({
+    category: Joi.string().required(),
+    email: Joi.string().email().required(),
+    program_id: Joi.number().required(),
   }),
 };
 const updateApprovalRequest = {
@@ -18,6 +29,12 @@ const updateApprovalRequest = {
 const getApprovalRequest = {
   params: Joi.object().keys({
     id: Joi.string().required(),
+  }),
+};
+
+const findAllByCategory = {
+  params: Joi.object().keys({
+    category: Joi.string().required(),
   }),
 };
 
@@ -38,4 +55,6 @@ export default {
   deleteApprovalRequest,
   createApprovalRequest,
   getAllApprovalRequests,
+  findAllByCategory,
+  createProgramRequest,
 };

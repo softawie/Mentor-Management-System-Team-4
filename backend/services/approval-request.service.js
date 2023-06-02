@@ -10,10 +10,11 @@ const { ApprovalRequest, User } = models;
  * @returns {Promise<ApprovalRequest>}
  */
 const create = async (body) => {
-  const { role, user_id } = body;
+  const { category, user_id, program_id } = body;
   return ApprovalRequest.create({
     user_id,
-    role,
+    category,
+    program_id,
   });
 };
 
@@ -82,7 +83,7 @@ const findAll = async (limit, page) => {
  * Get All ApprovalRequests
  * @param {Object} reqbody
  */
-const findAllUserId = async (user_id) => {
+const findAllByUserId = async (user_id) => {
   return ApprovalRequest.findAll({
     where: { user_id },
     include: [
@@ -94,4 +95,20 @@ const findAllUserId = async (user_id) => {
   });
 };
 
-export { create, update, destroy, findById, findAllUserId, findAll };
+/**
+ * Get All ApprovalRequests by category
+ * @param {Object} reqbody
+ */
+const findAllByCategory = async (category) => {
+  return ApprovalRequest.findAll({
+    where: { category },
+    include: [
+      {
+        model: User,
+        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
+      },
+    ],
+  });
+};
+
+export { create, update, destroy, findById, findAllByUserId, findAll, findAllByCategory };

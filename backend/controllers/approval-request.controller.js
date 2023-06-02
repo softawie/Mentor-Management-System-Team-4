@@ -5,14 +5,15 @@ import catchAsync from '../utils/catchAsync';
 import { ApprovalRequestService, userService } from '../services';
 
 const createApprovalRequest = catchAsync(async (req, res) => {
-  const { email, role } = req.body;
+  const { email, category, program_id } = req.body;
   const user = await userService.getUserByEmail(email);
   if (!user) {
     throw new ApiError(httpStatus.NOT_FOUND, `User with email: ${email} not found`);
   }
   const approval = await ApprovalRequestService.create({
     user_id: user.user_id,
-    role,
+    category,
+    program_id,
   });
   res.status(httpStatus.CREATED).json({ success: true, data: approval });
 });
@@ -42,5 +43,13 @@ const getApprovalRequestById = catchAsync(async (req, res) => {
   }
   res.status(httpStatus.OK).json({ success: true, data: approval });
 });
+const findAllByCategory = catchAsync(async (req, res) => {
+  const { category } = req.params;
+  const approval = await ApprovalRequestService.findAllByCategory(category);
+  if (!approval) {
+    throw new ApiError(httpStatus.NOT_FOUND, `Approval request not found`);
+  }
+  res.status(httpStatus.OK).json({ success: true, data: approval });
+});
 
-export { createApprovalRequest, updateApprovalRequest, getApprovalRequests, getApprovalRequestById };
+export { createApprovalRequest, updateApprovalRequest, getApprovalRequests, getApprovalRequestById, findAllByCategory };
