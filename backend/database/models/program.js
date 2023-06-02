@@ -49,11 +49,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Program.associate = ({ User, ApprovalRequest }) => {
+  Program.associate = ({ User, ApprovalRequest, Report }) => {
     Program.belongsTo(User, {
       foreignKey: 'created_by',
     });
     Program.hasMany(ApprovalRequest, {
+      foreignKey: 'program_id',
+    });
+    Program.hasMany(Report, {
       foreignKey: 'program_id',
     });
   };
