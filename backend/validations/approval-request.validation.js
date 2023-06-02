@@ -2,8 +2,12 @@ import Joi from 'joi';
 
 const createApprovalRequest = {
   body: Joi.object().keys({
-    category: Joi.string().required(),
+    category: Joi.string().valid('mentor', 'mentor-manager', 'program').required(),
     email: Joi.string().email().required(),
+    program_id: Joi.number().when('category', {
+      is: Joi.valid('program'),
+      then: Joi.required(),
+    }),
   }),
 };
 const createProgramRequest = {
