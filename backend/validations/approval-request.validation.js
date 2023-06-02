@@ -21,6 +21,12 @@ const getApprovalRequest = {
   }),
 };
 
+const findAllByCategory = {
+  params: Joi.object().keys({
+    category: Joi.string().required(),
+  }),
+};
+
 const deleteApprovalRequest = {
   params: Joi.object().keys({
     id: Joi.string().required(),
@@ -38,4 +44,5 @@ export default {
   deleteApprovalRequest,
   createApprovalRequest,
   getAllApprovalRequests,
+  findAllByCategory,
 };
