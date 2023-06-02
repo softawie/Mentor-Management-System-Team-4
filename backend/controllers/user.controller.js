@@ -41,7 +41,7 @@ const getUsersByRole = catchAsync(async (req, res) => {
 
 const getUserApprovalRequests = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const approvals = await ApprovalRequestService.findAllUserId(id);
+  const approvals = await ApprovalRequestService.findAllByUserId(id);
   res.status(httpStatus.OK).json({ success: true, data: approvals });
 });
 
