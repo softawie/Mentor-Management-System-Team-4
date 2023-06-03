@@ -1,3 +1,6 @@
+/* eslint-disable camelcase */
+import models from '.';
+
 module.exports = (sequelize, DataTypes) => {
   const ApprovalRequest = sequelize.define(
     'ApprovalRequest',
@@ -40,6 +43,18 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'approval_requests',
       underscore: true,
       timestamps: true,
+      hooks: {
+        afterUpdate: async ({ dataValues: { status, category, user_id } }) => {
+          if (status === 'accepted' && category !== 'program') {
+            await models.User.update(
+              {
+                user_role: category,
+              },
+              { where: { user_id } }
+            );
+          }
+        },
+      },
     }
   );
 
