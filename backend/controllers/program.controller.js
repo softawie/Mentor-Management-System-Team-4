@@ -68,9 +68,9 @@ const destroy = catchAsync(async (req, res) => {
 });
 
 const findAllAssignedUsersByRole = catchAsync(async (req, res) => {
-  const { program_id, role } = req.params;
+  const { program_id, user_role } = req.params;
   const { limit = 50, page = 1 } = req.body;
-  const programs = await programService.findAllAssignedUsersByRole(role, program_id, page, limit);
+  const programs = await programService.findAllAssignedUsersByRole(user_role, program_id, page, limit);
   if (!programs) {
     throw new ApiError(httpStatus.NOT_FOUND, `Program request not found`);
   }

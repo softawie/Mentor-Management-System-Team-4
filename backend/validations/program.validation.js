@@ -36,7 +36,7 @@ const findAllByUserId = {
 const findAllAssignedUsersByRole = {
   params: Joi.object().keys({
     program_id: Joi.number().required(),
-    role: Joi.string().required(),
+    user_role: Joi.string().valid('admin', 'mentor', 'mentor-manager').required(),
   }),
 };
 

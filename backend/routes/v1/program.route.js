@@ -13,6 +13,9 @@ router
   .put(verifyToken, validate(validator.update), controller.update)
   .delete(verifyToken, validate(validator.destroy), controller.destroy);
 router.route('/users/:id').get(verifyToken, validate(validator.findAllByUserId), controller.findAllByUserId);
+router
+  .route('/:program_id/role/:user_role')
+  .get(verifyToken, validate(validator.findAllAssignedUsersByRole), controller.findAllAssignedUsersByRole);
 router.route('/').get(verifyToken, validate(validator.findAll), controller.findAll);
 
 export default router;
