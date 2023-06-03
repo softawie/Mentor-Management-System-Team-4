@@ -137,6 +137,7 @@ module.exports = (sequelize, DataTypes) => {
     Setting,
     ApprovalRequest,
     SupportMessage,
+    Task,
   }) => {
     User.hasOne(Credential, {
       as: 'credential',
@@ -183,6 +184,9 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.hasMany(SupportMessage, {
       foreignKey: 'user_id',
+    });
+    User.belongsToMany(Task, {
+      as: 'tasks',
     });
   };
 
