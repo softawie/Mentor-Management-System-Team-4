@@ -62,9 +62,19 @@ const destroy = catchAsync(async (req, res) => {
   if (!program) {
     throw new ApiError(httpStatus.NOT_FOUND, `Program request not found`);
   }
-  program = await programService.destroy(id);
+  program = await program.destroy();
 
   res.status(httpStatus.OK).json({ success: true, data: program });
 });
 
-export { create, findById, update, destroy, findAll, findAllByUserId };
+const findAllAssignedUsersByRole = catchAsync(async (req, res) => {
+  const { program_id, role } = req.params;
+  const { limit = 50, page = 1 } = req.body;
+  const programs = await programService.findAllAssignedUsersByRole(role, program_id, page, limit);
+  if (!programs) {
+    throw new ApiError(httpStatus.NOT_FOUND, `Program request not found`);
+  }
+  res.status(httpStatus.OK).json({ success: true, data: programs });
+});
+
+export { create, findById, update, destroy, findAll, findAllByUserId, findAllAssignedUsersByRole };

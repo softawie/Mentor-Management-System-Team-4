@@ -33,9 +33,10 @@ const findAllByUserId = {
   }),
 };
 
-const findAllUserByProgramId = {
+const findAllAssignedUsersByRole = {
   params: Joi.object().keys({
-    id: Joi.number().required(),
+    program_id: Joi.number().required(),
+    role: Joi.string().required(),
   }),
 };
 
@@ -52,4 +53,4 @@ const findAll = {
   }),
 };
 
-export default { create, update, destroy, findById, findAll, findAllByUserId, findAllUserByProgramId };
+export default { create, update, destroy, findById, findAll, findAllByUserId, findAllAssignedUsersByRole };
