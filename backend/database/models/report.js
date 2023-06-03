@@ -38,9 +38,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Report.associate = ({ User }) => {
+  Report.associate = ({ User, Program }) => {
     Report.belongsTo(User, {
       foreignKey: 'user_id',
+    });
+    Report.belongsTo(Program, {
+      foreignKey: 'program_id',
     });
   };
 

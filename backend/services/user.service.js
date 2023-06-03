@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import models from '../database/models';
 
-const { User, Credential } = models;
+const { User } = models;
 
 /**
  * Query users by role
@@ -56,7 +56,6 @@ const queryUsers = async (limit, page) => {
     limit,
     offset,
     order: [['updated_at', 'DESC']],
-    attributes: { exclude: ['reset_password_code'] },
   });
 
   const pages = Math.ceil(count / limit);
@@ -95,7 +94,7 @@ const getUserByEmail = async (email) => {
     where: {
       email,
     },
-    include: { model: Credential },
+    include: ['credential'],
     raw: true,
     nest: true,
   });

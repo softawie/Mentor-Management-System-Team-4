@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import models from '../database/models';
 
-const { ApprovalRequest, User } = models;
+const { ApprovalRequest } = models;
 
 /**
  * Create an ApprovalRequest
@@ -55,12 +55,7 @@ const findAll = async (limit, page) => {
     limit,
     offset,
     order: [['updated_at', 'DESC']],
-    include: [
-      {
-        model: User,
-        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
-      },
-    ],
+    include: ['users'],
   });
 
   const pages = Math.ceil(count / limit);
@@ -86,12 +81,7 @@ const findAll = async (limit, page) => {
 const findAllByUserId = async (user_id) => {
   return ApprovalRequest.findAll({
     where: { user_id },
-    include: [
-      {
-        model: User,
-        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
-      },
-    ],
+    include: ['users'],
   });
 };
 
@@ -102,12 +92,7 @@ const findAllByUserId = async (user_id) => {
 const findAllByCategory = async (category) => {
   return ApprovalRequest.findAll({
     where: { category },
-    include: [
-      {
-        model: User,
-        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
-      },
-    ],
+    include: ['users'],
   });
 };
 

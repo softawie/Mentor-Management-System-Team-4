@@ -116,6 +116,11 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'users',
       underscore: true,
       timestamps: true,
+      defaultScope: {
+        attributes: {
+          exclude: ['reset_password_code', 'password_code_expire'],
+        },
+      },
     }
   );
 
@@ -134,15 +139,15 @@ module.exports = (sequelize, DataTypes) => {
     SupportMessage,
   }) => {
     User.hasOne(Credential, {
+      as: 'credential',
       foreignKey: 'user_id',
     });
     User.hasOne(Setting, {
+      as: 'settings',
       foreignKey: 'user_id',
     });
-    User.hasMany(Program, {
-      foreignKey: 'created_by',
-    });
     User.hasMany(Invite, {
+      as: 'invites',
       foreignKey: 'user_id',
     });
     User.hasMany(Mentor, {
@@ -152,19 +157,29 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'user_id',
     });
     User.hasMany(Report, {
+      as: 'reports',
       foreignKey: 'user_id',
     });
     User.hasMany(Notification, {
       foreignKey: 'user_id',
     });
     User.hasMany(Message, {
+      as: 'messages',
       foreignKey: 'sender_id',
     });
     User.hasMany(Participant, {
+      as: 'participants',
       foreignKey: 'user_id',
     });
     User.hasMany(ApprovalRequest, {
+      as: 'requests',
       foreignKey: 'user_id',
+    });
+    User.belongsToMany(Program, {
+      as: 'programs',
+      through: ApprovalRequest,
+      foreignKey: 'user_id',
+      otherKey: 'program_id',
     });
     User.hasMany(SupportMessage, {
       foreignKey: 'user_id',

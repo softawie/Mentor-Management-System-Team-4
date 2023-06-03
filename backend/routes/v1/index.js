@@ -4,6 +4,7 @@ import userRoute from './user.route';
 import notificationRoute from './notification.route';
 import approvalRoute from './approval-request.route';
 import settingRoutes from './setting.route';
+import programRoutes from './program.route';
 import config from '../../config/config';
 
 const router = express.Router();
@@ -28,6 +29,10 @@ const defaultRoutes = [
   {
     path: '/approvals',
     route: approvalRoute,
+  },
+  {
+    path: '/programs',
+    route: programRoutes,
   },
 ];
 

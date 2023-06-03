@@ -15,7 +15,7 @@ const updateProfile = catchAsync(async (req, res) => {
 });
 
 const getUsers = catchAsync(async (req, res) => {
-  const { limit = 10, page = 1 } = req.query;
+  const { limit = 10, page = 1 } = req.params;
   const result = await userService.queryUsers(limit, page);
 
   res.status(httpStatus.OK).json({ success: true, data: result });
