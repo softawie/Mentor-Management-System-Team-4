@@ -33,6 +33,12 @@ const findAllByUserId = {
   }),
 };
 
+const findAllUserByProgramId = {
+  params: Joi.object().keys({
+    id: Joi.number().required(),
+  }),
+};
+
 const destroy = {
   params: Joi.object().keys({
     id: Joi.number().required(),
@@ -46,4 +52,4 @@ const findAll = {
   }),
 };
 
-export default { create, update, destroy, findById, findAll, findAllByUserId };
+export default { create, update, destroy, findById, findAll, findAllByUserId, findAllUserByProgramId };
