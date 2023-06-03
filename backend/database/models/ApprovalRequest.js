@@ -45,9 +45,11 @@ module.exports = (sequelize, DataTypes) => {
 
   ApprovalRequest.associate = ({ User, Program }) => {
     ApprovalRequest.belongsTo(User, {
+      as: 'user',
       foreignKey: 'user_id',
     });
     ApprovalRequest.belongsTo(Program, {
+      as: 'program',
       foreignKey: 'program_id',
     });
   };

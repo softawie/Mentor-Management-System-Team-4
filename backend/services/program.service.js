@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
-import { Op } from 'sequelize';
 import models from '../database/models';
 
-const { Program, User, ApprovalRequest } = models;
+const { Program, ApprovalRequest } = models;
 
 /**
  * Create an Program
@@ -11,48 +10,48 @@ const { Program, User, ApprovalRequest } = models;
  * @returns {Promise<ApprovalRequest>}
  */
 const create = async (body) => {
-  const { name, description, created_by, avatar_url, users } = body;
-  const program = await Program.create({
-    name,
-    description,
-    avatar_url,
-    created_by,
-  });
+  const { users, ...rest } = body;
   const requests = users.map((user_id) => ({
     user_id,
-    program_id: program.program_id,
     status: 'accepted',
     category: 'program',
   }));
-  await Program.bulkCreate(requests);
+  const program = await Program.create(
+    {
+      ...rest,
+      requests,
+    },
+    {
+      include: [
+        {
+          association: 'requests',
+          include: ['user'],
+        },
+      ],
+    }
+  );
+
   return program;
 };
 
 /**
  * Update an ApprovalRequest
  * @param {Object} reqbody
- * @param {Object} transaction
- * @returns {Promise<ApprovalRequest>}
+ * @param {Program} program
+ * @returns {Promise<Program>}
  */
-const update = async (body, program_id) => {
+const update = async (body, model) => {
   const { users, ...rest } = body;
-  const program = await Program.update(rest, { where: { program_id } });
-  if (users) {
-    await ApprovalRequest.destroy({
-      where: {
-        user_id: { [Op.notIn]: users },
-        program_id,
-      },
-    });
-    users.map(async (user_id) => {
-      await ApprovalRequest.upsert({
-        status: 'accepted',
-        category: 'program',
-        program_id,
-        user_id,
-      });
-    });
-  }
+  const requests = users.map((user_id) => ({
+    user_id,
+    status: 'accepted',
+    category: 'program',
+    program_id: model.program_id,
+  }));
+  await model.setRequests([]);
+  const results = await ApprovalRequest.bulkCreate(requests);
+  model.setRequests(results);
+  const program = await model.update(rest);
   return program;
 };
 
@@ -69,26 +68,21 @@ const destroy = async (program_id) => {
  * @param {Object} reqbody
  */
 const findById = async (pk) => {
-  return Program.findByPk(pk);
+  return Program.findByPk(pk, { include: ['users'] });
 };
 
 /**
  * Get user's ApprovalRequests
  * @param {Object} reqbody
  */
-const findAll = async (limit, page) => {
+const findAll = async (page, limit) => {
   const offset = limit * (page - 1);
 
   const { count, rows } = await Program.findAndCountAll({
     limit,
     offset,
     order: [['updated_at', 'DESC']],
-    include: [
-      {
-        model: User,
-        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
-      },
-    ],
+    include: ['users'],
   });
 
   const pages = Math.ceil(count / limit);
@@ -111,16 +105,35 @@ const findAll = async (limit, page) => {
  * Get All ApprovalRequests
  * @param {Object} reqbody
  */
-const findAllByUserId = async (user_id) => {
-  return Program.findAll({
-    where: { user_id },
+const findAllByUserId = async (user_id, page, limit) => {
+  const offset = limit * (page - 1);
+  const { count, rows } = await Program.findAndCountAll({
+    limit,
+    offset,
+    order: [['updated_at', 'DESC']],
     include: [
       {
-        model: User,
-        attributes: { exclude: ['reset_password_code', 'password_code_expire', 'has_change_password', 'has_fill_profile'] },
+        association: 'users',
+        where: { user_id },
       },
     ],
   });
+
+  const pages = Math.ceil(count / limit);
+  const currentPage = Math.floor(offset / limit) + 1;
+  const nextPage = currentPage === pages ? null : currentPage + 1;
+  const prevPage = currentPage === 1 ? null : currentPage - 1;
+
+  return {
+    rows,
+    meta: {
+      limit,
+      pages,
+      currentPage,
+      nextPage,
+      prevPage,
+    },
+  };
 };
 
 export { create, update, destroy, findById, findAllByUserId, findAll };
