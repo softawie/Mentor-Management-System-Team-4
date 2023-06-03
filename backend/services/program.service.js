@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import models from '../database/models';
 
-const { Program, ApprovalRequest } = models;
+const { Program, ApprovalRequest, User } = models;
 
 /**
  * Create an Program
@@ -136,4 +136,40 @@ const findAllByUserId = async (user_id, page, limit) => {
   };
 };
 
-export { create, update, destroy, findById, findAllByUserId, findAll };
+/**
+ * Get All Users associate to a program
+ * @param {Object} reqbody
+ */
+const findAllAssignedUsersByRole = async (user_role, program_id, page, limit) => {
+  const offset = limit * (page - 1);
+  const { count, rows } = await User.findAndCountAll({
+    limit,
+    offset,
+    order: [['updated_at', 'DESC']],
+    where: { user_role },
+    include: [
+      {
+        association: 'programs',
+        where: { program_id },
+      },
+    ],
+  });
+
+  const pages = Math.ceil(count / limit);
+  const currentPage = Math.floor(offset / limit) + 1;
+  const nextPage = currentPage === pages ? null : currentPage + 1;
+  const prevPage = currentPage === 1 ? null : currentPage - 1;
+
+  return {
+    rows,
+    meta: {
+      limit,
+      pages,
+      currentPage,
+      nextPage,
+      prevPage,
+    },
+  };
+};
+
+export { create, update, destroy, findById, findAllByUserId, findAll, findAllAssignedUsersByRole };
