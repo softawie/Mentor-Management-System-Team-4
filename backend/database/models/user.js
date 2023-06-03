@@ -187,6 +187,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.belongsToMany(Task, {
       as: 'tasks',
+      through: 'task_user',
     });
   };
 

@@ -38,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
   Task.associate = ({ User }) => {
     Task.belongsToMany(User, {
       as: 'users',
+      through: 'task_user',
     });
   };
 
