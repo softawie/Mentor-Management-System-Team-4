@@ -1,13 +1,13 @@
-import { Avatar, Box, Button, Chip, Pagination, Stack, Typography } from '@mui/material'
-import React from 'react'
 import { FilterList, GridOn, Search, Toc } from '@mui/icons-material'
+import { Box, Button, Chip, Pagination, Stack, Typography } from '@mui/material'
+import PropTypes from 'prop-types'
 export default function Filter({ setColumn, column }) {
     console.log(column)
     return (
-        <Stack alignItems={"center"} direction="row" spacing={2} pt={2}>
+        <Stack alignItems="center" direction="row" spacing={2} pt={2}>
             <Typography
-                color={"common.black"}
-                fontWeight={"bold"}
+                color="common.black"
+                fontWeight="bold"
                 fontSize={24}
             >Mentors</Typography>
             <Toc fontSize='large'
@@ -27,4 +27,10 @@ export default function Filter({ setColumn, column }) {
             <FilterList />
         </Stack>
     )
+}
+
+
+Filter.propsTypes = {
+    setColumn: PropTypes.func,
+    column: PropTypes.number
 }

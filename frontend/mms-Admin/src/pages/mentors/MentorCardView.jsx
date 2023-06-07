@@ -1,4 +1,4 @@
-import { Avatar, Button, ListItem, ListItemAvatar, ListItemButton, ListItemText } from '@mui/material'
+import { Avatar, Button, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 import { MentorImage } from 'src/components/icons'
 
 export default function MentorCardView() {

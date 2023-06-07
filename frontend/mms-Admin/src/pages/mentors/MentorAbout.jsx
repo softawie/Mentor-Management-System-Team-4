@@ -1,8 +1,8 @@
 import { Article } from '@mui/icons-material';
-import { TabContext, TabList, TabPanel } from '@mui/lab'
-import { Avatar, Box, Button, Chip, ListItem, ListItemAvatar, ListItemText, Stack, Tab, Typography } from '@mui/material'
-import React from 'react'
-import { MentorImage, NigeriaMap } from 'src/components/icons'
+import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { Avatar, Box, Button, Chip, ListItem, ListItemAvatar, ListItemText, Stack, Tab, Typography } from '@mui/material';
+import React from 'react';
+import { MentorImage, NigeriaMap } from 'src/components/icons';
 
 export default function MentorAbout() {
 
@@ -20,7 +20,7 @@ export default function MentorAbout() {
                 </ListItemAvatar>
                 <ListItemText
                     primary={
-                        <Stack spacing={2} direction={"row"}>
+                        <Stack spacing={2} direction="row">
                             <Typography>Alison Davis</Typography>
                             <Avatar
                                 src={NigeriaMap}
@@ -45,92 +45,92 @@ export default function MentorAbout() {
                 </Box>
                 <TabPanel value="1">
                     <Stack spacing={2}>
-                        <Typography color={"common.black"} fontWeight={"bold"} fontSize={18}>Bio</Typography>
-                        <Typography paragraph color={"secondary"}>
+                        <Typography color="common.black" fontWeight="bold" fontSize={18}>Bio</Typography>
+                        <Typography paragraph color="secondary">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dignissim ut cursus purus efficitur et. Duis ac enim tellus. Phasellus pharetra metus, ut cursus purus efficitur et. Duis ac enim tellus. Phasellus eget tortor dapibus, laoreet mauris sed, dignissim lectus.
                         </Typography>
-                        <Typography paragraph color={"secondary"}>
+                        <Typography paragraph color="secondary">
                             <Typography
-                                component={"b"}
-                                color={"common.black"}
+                                component="b"
+                                color="common.black"
                                 fontSize={18}
-                                fontWeight={"bold"}
-                                children={"Technical Proficiency: "}
+                                fontWeight="bold"
+                                children="Technical Proficiency: "
                             />
                             Java Script, Django, Mysql, Android
                         </Typography>
-                        <Typography paragraph color={"secondary"}>
+                        <Typography paragraph color="secondary">
                             <Typography
-                                component={"b"}
-                                color={"common.black"}
+                                component="b"
+                                color="common.black"
                                 fontSize={18}
-                                fontWeight={"bold"}
+                                fontWeight="bold"
                                 children={"Previous Programs: "}
                             />
                             GADS 2022, Google I/O Extended 2021
                         </Typography>
-                        <Typography paragraph color={"secondary"}>
+                        <Typography paragraph color="secondary">
                             <Typography
-                                component={"b"}
-                                color={"common.black"}
+                                component="b"
+                                color="common.black"
                                 fontSize={18}
-                                fontWeight={"bold"}
-                                children={"Previous Roles Held: "}
+                                fontWeight="bold"
+                                children="Previous Roles Held: "
                             />
                             Learner, Mentor, Program Assistant,  Program Assistant Lead
                         </Typography>
 
-                        <Typography paragraph color={"secondary"}>
+                        <Typography paragraph color="secondary">
                             <Typography
-                                component={"b"}
-                                color={"common.black"}
+                                component="b"
+                                color="common.black"
                                 fontSize={18}
-                                fontWeight={"bold"}
+                                fontWeight="bold"
                                 children={"Availability to join a new program: "}
                             />
                             Unavailable
 
                         </Typography>
 
-                        <Typography paragraph color={"secondary"}>
+                        <Typography paragraph color="secondary">
                             <Typography
-                                component={"b"}
-                                color={"common.black"}
+                                component="b"
+                                color="common.black"
                                 fontSize={18}
-                                fontWeight={"bold"}
+                                fontWeight="bold"
                                 children={"Program of interest: "}
                             />
                             Google Africa Scholarship Program
 
                         </Typography>
 
-                        <Typography paragraph color={"secondary"}>
+                        <Typography paragraph color="secondary">
                             <Typography
-                                component={"b"}
-                                color={"common.black"}
+                                component="b"
+                                color="common.black"
                                 fontSize={18}
-                                fontWeight={"bold"}
+                                fontWeight="bold"
                                 children={"Been a Mentor Before?: "}
                             />
                             Yes
 
                         </Typography>
 
-                        <Typography paragraph color={"secondary"}>
+                        <Typography paragraph color="secondary">
                             <Typography
-                                component={"b"}
-                                color={"common.black"}
+                                component="b"
+                                color="common.black"
                                 fontSize={18}
-                                fontWeight={"bold"}
+                                fontWeight="bold"
                                 children={"Years of Technical Experience: "}
                             />
                             5 Years
 
                         </Typography>
                         <Typography
-                            color={"common.black"}
+                            color="common.black"
                             fontSize={18}
-                            fontWeight={"bold"}
+                            fontWeight="bold"
                             children={"Documents : "}
                         />
                         <Box>
@@ -140,10 +140,10 @@ export default function MentorAbout() {
                         </Box>
 
                         <Typography
-                            color={"common.black"}
+                            color="common.black"
                             fontSize={18}
-                            fontWeight={"bold"}
-                            children={"Website: www.kabir.i@andela.com"}
+                            fontWeight="bold"
+                            children="Website: www.kabir.i@andela.com"
                         />
                     </Stack>
 
