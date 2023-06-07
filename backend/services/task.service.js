@@ -18,11 +18,14 @@ const create = async (body) => {
          [Op.in]: users,
        },
      },
-   });*/
-  const task = await Task.create({
-    ...rest,
-    user_task: users.map(user_id => ({ user_id })),
-  }, { include: 'users' });
+   }); */
+  const task = await Task.create(
+    {
+      ...rest,
+      user_task: users.map((user_id) => ({ user_id })),
+    },
+    { include: 'users' }
+  );
   //  await task.setUsers(task_users);
   await task.reload({ include: 'users' });
   return task;
