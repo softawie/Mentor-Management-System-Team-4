@@ -12,18 +12,18 @@ const { Task, User } = models;
  */
 const create = async (body) => {
   const { users, ...rest } = body;
- /* const task_users = await User.findAll({
-    where: {
-      user_id: {
-        [Op.in]: users,
-      },
-    },
-  });*/
+  /* const task_users = await User.findAll({
+     where: {
+       user_id: {
+         [Op.in]: users,
+       },
+     },
+   });*/
   const task = await Task.create({
-    rest,
-    "user_task": users.map(user_id=>({user_id}),
-  },{ include: 'users' });
-//  await task.setUsers(task_users);
+    ...rest,
+    user_task: users.map(user_id => ({ user_id })),
+  }, { include: 'users' });
+  //  await task.setUsers(task_users);
   await task.reload({ include: 'users' });
   return task;
 };
@@ -108,7 +108,7 @@ const findAllByUserId = async (user_id, page, limit) => {
     order: [['updated_at', 'DESC']],
     include: [
       {
-        association: 'task_user',
+        association: 'users',
         where: { user_id },
       },
     ],
@@ -143,7 +143,7 @@ const findAssignedUsersByTask = async (task_id, page, limit) => {
     order: [['updated_at', 'DESC']],
     include: [
       {
-        association: 'task_user',
+        association: 'tasks',
         where: { task_id },
       },
     ],
