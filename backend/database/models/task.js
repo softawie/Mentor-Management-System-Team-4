@@ -35,10 +35,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Task.associate = ({ User }) => {
+  Task.associate = ({ User, TaskUser }) => {
     Task.belongsToMany(User, {
       as: 'users',
-      through: 'task_user',
+      through: TaskUser,
+      foreignKey: 'task_id',
+      otherKey: 'user_id',
     });
   };
 

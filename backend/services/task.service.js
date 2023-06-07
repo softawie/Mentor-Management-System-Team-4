@@ -5,31 +5,26 @@ import models from '../database/models';
 const { Task, User } = models;
 
 /**
- * Create an Program
+ * Create a task
  * @param {Object} reqbody
  * @param {Object} transaction
  * @returns {Promise<Task>}
  */
 const create = async (body) => {
   const { users, ...rest } = body;
-  const task_user = users.map((user_id) => ({
-    user_id,
-  }));
-  const task = await Task.create(
-    {
-      ...rest,
-      task_user,
+ /* const task_users = await User.findAll({
+    where: {
+      user_id: {
+        [Op.in]: users,
+      },
     },
-    {
-      include: [
-        {
-          association: 'task_user',
-          include: ['user'],
-        },
-      ],
-    }
-  );
-
+  });*/
+  const task = await Task.create({
+    rest,
+    "user_task": users.map(user_id=>({user_id}),
+  },{ include: 'users' });
+//  await task.setUsers(task_users);
+  await task.reload({ include: 'users' });
   return task;
 };
 
@@ -41,7 +36,7 @@ const create = async (body) => {
  */
 const update = async (body, task) => {
   const { users, ...rest } = body;
-  const task_user = User.findAll({
+  const task_user = await User.findAll({
     where: {
       user_id: {
         [Op.in]: users,
@@ -49,7 +44,10 @@ const update = async (body, task) => {
     },
   });
   await task.setUsers(task_user);
-  return task.update(rest);
+  await task.update(rest);
+  await task.reload({ include: 'users' });
+
+  return task;
 };
 
 /**

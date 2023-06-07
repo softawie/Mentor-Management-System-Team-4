@@ -1,16 +1,20 @@
 module.exports = (sequelize, DataTypes) => {
-  const Mentor = sequelize.define(
-    'Mentor',
+  const TaskUser = sequelize.define(
+    'TaskUser',
     {
-      mentor_id: {
+      id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
+      task_id: {
+        type: DataTypes.BIGINT,
+        allowNull: true,
+      },
       user_id: {
         type: DataTypes.BIGINT,
-        allowNull: false,
+        allowNull: true,
       },
       created_at: {
         type: DataTypes.DATE,
@@ -26,19 +30,21 @@ module.exports = (sequelize, DataTypes) => {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       underscore: true,
-      tableName: 'mentors',
+      tableName: 'task_user',
       timestamps: true,
     }
   );
 
-  Mentor.associate = ({ User, Task }) => {
-    Mentor.belongsTo(User, {
+  TaskUser.associate = ({ User, Task }) => {
+    TaskUser.belongsTo(User, {
+      as: 'user',
       foreignKey: 'user_id',
     });
-    Mentor.hasMany(Task, {
-      foreignKey: 'mentor_id',
+    TaskUser.belongsTo(Task, {
+      as: 'task',
+      foreignKey: 'task_id',
     });
   };
 
-  return Mentor;
+  return TaskUser;
 };

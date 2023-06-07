@@ -5,12 +5,7 @@ import catchAsync from '../utils/catchAsync';
 import { taskService } from '../services';
 
 const create = catchAsync(async (req, res) => {
-  const { name, details, users } = req.body;
-  const task = await taskService.create({
-    name,
-    details,
-    users,
-  });
+  const task = await taskService.create(req.body);
 
   res.status(httpStatus.CREATED).json({ success: true, data: task });
 });

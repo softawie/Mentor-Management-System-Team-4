@@ -13,7 +13,7 @@ const update = {
     id: Joi.number().required(),
   }),
   body: Joi.object().keys({
-    name: Joi.string().optional(),
+    title: Joi.string().optional(),
     details: Joi.string().optional(),
     users: Joi.array().items(Joi.number()).optional(),
   }),
