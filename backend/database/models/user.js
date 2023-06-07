@@ -128,8 +128,6 @@ module.exports = (sequelize, DataTypes) => {
     Credential,
     Program,
     Invite,
-    Mentor,
-    MentorManager,
     Report,
     Notification,
     Message,
@@ -137,6 +135,8 @@ module.exports = (sequelize, DataTypes) => {
     Setting,
     ApprovalRequest,
     SupportMessage,
+    Task,
+    TaskUser,
   }) => {
     User.hasOne(Credential, {
       as: 'credential',
@@ -148,12 +148,6 @@ module.exports = (sequelize, DataTypes) => {
     });
     User.hasMany(Invite, {
       as: 'invites',
-      foreignKey: 'user_id',
-    });
-    User.hasMany(Mentor, {
-      foreignKey: 'user_id',
-    });
-    User.hasMany(MentorManager, {
       foreignKey: 'user_id',
     });
     User.hasMany(Report, {
@@ -182,6 +176,12 @@ module.exports = (sequelize, DataTypes) => {
       otherKey: 'program_id',
     });
     User.hasMany(SupportMessage, {
+      foreignKey: 'user_id',
+    });
+    User.belongsToMany(Task, {
+      as: 'tasks',
+      through: TaskUser,
+      otherKey: 'task_id',
       foreignKey: 'user_id',
     });
   };

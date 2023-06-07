@@ -101,7 +101,7 @@ const loginUser = async (body) => {
 
   const user = await getUserByEmail(email);
 
-  if (user && user.Credential.login_type !== 'local') {
+  if (user && user.credential.login_type !== 'local') {
     return {
       status: 400,
       success: false,
@@ -117,7 +117,7 @@ const loginUser = async (body) => {
     };
   }
 
-  const { user_id: id, Credential: credential } = user;
+  const { user_id: id, credential } = user;
 
   // check password
   const validPassword = await bcrypt.compare(password, credential.hashed_password);
@@ -135,7 +135,7 @@ const loginUser = async (body) => {
     email,
   });
 
-  delete user.Credential;
+  delete user.credential;
 
   return {
     success: true,
