@@ -61,7 +61,7 @@ const theme = createTheme({
     },
     action: {
       active: alpha(themeColors.primary, 0.54),
-      hover: alpha(themeColors.primary, 0.6),
+      hover: alpha(themeColors.primary, 0.1),
       selected: alpha(themeColors.background, 0.1),
       disabled: alpha(themeColors.primary, 0.26),
       disabledBackground: alpha(themeColors.primary, 0.12),
