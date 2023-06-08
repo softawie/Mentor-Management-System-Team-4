@@ -5,6 +5,7 @@ import { MentorImage, NigeriaMap } from 'src/components/icons';
 import About from './About';
 import ProgramList from './programs/ProgramList';
 import TaskList from './tasks/TaskList';
+import CertificateList from './certificates/CertificateList';
 
 export default function MentorAbout() {
 
@@ -54,7 +55,9 @@ export default function MentorAbout() {
                 <TabPanel value="3">
                     <TaskList />
                 </TabPanel>
-                <TabPanel value="4">Certificates</TabPanel>
+                <TabPanel value="4">
+                    <CertificateList />
+                </TabPanel>
             </TabContext>
         </Stack>
     )
