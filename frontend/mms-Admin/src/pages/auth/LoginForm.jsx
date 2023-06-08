@@ -23,9 +23,14 @@ function LoginForm() {
 
   const onSubmit = async (values) => {
     const rest = await login(values).unwrap();
-    console.log(rest);
-    toast('Login successfully', { type: 'success' });
-    navigate('/');
+    if (rest.user.success) {
+      toast('Login successfully', { type: 'success' });
+      navigate('/');
+    } else {
+      toast(rest.user.error, { type: 'error' });
+
+    }
+
   }
 
   const [showPassword, setShowPassword] = useState(false);

@@ -1,16 +1,23 @@
-import ManagerList from "./Sample";
-import ViewManager from "./ViewManager";
+import ViewMentor from "./ViewMentor";
+import MentorList from "./MentorList";
+import MentorAbout from "./MentorAbout";
 
 export default {
     path: "mentor-manager",
-    children:[
+    children: [
         {
             index: true,
-            element: <ManagerList />
+            element: <MentorList />
         },
         {
             path: ":id/view",
-            element: <ViewManager />
+            element: <ViewMentor />,
+            children: [
+                {
+                    index: true,
+                    element: <MentorAbout />
+                }
+            ]
         }
     ]
 }
