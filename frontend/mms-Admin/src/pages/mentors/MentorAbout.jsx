@@ -4,6 +4,7 @@ import React from 'react';
 import { MentorImage, NigeriaMap } from 'src/components/icons';
 import About from './About';
 import ProgramList from './programs/ProgramList';
+import TaskList from './tasks/TaskList';
 
 export default function MentorAbout() {
 
@@ -51,6 +52,7 @@ export default function MentorAbout() {
                     <ProgramList />
                 </TabPanel>
                 <TabPanel value="3">
+                    <TaskList />
                 </TabPanel>
                 <TabPanel value="4">Certificates</TabPanel>
             </TabContext>
