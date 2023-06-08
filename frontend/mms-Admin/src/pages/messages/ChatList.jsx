@@ -1,8 +1,6 @@
-import { Stack, TextField, alpha } from '@mui/material'
-import React from 'react'
-import ChatItem from './ChatItem'
-import theme from 'src/theme/theme'
 import { AttachFile, Mood } from '@mui/icons-material'
+import { Stack, TextField } from '@mui/material'
+import ChatItem from './ChatItem'
 
 export default function ChatList() {
     return (
