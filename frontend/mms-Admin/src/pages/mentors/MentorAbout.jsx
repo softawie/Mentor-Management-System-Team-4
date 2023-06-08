@@ -3,6 +3,7 @@ import { Avatar, Box, Button, ListItem, ListItemAvatar, ListItemText, Stack, Tab
 import React from 'react';
 import { MentorImage, NigeriaMap } from 'src/components/icons';
 import About from './About';
+import ProgramList from './programs/ProgramList';
 
 export default function MentorAbout() {
 
@@ -47,6 +48,7 @@ export default function MentorAbout() {
                     <About />
                 </TabPanel>
                 <TabPanel value="2">
+                    <ProgramList />
                 </TabPanel>
                 <TabPanel value="3">
                 </TabPanel>
