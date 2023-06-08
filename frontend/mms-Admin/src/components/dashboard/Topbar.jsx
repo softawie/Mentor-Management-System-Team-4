@@ -53,7 +53,7 @@ export default function AppHeader() {
                 spacing={1}
                 sx={{ alignItems: "center", display: "flex" }}
               >
-                <img src={Logo} alt="logo" />
+                <Avatar src={Logo} alt="logo" variant="" />
                 <Typography
                   variant="h3"
                   sx={{ fontSize: "16px", fontWeight: 600 }}

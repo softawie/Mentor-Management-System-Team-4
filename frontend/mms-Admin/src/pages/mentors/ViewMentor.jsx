@@ -2,10 +2,11 @@ import { Box, Grid, Typography } from '@mui/material'
 import { Stack } from '@mui/system'
 import React from 'react'
 import MentorCardView from './MentorCardView'
-import { Outlet } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
 import { FilterList, Search } from '@mui/icons-material'
 
 export default function ViewMentor() {
+    const navigate = useNavigate()
     return (
         <Grid container columns={4} mt={2} spacing={2}>
             <Grid item xs={1}>
@@ -20,25 +21,12 @@ export default function ViewMentor() {
                         <Search />
                         <FilterList />
                     </Stack>
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
-                    <MentorCardView />
+                    {
+                        (new Array(100)).fill(0).map((v, index) => (
+                            <Box onClick={() => navigate(`/mentors/${index}/view`)} key={index} >
+                                <MentorCardView />
+                            </Box>))
+                    }
                 </Stack>
             </Grid>
             <Grid item xs={3}>

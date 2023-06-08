@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Drawer, Stack, Toolbar, Typography } from "@mui/material";
+import { Box, Drawer, ListItemText, Stack, Toolbar, Typography } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import MenuItem from "./MenuItem";
 import { drawerWidth, usePalette } from "../../theme/theme";
@@ -38,44 +38,15 @@ function Sidebar() {
         <Toolbar />
         <Stack
           direction="column"
-          sx={{ alignItems: "center", justifyContent: "center", py: 3 }}
+          sx={{ alignItems: "center", justifyContent: "center"}}
         >
-          <Box
-            sx={{
-              textAlign: "start",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "start",
-              justifyContent: "start",
-              mb: 4,
-            }}
-          >
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: "32px",
-                fontWeight: 700,
-                lineHeight: "53px",
-                fontFamily: "Mukta",
-                color: "#141414",
-              }}
-            >
-              Hi Kabiru
-            </Typography>
 
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: "24px",
-                fontWeight: 400,
-                lineHeight: "40px",
-                fontFamily: "Mukta",
-                color: palette.secondary.main,
-              }}
-            >
-              Admin
-            </Typography>
-          </Box>
+          <ListItemText
+            primary='Hi Kabiru'
+            primaryTypographyProps={{ sx: { fontWeight: "bold", fontSize: 24, color: "common.black" } }}
+            secondary='Admin'
+            secondaryTypographyProps={{ sx: { fontWeight: "bold", fontSize: 18 } }}
+          />
 
           <MenuItem
             path="/profile"

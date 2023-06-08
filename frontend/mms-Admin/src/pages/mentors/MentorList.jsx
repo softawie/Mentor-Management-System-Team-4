@@ -12,84 +12,12 @@ const MentorList = () => {
         <Stack spacing={2} pr={3}>
             <Filter column={column} setColumn={setColumn} />
             <Grid container columns={column} spacing={2}>
-                <Grid item xs={1} onClick={() => navigate("1/view")}>
-                    <MentorCard  />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
-                <Grid item xs={1}>
-                    <MentorCard />
-                </Grid>
+                {
+                    (new Array(10)).fill(0).map((v, index) => (
+                        <Grid item xs={1} onClick={() => navigate(`${index}/view`)} key={index} >
+                            <MentorCard />
+                        </Grid>))
+                }
             </Grid>
         </Stack>
     );

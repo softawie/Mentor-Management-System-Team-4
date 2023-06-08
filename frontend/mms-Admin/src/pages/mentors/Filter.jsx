@@ -1,7 +1,8 @@
 import { FilterList, GridOn, Search, Toc } from '@mui/icons-material'
 import { Box, Button, Chip, Pagination, Stack, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
-export default function Filter({ setColumn, column }) {
+
+const Filter = ({ setColumn, column }) => {
     console.log(column)
     return (
         <Stack alignItems="center" direction="row" spacing={2} pt={2}>
@@ -30,7 +31,9 @@ export default function Filter({ setColumn, column }) {
 }
 
 
-Filter.propsTypes = {
+Filter.propTypes = {
     setColumn: PropTypes.func,
     column: PropTypes.number
 }
+
+export default Filter
