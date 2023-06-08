@@ -77,7 +77,6 @@ const theme = createTheme({
     MuiInputLabel: {
       defaultProps: {
         size: "small",
-
         // color: "#808080",
         // color: "primary",
       },
@@ -96,6 +95,18 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiAutocomplete: {
+      defaultProps: {
+        variant: "contained",
+        disableElevation: true,
+      },
+      styleOverrides: {
+        tag: {
+          color: themeColors.black,
         },
       },
     },
