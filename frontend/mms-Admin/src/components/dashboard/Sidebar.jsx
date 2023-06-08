@@ -1,17 +1,16 @@
-import React from "react";
-import { Box, Drawer, ListItemText, Stack, Toolbar, Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import MenuItem from "./MenuItem";
-import { drawerWidth, usePalette } from "../../theme/theme";
-import { MdOutlineAccountBox } from "react-icons/md";
+import { Box, Drawer, ListItemText, Stack, Toolbar } from "@mui/material";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { BiUser, BiMessageAlt, BiMessageDetail } from "react-icons/bi";
-import { RxDashboard } from "react-icons/rx";
+import { BiMessageAlt, BiMessageDetail, BiUser } from "react-icons/bi";
+import { FiSettings, FiUsers } from "react-icons/fi";
 import { HiLogout } from "react-icons/hi";
-import { FiUsers, FiSettings } from "react-icons/fi";
-import Report from "../../../src/assets/images/reports.svg";
+import { MdOutlineAccountBox } from "react-icons/md";
+import { RxDashboard } from "react-icons/rx";
+import { useLocation } from "react-router-dom";
 import Certificate from "../../../src/assets/images/certificate.svg";
+import Report from "../../../src/assets/images/reports.svg";
 import Task from "../../../src/assets/images/task.svg";
+import { drawerWidth, usePalette } from "../../theme/theme";
+import MenuItem from "./MenuItem";
 function Sidebar() {
   const palette = usePalette();
   const location = useLocation();
