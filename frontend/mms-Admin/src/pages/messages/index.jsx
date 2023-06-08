@@ -1,4 +1,4 @@
-import MessageList from "./MessageList";
+import MessageList from "./Message";
 
 export default {
     path: "messages",
