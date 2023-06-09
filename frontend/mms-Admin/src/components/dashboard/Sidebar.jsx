@@ -1,17 +1,16 @@
-import React from "react";
-import { Box, Drawer, Stack, Toolbar, Typography } from "@mui/material";
-import { useLocation } from "react-router-dom";
-import MenuItem from "./MenuItem";
-import { drawerWidth, usePalette } from "../../theme/theme";
-import { MdOutlineAccountBox } from "react-icons/md";
+import { Box, Drawer, ListItemText, Stack, Toolbar } from "@mui/material";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import { BiUser, BiMessageAlt, BiMessageDetail } from "react-icons/bi";
-import { RxDashboard } from "react-icons/rx";
+import { BiMessageAlt, BiMessageDetail, BiUser } from "react-icons/bi";
+import { FiSettings, FiUsers } from "react-icons/fi";
 import { HiLogout } from "react-icons/hi";
-import { FiUsers, FiSettings } from "react-icons/fi";
-import Report from "../../../src/assets/images/reports.svg";
+import { MdOutlineAccountBox } from "react-icons/md";
+import { RxDashboard } from "react-icons/rx";
+import { useLocation } from "react-router-dom";
 import Certificate from "../../../src/assets/images/certificate.svg";
+import Report from "../../../src/assets/images/reports.svg";
 import Task from "../../../src/assets/images/task.svg";
+import { drawerWidth, usePalette } from "../../theme/theme";
+import MenuItem from "./MenuItem";
 function Sidebar() {
   const palette = usePalette();
   const location = useLocation();
@@ -38,44 +37,15 @@ function Sidebar() {
         <Toolbar />
         <Stack
           direction="column"
-          sx={{ alignItems: "center", justifyContent: "center", py: 3 }}
+          sx={{ alignItems: "center", justifyContent: "center"}}
         >
-          <Box
-            sx={{
-              textAlign: "start",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "start",
-              justifyContent: "start",
-              mb: 4,
-            }}
-          >
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: "32px",
-                fontWeight: 700,
-                lineHeight: "53px",
-                fontFamily: "Mukta",
-                color: "#141414",
-              }}
-            >
-              Hi Kabiru
-            </Typography>
 
-            <Typography
-              variant="h2"
-              sx={{
-                fontSize: "24px",
-                fontWeight: 400,
-                lineHeight: "40px",
-                fontFamily: "Mukta",
-                color: palette.secondary.main,
-              }}
-            >
-              Admin
-            </Typography>
-          </Box>
+          <ListItemText
+            primary='Hi Kabiru'
+            primaryTypographyProps={{ sx: { fontWeight: "bold", fontSize: 24, color: "common.black" } }}
+            secondary='Admin'
+            secondaryTypographyProps={{ sx: { fontWeight: "bold", fontSize: 18 } }}
+          />
 
           <MenuItem
             path="/profile"
@@ -101,8 +71,8 @@ function Sidebar() {
             sx={{ backgroundColor: "#FFFFFF" }}
             active={location.pathname === "/"}
           />
-          <MenuItem path="/task" name="Tasks" icon={<img src={Task} />} />
-          <MenuItem path="/report" name="Reports" icon={<img src={Report} />} />
+          <MenuItem path="/tasks" name="Tasks" icon={<img src={Task} />} />
+          <MenuItem path="/reports" name="Reports" icon={<img src={Report} />} />
           <MenuItem
             path="/mentors"
             name="Mentors"
@@ -131,7 +101,7 @@ function Sidebar() {
             icon={<BiMessageAlt size={25} color={palette.secondary.main} />}
           />
           <MenuItem
-            path="/discussion"
+            path="/discussions"
             name="Discussion Forum"
             icon={<BiMessageDetail size={25} color={palette.secondary.main} />}
           />

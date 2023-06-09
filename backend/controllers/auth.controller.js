@@ -2,9 +2,9 @@ import httpStatus from 'http-status';
 import catchAsync from '../utils/catchAsync';
 import { authService } from '../services';
 
-const register = catchAsync(async (req, res) => {
-  const user = await authService.registerUser(req);
-  res.status(httpStatus.CREATED).json({ success: true, user });
+const createUser = catchAsync(async (req, res) => {
+  const user = await authService.createUser(req.body);
+  res.status(httpStatus.CREATED).json({ success: true, data: user });
 });
 
 const login = catchAsync(async (req, res) => {
@@ -31,4 +31,4 @@ const changePassword = catchAsync(async (req, res) => {
   return user;
 });
 
-export { register, login, forgotPassword, resetPassword, changePassword };
+export { createUser, login, forgotPassword, resetPassword, changePassword };

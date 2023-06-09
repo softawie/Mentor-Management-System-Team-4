@@ -1,7 +1,7 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { Box, Stack, Switch, Typography } from "@mui/material";
 import PropTypes from "prop-types";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   width: 42,

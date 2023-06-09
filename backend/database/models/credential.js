@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Credential.associate = ({ User }) => {
     Credential.belongsTo(User, {
+      as: 'user',
       foreignKey: 'user_id',
     });
   };
