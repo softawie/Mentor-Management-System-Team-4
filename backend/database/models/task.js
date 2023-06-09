@@ -16,6 +16,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      mentor_id: {
+        type: DataTypes.BIGINT,
+        allowNull: true,
+      },
+      mentor_manager_id: {
+        type: DataTypes.BIGINT,
+        allowNull: true,
+      },
       created_at: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -35,12 +43,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Task.associate = ({ User, TaskUser }) => {
-    Task.belongsToMany(User, {
-      as: 'users',
-      through: TaskUser,
-      foreignKey: 'task_id',
-      otherKey: 'user_id',
+  Task.associate = ({ Mentor, MentorManager }) => {
+    Task.belongsTo(Mentor, {
+      foreignKey: 'mentor_id',
+    });
+    Task.belongsTo(MentorManager, {
+      foreignKey: 'mentor_manager_id',
     });
   };
 

@@ -1,14 +1,13 @@
-/* eslint-disable camelcase */
 import bcrypt from 'bcryptjs';
-import { nanoid } from 'nanoid';
-import config from '../config/config';
-import models from '../database/models';
-import utils from '../utils/auth';
-import { sendEmail, sendResetPasswordEmail } from './email.service';
+import jwt from 'jsonwebtoken';
+import { getUserByEmail, getUserById } from './user.service';
+import { sendResetPasswordEmail } from './email.service';
 import { generateToken } from './token.service';
-import { getUserByEmail } from './user.service';
+import utils from '../utils/auth';
+import models from '../database/models';
+import config from '../config/config';
 
-const { User, Credential, Setting } = models;
+const { User, Credential } = models;
 const { hashPassword } = utils;
 
 /**
@@ -17,8 +16,10 @@ const { hashPassword } = utils;
  * @param {Object} transaction
  * @returns {Promise<User>}
  */
-const createUser = async (body, transaction) => {
-  const { email, user_role, loginType } = body;
+const registerUser = async (userBody, transaction) => {
+  const { body, query } = userBody;
+  const { email, password, loginType } = body;
+  const { userType } = query;
 
   // insert into users table
   const t = transaction;
@@ -27,19 +28,17 @@ const createUser = async (body, transaction) => {
   const [{ dataValues }, created] = await User.findOrCreate({
     where: { email },
     includes: { model: Credential },
-    defaults: { email, user_role: user_role || 'admin' },
+    defaults: { email, user_type: userType || 'admin' },
     transaction: t,
   });
 
   let user = dataValues;
 
-  const password = nanoid();
-
   if (created) {
     if (loginType) {
       payload = {
         user_id: user.user_id,
-        login_type: loginType || 'local',
+        login_type: loginType,
       };
     } else {
       const hashedPassword = await hashPassword(password);
@@ -55,36 +54,9 @@ const createUser = async (body, transaction) => {
       transaction: t,
     });
 
-    await Setting.create(
-      {
-        user_id: user.user_id,
-      },
-      {
-        transaction: t,
-      }
-    );
-
     // remove password from credential data
     delete credentials.dataValues.hashed_password;
     user = { ...user, ...credentials.dataValues };
-
-    await sendEmail(
-      user.email,
-      'Mentor Manager System Account',
-      `
-    Dear ${user_role.charAt(0).toUpperCase() + user_role.slice(1)},
-    Welcome to join MMS.
-    Kindly find below your credentials:
-    login:  ${user.email}
-    password: ${password}
-    MMS URL: ${config.client_url}
-    Kindly change your password and update your profile.
-  
-    Best Regards,
-    MMS Account Manager
-  
-    `
-    );
   }
 
   return user;
@@ -101,7 +73,7 @@ const loginUser = async (body) => {
 
   const user = await getUserByEmail(email);
 
-  if (user && user.credential.login_type !== 'local') {
+  if (user && user.Credential.login_type !== 'local') {
     return {
       status: 400,
       success: false,
@@ -117,7 +89,7 @@ const loginUser = async (body) => {
     };
   }
 
-  const { user_id: id, credential } = user;
+  const { user_id: id, Credential: credential } = user;
 
   // check password
   const validPassword = await bcrypt.compare(password, credential.hashed_password);
@@ -135,7 +107,7 @@ const loginUser = async (body) => {
     email,
   });
 
-  delete user.credential;
+  delete user.Credential;
 
   return {
     success: true,
@@ -195,20 +167,7 @@ const requestPasswordReset = async (req, res) => {
 
     const passToken = generateToken({ userId });
 
-    const passcode = nanoid(5);
-
-    await sendResetPasswordEmail(email, passcode);
-
-    const date = new Date();
-
-    date.setDate(date.getDate() + 1);
-
-    await User.update(
-      { reset_password_code: passcode },
-      {
-        where: { email },
-      }
-    );
+    await sendResetPasswordEmail(email, passToken);
 
     return res.status(201).json({
       success: true,
@@ -268,9 +227,11 @@ const changePassword = async (req, res) => {
  * @returns {Object} Response object
  */
 const resetPassword = async (req, res) => {
-  const { password, passcode } = req.body;
+  const { password } = req.body;
+  const { token } = req.query;
+
   try {
-    if (!passcode) {
+    if (!token) {
       return res.status(401).json({
         status: 401,
         success: false,
@@ -278,19 +239,17 @@ const resetPassword = async (req, res) => {
       });
     }
 
-    const user = await User.findOne({ where: { reset_password_code: passcode } });
+    const { userId } = await jwt.verify(token, config.jwt.secret);
 
-    // const { userId } = await jwt.verify(token, config.jwt.secret);
-
-    if (!user) {
+    if (!userId) {
       return res.status(401).json({
         status: 401,
         success: false,
-        message: 'Invalid passcode provided',
+        message: 'Invalid token provided',
       });
     }
 
-    // const user = await getUserById(userId);
+    const user = await getUserById(userId);
 
     if (!user) {
       return res.status(404).json({
@@ -302,14 +261,7 @@ const resetPassword = async (req, res) => {
     const newPassword = await hashPassword(password);
 
     // if user, update the password
-    await updateCredential({ hashed_password: newPassword }, user.user_id);
-
-    await User.update(
-      { reset_password_code: null },
-      {
-        where: { user_id: user.user_id },
-      }
-    );
+    await updateCredential({ hashed_password: newPassword }, userId);
 
     return res.status(200).json({
       success: true,
@@ -323,4 +275,4 @@ const resetPassword = async (req, res) => {
   }
 };
 
-export { createUser, requestPasswordReset, loginUser, updateCredential, resetPassword, changePassword, getUserCredential };
+export { registerUser, requestPasswordReset, loginUser, updateCredential, resetPassword, changePassword, getUserCredential };

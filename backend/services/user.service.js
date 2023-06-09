@@ -1,45 +1,40 @@
-/* eslint-disable camelcase */
 import models from '../database/models';
 
-const { User } = models;
-
-/**
- * Query users by role
- * @param {String} user_role
- * @returns {Promise<User[]>}
- */
-
-const getUsersByRole = async (user_role) => {
-  return User.findAll({
-    where: { user_role },
-    attributes: { exclude: ['reset_password_code'] },
-  });
-};
+const { User, Credential } = models;
 
 /**
  * Create a user profile
  * @param {Object} userBody
  * @returns {Promise<User>}
  */
-const updateProfile = async (body, user_id) => {
-  const { imageUrl, ...rest } = body;
+const createProfile = async (userBody) => {
+  const { body, user: userEmail } = userBody;
+  const { firstName, lastName, bio, website, country, city, gitHub, linkedIn, instagram, twitter, imageUrl } = body;
+  const { email } = userEmail;
 
   const user = await User.update(
     {
+      firstName,
+      lastName,
+      email,
+      bio,
+      website,
+      country,
+      city,
+      gitHub,
+      instagram,
+      linkedIn,
+      twitter,
       image_url: imageUrl,
-      ...rest,
-      has_fill_profile: true,
-      has_change_password: true,
     },
     {
-      where: { user_id },
-      attributes: { exclude: ['reset_password_code', 'password_code_expire'] },
+      where: { email },
       returning: true,
       plain: true,
     }
   );
 
-  return user;
+  return user[1].dataValues;
 };
 
 /**
@@ -94,10 +89,10 @@ const getUserByEmail = async (email) => {
     where: {
       email,
     },
-    include: ['credential'],
+    include: { model: Credential },
     raw: true,
     nest: true,
   });
 };
 
-export { getUsersByRole, updateProfile, queryUsers, getUserById, getUserByEmail };
+export { createProfile, queryUsers, getUserById, getUserByEmail };

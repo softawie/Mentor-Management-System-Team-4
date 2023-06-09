@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BiMessageAlt, BiBell } from "react-icons/bi";
+import MenuIcon from "@material-ui/icons/Menu";
 import Logo from "../../assets/images/Logo-Onley.svg";
 import { usePalette } from "../../theme/theme";
 import { FiSearch } from "react-icons/fi";
@@ -10,6 +11,7 @@ import {
   Grid,
   IconButton,
   ListItemIcon,
+  Menu,
   MenuItem,
   Toolbar,
   Typography,
@@ -18,17 +20,11 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Menu, Person } from "@mui/icons-material";
-import { useLogoutMutation } from "src/services/auth.service";
-import { useAuth } from "src/store/auth.reducer";
+import { Person } from "@material-ui/icons";
+import { logout } from "src/services/login";
 
 export default function AppHeader() {
   // const classes = useStyles();
-  const [logout] = useLogoutMutation();
-  const auth = useAuth()
-
-  const handleLogout = async ()=>await logout(auth?.user?.email)
-
   const navigate = useNavigate();
   const palette = usePalette();
   const openProfile = () => navigate("/profile");
@@ -53,7 +49,7 @@ export default function AppHeader() {
                 spacing={1}
                 sx={{ alignItems: "center", display: "flex" }}
               >
-                <Avatar src={Logo} alt="logo" variant="" />
+                <img src={Logo} alt="logo" />
                 <Typography
                   variant="h3"
                   sx={{ fontSize: "16px", fontWeight: 600 }}
@@ -78,7 +74,7 @@ export default function AppHeader() {
                 aria-label="menu"
                 sx={{ mr: 2, display: ["block", "block", "none"] }}
               >
-                <Menu />
+                <MenuIcon />
               </IconButton>
 
               <Stack
@@ -151,7 +147,7 @@ export default function AppHeader() {
                       </ListItemIcon>
                       Profile
                     </MenuItem>
-                    <MenuItem onClick={handleLogout}>
+                    <MenuItem onClick={logout}>
                       <ListItemIcon>{/* <IoMdLogOut /> */}</ListItemIcon>
                       Logout
                     </MenuItem>

@@ -61,7 +61,7 @@ const theme = createTheme({
     },
     action: {
       active: alpha(themeColors.primary, 0.54),
-      hover: alpha(themeColors.primary, 0.1),
+      hover: alpha(themeColors.primary, 0.6),
       selected: alpha(themeColors.background, 0.1),
       disabled: alpha(themeColors.primary, 0.26),
       disabledBackground: alpha(themeColors.primary, 0.12),
@@ -77,6 +77,7 @@ const theme = createTheme({
     MuiInputLabel: {
       defaultProps: {
         size: "small",
+
         // color: "#808080",
         // color: "primary",
       },
@@ -95,18 +96,6 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: "none",
-          borderRadius: 8,
-        },
-      },
-    },
-    MuiAutocomplete: {
-      defaultProps: {
-        variant: "contained",
-        disableElevation: true,
-      },
-      styleOverrides: {
-        tag: {
-          color: themeColors.black,
         },
       },
     },
