@@ -6,8 +6,12 @@ import * as userController from '../../controllers/user.controller';
 
 const router = express.Router();
 
+router.route('/role/:role').get(verifyToken, validate(userValidation.getUsersByRole), userController.getUsersByRole);
+router.route('/:id').get(verifyToken, validate(userValidation.getUserById), userController.getUserById);
+router.route('/:id').put(verifyToken, validate(userValidation.updateProfile), userController.updateProfile);
+router
+  .route('/:id/approvals')
+  .get(verifyToken, validate(userValidation.getUserApprovalRequest), userController.getUserApprovalRequests);
 router.route('/').get(verifyToken, validate(userValidation.getUsers), userController.getUsers);
-router.route('/profile').put(verifyToken, validate(userValidation.createProfile), userController.createProfile);
-router.route('/:userId').get(verifyToken, validate(userValidation.getUser), userController.getUser);
 
 export default router;

@@ -1,15 +1,32 @@
 module.exports = (sequelize, DataTypes) => {
-  const Mentor = sequelize.define(
-    'Mentor',
+  const SupportMessage = sequelize.define(
+    'SupportMessage',
     {
-      mentor_id: {
+      message_id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
+
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
+      body: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+
       user_id: {
         type: DataTypes.BIGINT,
+        unique: true,
         allowNull: false,
       },
       created_at: {
@@ -26,19 +43,16 @@ module.exports = (sequelize, DataTypes) => {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       underscore: true,
-      tableName: 'mentors',
+      tableName: 'SupportMessage',
       timestamps: true,
     }
   );
 
-  Mentor.associate = ({ User, Task }) => {
-    Mentor.belongsTo(User, {
+  SupportMessage.associate = ({ User }) => {
+    SupportMessage.belongsTo(User, {
       foreignKey: 'user_id',
-    });
-    Mentor.hasMany(Task, {
-      foreignKey: 'mentor_id',
     });
   };
 
-  return Mentor;
+  return SupportMessage;
 };

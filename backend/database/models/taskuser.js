@@ -1,22 +1,18 @@
 module.exports = (sequelize, DataTypes) => {
-  const Label = sequelize.define(
-    'Label',
+  const TaskUser = sequelize.define(
+    'TaskUser',
     {
-      label_id: {
+      id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      mentor_id: {
+      task_id: {
         type: DataTypes.BIGINT,
         allowNull: true,
       },
-      mentor_manager_id: {
+      user_id: {
         type: DataTypes.BIGINT,
         allowNull: true,
       },
@@ -34,19 +30,21 @@ module.exports = (sequelize, DataTypes) => {
       createdAt: 'created_at',
       updatedAt: 'updated_at',
       underscore: true,
-      tableName: 'labels',
+      tableName: 'task_user',
       timestamps: true,
     }
   );
 
-  Label.associate = ({ Mentor, MentorManager }) => {
-    Label.belongsTo(Mentor, {
-      foreignKey: 'mentor_id',
+  TaskUser.associate = ({ User, Task }) => {
+    TaskUser.belongsTo(User, {
+      as: 'user',
+      foreignKey: 'user_id',
     });
-    Label.belongsTo(MentorManager, {
-      foreignKey: 'mentor_manger_id',
+    TaskUser.belongsTo(Task, {
+      as: 'task',
+      foreignKey: 'task_id',
     });
   };
 
-  return Label;
+  return TaskUser;
 };

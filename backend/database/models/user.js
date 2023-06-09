@@ -69,6 +69,46 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         defaultValue: sequelize.fn('NOW'),
       },
+      reset_password_code: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+      },
+      password_code_expire: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      has_change_password: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      has_fill_profile: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      technical_proficiency: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      previous_programs: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      availability_to_join: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      program_interest: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      mentor_before: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      years_of_experience: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
     {
       createdAt: 'created_at',
@@ -76,6 +116,11 @@ module.exports = (sequelize, DataTypes) => {
       tableName: 'users',
       underscore: true,
       timestamps: true,
+      defaultScope: {
+        attributes: {
+          exclude: ['reset_password_code', 'password_code_expire'],
+        },
+      },
     }
   );
 
@@ -83,42 +128,60 @@ module.exports = (sequelize, DataTypes) => {
     Credential,
     Program,
     Invite,
-    Mentor,
-    MentorManager,
     Report,
     Notification,
     Message,
     Participant,
     Setting,
+    ApprovalRequest,
+    SupportMessage,
+    Task,
+    TaskUser,
   }) => {
     User.hasOne(Credential, {
+      as: 'credential',
       foreignKey: 'user_id',
     });
     User.hasOne(Setting, {
+      as: 'settings',
       foreignKey: 'user_id',
-    });
-    User.hasMany(Program, {
-      foreignKey: 'created_by',
     });
     User.hasMany(Invite, {
-      foreignKey: 'user_id',
-    });
-    User.hasMany(Mentor, {
-      foreignKey: 'user_id',
-    });
-    User.hasMany(MentorManager, {
+      as: 'invites',
       foreignKey: 'user_id',
     });
     User.hasMany(Report, {
+      as: 'reports',
       foreignKey: 'user_id',
     });
     User.hasMany(Notification, {
       foreignKey: 'user_id',
     });
     User.hasMany(Message, {
+      as: 'messages',
       foreignKey: 'sender_id',
     });
     User.hasMany(Participant, {
+      as: 'participants',
+      foreignKey: 'user_id',
+    });
+    User.hasMany(ApprovalRequest, {
+      as: 'requests',
+      foreignKey: 'user_id',
+    });
+    User.belongsToMany(Program, {
+      as: 'programs',
+      through: ApprovalRequest,
+      foreignKey: 'user_id',
+      otherKey: 'program_id',
+    });
+    User.hasMany(SupportMessage, {
+      foreignKey: 'user_id',
+    });
+    User.belongsToMany(Task, {
+      as: 'tasks',
+      through: TaskUser,
+      otherKey: 'task_id',
       foreignKey: 'user_id',
     });
   };
