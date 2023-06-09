@@ -1,15 +1,16 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
 import React from "react";
-import { CookiesProvider } from "react-cookie";
 import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import App from "./App";
-import "./index.css";
-import store from "./store";
+import { ToastContainer } from "react-toastify";
 import theme from "./theme/theme";
+import { BrowserRouter } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import "./index.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import StatusPage from "./components/statusPage/status-page.component";
+import { CookiesProvider } from "react-cookie";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -29,4 +30,14 @@ if (window.self === window.top) {
       </Provider>
     </React.StrictMode>
   );
-} 
+} else {
+  root.render(
+    <StatusPage
+      code="403"
+      title={"403"}
+      helperText={""}
+      btnText={"Go to Dashboard"}
+    />,
+    document.getElementById("root")
+  );
+}
